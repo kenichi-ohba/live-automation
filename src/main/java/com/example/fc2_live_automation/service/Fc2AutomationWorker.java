@@ -27,7 +27,6 @@ public class Fc2AutomationWorker {
     private final Map<Long, Browser> activeBrowsers = new ConcurrentHashMap<>();
     private final Map<Long, Boolean> stopSignals = new ConcurrentHashMap<>();
 
-    // 🌟 これらが抜けていたためエラーになっていました
     private final Map<Long, List<String>> memoryLogs = new ConcurrentHashMap<>();
     private final Map<Long, String> latestVideoTimes = new ConcurrentHashMap<>();
     private final Map<Long, Boolean> streamReadyFlags = new ConcurrentHashMap<>();
@@ -41,9 +40,9 @@ public class Fc2AutomationWorker {
         try {
             String os = System.getProperty("os.name").toLowerCase();
             if (os.contains("win")) {
-                System.out.println("🧹 起動時クリーンアップ: ゾンビ化したプロセスを停止します");
+                System.out.println("🧹 起動時クリーンアップ: ゾンビ化したFFmpegプロセスを停止します");
                 new ProcessBuilder("taskkill", "/F", "/IM", "ffmpeg.exe", "/T").start().waitFor();
-                new ProcessBuilder("taskkill", "/F", "/IM", "chrome.exe", "/T").start().waitFor();
+                // ※Chromeの無差別強制終了は削除しました（ユーザーの普段のブラウザを守るため）
             }
         } catch (Exception ignore) {}
     }
@@ -61,6 +60,25 @@ public class Fc2AutomationWorker {
         } catch (Exception e) {
             p.destroyForcibly();
         }
+    }
+
+    // 🌟 追加：日本語のパス文字化けを防ぐため、Windows専用の「短い英数字パス(8.3形式)」に変換する魔法のメソッド
+    private String getSafeWindowsShortPath(String originalPath) {
+        String os = System.getProperty("os.name").toLowerCase();
+        if (!os.contains("win")) return originalPath; 
+        
+        try {
+            Process p = new ProcessBuilder("cmd", "/c", "for %I in (\"" + originalPath + "\") do @echo %~sI").start();
+            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(p.getInputStream(), "Shift_JIS"))) {
+                String shortPath = reader.readLine();
+                if (shortPath != null && !shortPath.isEmpty()) {
+                    return shortPath.trim(); // 例: C:\Users\aikus\OneDrive\DESKTO~1\WORK~1\Test.mp4
+                }
+            }
+        } catch (Exception e) {
+            // 失敗した場合は元のパスのまま頑張る
+        }
+        return originalPath;
     }
 
     public void addLog(Long id, String message) {
@@ -417,12 +435,16 @@ public class Fc2AutomationWorker {
             throw new Exception("Video file not found");
         }
 
+        // 🌟 魔法のメソッド呼び出し：文字化けしない安全なパスに変換する
+        String safeVideoPath = getSafeWindowsShortPath(cleanVideoPath);
+
         String baseUrl = account.getServerUrl();
         String key = account.getStreamKey();
         String rtmpUrl = baseUrl.endsWith("/") ? baseUrl + key : baseUrl + "/" + key;
         
         ProcessBuilder pb = new ProcessBuilder(
-                ffmpegPath, "-re", "-i", cleanVideoPath, "-c:v", "libx264", "-preset", "veryfast", "-b:v", "2000k",
+                // 🌟 変換済みの安全なパスをFFmpegに渡す
+                ffmpegPath, "-re", "-i", safeVideoPath, "-c:v", "libx264", "-preset", "veryfast", "-b:v", "2000k",
                 "-maxrate", "2000k", "-bufsize", "4000k", "-pix_fmt", "yuv420p", "-g", "60", "-c:a", "aac", "-b:a",
                 "128k", "-ar", "44100", "-f", "flv", rtmpUrl);
 

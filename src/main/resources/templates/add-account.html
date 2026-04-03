@@ -53,11 +53,7 @@
                     </div>
 
                     <div class="p-4 bg-yellow-50 rounded border border-yellow-200">
-<<<<<<< HEAD
-                        <label class="block font-bold mb-2 text-yellow-800">配信中の自動切り替え時間</label>
-=======
                         <label class="block font-bold mb-2 text-yellow-800">有料配信への自動切り替え時間</label>
->>>>>>> 03c382712fca97b74dbaa62e3ded248cec43418e
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center">
                                 <input type="number" th:field="*{paidSwitchMinute}" min="0" class="border rounded px-3 py-2 w-24 bg-white text-center" placeholder="0">
@@ -68,21 +64,8 @@
                                 <span class="ml-2 font-bold text-gray-700">秒</span>
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <p class="text-xs text-red-500 mt-2 font-bold">※設定した時間が経過すると、自動で「切り替えボタン」を実行します。</p>
-
-                        <div class="mt-4 pt-4 border-t border-yellow-200">
-                            <label class="block font-bold mb-2 text-yellow-800">操作ラグの事前相殺（微調整用）</label>
-                            <div class="flex items-center">
-                                <input type="number" th:field="*{switchLagSeconds}" min="0" class="border rounded px-3 py-2 w-24 bg-white text-center" placeholder="5">
-                                <span class="ml-2 font-bold text-gray-700">秒前に行動開始</span>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">※ボタンのクリック操作にかかる物理的な時間を相殺するため、指定時間よりこの秒数だけ早く裏で操作を開始します。（標準: 5）</p>
-                        </div>
-=======
                         <p class="text-xs text-red-500 mt-2 font-bold">※設定した時間が経過すると、自動で「有料切り替え」を実行します。</p>
                         <p class="text-xs text-gray-500 mt-1">※無料配信の場合は無視されます。</p>
->>>>>>> 03c382712fca97b74dbaa62e3ded248cec43418e
                     </div>
                 </div>
             </div>

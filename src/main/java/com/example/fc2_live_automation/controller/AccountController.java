@@ -2,6 +2,7 @@ package com.example.fc2_live_automation.controller;
 
 import com.example.fc2_live_automation.model.Fc2Account;
 import com.example.fc2_live_automation.service.AccountService;
+import com.example.fc2_live_automation.service.Fc2AutomationWorker; // 🌟 これを追加しました
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class AccountController {
 
     private final AccountService accountService;
+    private final Fc2AutomationWorker fc2AutomationWorker; // 🌟 ログ取得用にWorkerを追加
 
-    public AccountController(AccountService accountService) {
+    // 🌟 コンストラクタも修正し、Workerを受け取れるようにしました
+    public AccountController(AccountService accountService, Fc2AutomationWorker fc2AutomationWorker) {
         this.accountService = accountService;
+        this.fc2AutomationWorker = fc2AutomationWorker;
     }
 
     @GetMapping("/")
@@ -78,11 +82,12 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
-    // 🌟 特定アカウントのログを取得するAPI
+    // 🌟 特定アカウントのログを取得するAPI（ここを修正しました！）
     @GetMapping("/api/logs/{id}")
     @ResponseBody
     public List<String> getLogs(@PathVariable Long id) {
-        Fc2Account account = accountService.getAccountById(id);
-        return (account != null) ? account.getLogs() : new ArrayList<>();
+        // 古い「アカウント情報からの取得」をやめ、Workerのメモリから最新のログを直接引っ張ってきます
+        return fc2AutomationWorker.getLogs(id);
     }
+    
 }
