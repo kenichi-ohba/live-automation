@@ -24,18 +24,6 @@ public class AccountService {
         return repository.findById(id).orElse(null);
     }
 
-<<<<<<< HEAD
-    public void saveAccount(Fc2Account account) {
-        if (account.getId() != null) {
-            Fc2Account existing = getAccountById(account.getId());
-            if (existing != null) {
-                if (account.getPass() == null || account.getPass().isEmpty()) {
-                    account.setPass(existing.getPass());
-                }
-                if (account.getStreamKey() == null || account.getStreamKey().isEmpty()) {
-                    account.setStreamKey(existing.getStreamKey());
-                }
-=======
     // 🌟 修正：編集時にパスワードとストリームキーが消えないように保護する
     public void saveAccount(Fc2Account account) {
         if (account.getId() != null) {
@@ -51,15 +39,11 @@ public class AccountService {
                     account.setStreamKey(existing.getStreamKey());
                 }
                 // ステータスとURLを維持
->>>>>>> 03c382712fca97b74dbaa62e3ded248cec43418e
                 account.setStatus(existing.getStatus());
                 account.setBroadcastUrl(existing.getBroadcastUrl());
             }
         } else {
-<<<<<<< HEAD
-=======
             // 新規作成の場合
->>>>>>> 03c382712fca97b74dbaa62e3ded248cec43418e
             if (account.getStatus() == null) {
                 account.setStatus("IDLE");
             }
@@ -84,12 +68,4 @@ public class AccountService {
     public void stopStreaming(Long id) {
         fc2AutomationWorker.stopStreamingProcess(id);
     }
-<<<<<<< HEAD
-
-    // 🌟 新規：Workerから直接ログを取得してコントローラーに渡す
-    public List<String> getLogs(Long id) {
-        return fc2AutomationWorker.getLogs(id);
-    }
-=======
->>>>>>> 03c382712fca97b74dbaa62e3ded248cec43418e
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
@@ -204,121 +203,12 @@
                                 <button onclick="showLogs(${acc.id})" class="text-blue-500 hover:underline text-xs mr-2">ログ</button>
                                 ${
                                   isActive
-=======
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>FC2 Live Automation - 管理ダッシュボード</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        #log-content { font-family: 'Consolas', monospace; }
-        .status-badge-running { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
-    </style>
-</head>
-<body class="bg-gray-100 text-gray-900">
-    <div class="container mx-auto px-4 py-8">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-blue-700">FC2配信管理システム</h1>
-            <a href="/add" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-md">+ 新規追加</a>
-        </div>
-
-        <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
-            <table class="min-w-full">
-                <thead class="bg-gray-50 border-b">
-                    <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                        <th class="px-6 py-3">ID</th>
-                        <th class="px-6 py-3">アカウント情報</th>
-                        <th class="px-6 py-3">ステータス</th>
-                        <th class="px-6 py-3 text-center">操作</th>
-                    </tr>
-                </thead>
-                <tbody id="account-table-body">
-                    <tr th:each="account : ${accounts}" th:id="'row-' + ${account.id}" class="border-b hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm text-gray-400" th:text="${account.id}">1</td>
-                        <td class="px-6 py-4">
-                            <div class="text-sm font-bold" th:text="${account.email}">email</div>
-                            <div class="text-xs text-gray-500" th:text="${account.title}">title</div>
-                        </td>
-                        <td class="px-6 py-4 status-cell" th:data-id="${account.id}">
-                            <span th:if="${account.status == 'STARTING'}" class="px-3 py-1 rounded-full text-xs font-bold bg-yellow-500 text-white animate-pulse">準備中...</span>
-                            <span th:if="${account.status == 'RUNNING'}" class="px-3 py-1 rounded-full text-xs font-bold bg-green-500 text-white status-badge-running">配信中</span>
-                            <span th:if="${account.status == 'IDLE'}" class="px-3 py-1 rounded-full text-xs font-bold bg-gray-400 text-white">停止中</span>
-                            <span th:if="${account.status == 'ERROR'}" class="px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white">ERROR</span>
-                        </td>
-                        <td class="px-6 py-4 text-center action-cell" th:data-id="${account.id}">
-                            <div class="flex justify-center space-x-2">
-                                <button th:onclick="'showLogs(' + ${account.id} + ')'" class="text-blue-500 hover:underline text-xs mr-2">ログ</button>
-                                
-                                <a th:if="${account.status == 'RUNNING' || account.status == 'STARTING'}" 
-                                   th:href="@{/stop/{id}(id=${account.id})}" class="bg-yellow-500 text-white font-bold py-1 px-4 rounded text-sm">停止</a>
-                                
-                                <a th:if="${account.status == 'IDLE' || account.status == 'ERROR'}" 
-                                   th:href="@{/start/{id}(id=${account.id})}" class="bg-green-500 text-white font-bold py-1 px-4 rounded text-sm">開始</a>
-                                
-                                <a th:href="@{/edit/{id}(id=${account.id})}" class="text-gray-400 hover:text-gray-600 font-bold py-1 px-2">編集</a>
-                                <a th:href="@{/delete/{id}(id=${account.id})}" onclick="return confirm('削除しますか？');" class="text-red-400 hover:text-red-600 font-bold py-1 px-2">削除</a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="log-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg w-11/12 h-5/6 flex flex-col overflow-hidden shadow-2xl">
-            <div class="p-4 border-b flex justify-between items-center bg-gray-50">
-                <h3 class="font-bold text-gray-700">リアルタイムログ (最新100行)</h3>
-                <button onclick="closeLogs()" class="text-2xl">&times;</button>
-            </div>
-            <pre id="log-content" class="flex-1 bg-gray-900 text-green-400 p-4 overflow-y-auto text-xs whitespace-pre-wrap"></pre>
-        </div>
-    </div>
-
-    <script>
-        let currentLogId = null;
-        let logInterval = null;
-
-        // 🌟 3秒ごとに全アカウントのステータスをAPIから取得して画面を書き換える
-        async function refreshDashboard() {
-            try {
-                const response = await fetch('/api/accounts');
-                const accounts = await response.json();
-
-                accounts.forEach(acc => {
-                    const statusCell = document.querySelector(`.status-cell[data-id="${acc.id}"]`);
-                    const actionCell = document.querySelector(`.action-cell[data-id="${acc.id}"]`);
-
-                    if (statusCell && actionCell) {
-                        // ステータス表示の更新
-                        let sHtml = '';
-                        if (acc.status === "RUNNING") {
-                            sHtml = `<a href="${acc.broadcastUrl}" target="_blank" class="px-3 py-1 rounded-full text-xs font-bold bg-green-500 text-white status-badge-running">● 配信中 (視聴)</a>`;
-                        } else if (acc.status === "STARTING") {
-                            sHtml = `<span class="px-3 py-1 rounded-full text-xs font-bold bg-yellow-500 text-white animate-pulse">準備中...</span>`;
-                        } else if (acc.status === "ERROR") {
-                            sHtml = `<span class="px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white">ERROR</span>`;
-                        } else {
-                            sHtml = `<span class="px-3 py-1 rounded-full text-xs font-bold bg-gray-400 text-white">停止中</span>`;
-                        }
-                        statusCell.innerHTML = sHtml;
-
-                        // ボタンの更新 (STARTING または RUNNING のときは「停止」を出す)
-                        const isActive = (acc.status === "RUNNING" || acc.status === "STARTING");
-                        actionCell.innerHTML = `
-                            <div class="flex justify-center items-center space-x-2">
-                                <button onclick="showLogs(${acc.id})" class="text-blue-500 hover:underline text-xs mr-2">ログ</button>
-                                ${isActive 
->>>>>>> 03c382712fca97b74dbaa62e3ded248cec43418e
                                     ? `<a href="/stop/${acc.id}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded text-sm shadow">停止</a>`
                                     : `<a href="/start/${acc.id}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded text-sm shadow">開始</a>`
                                 }
                                 <a href="/edit/${acc.id}" class="text-gray-400 hover:text-gray-600 font-bold py-1 px-2">編集</a>
                                 <a href="/delete/${acc.id}" onclick="return confirm('削除しますか？');" class="text-red-400 hover:text-red-600 font-bold py-1 px-2">削除</a>
                             </div>`;
-<<<<<<< HEAD
             }
           });
         } catch (e) {
@@ -352,37 +242,4 @@
       setInterval(refreshDashboard, 3000); // 3秒おきにステータス更新
     </script>
   </body>
-=======
-                    }
-                });
-            } catch (e) { console.error("Poll error:", e); }
-        }
-
-        async function fetchLogs() {
-            if (!currentLogId) return;
-            const res = await fetch('/api/logs/' + currentLogId);
-            const logs = await res.json();
-            const box = document.getElementById('log-content');
-            box.innerText = logs.length ? logs.join('\n') : "ログを取得中...";
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function showLogs(id) {
-            currentLogId = id;
-            document.getElementById('log-modal').classList.remove('hidden');
-            fetchLogs();
-            if (logInterval) clearInterval(logInterval);
-            logInterval = setInterval(fetchLogs, 2000);
-        }
-
-        function closeLogs() {
-            document.getElementById('log-modal').classList.add('hidden');
-            currentLogId = null;
-            clearInterval(logInterval);
-        }
-
-        setInterval(refreshDashboard, 3000); // 3秒おきにステータス更新
-    </script>
-</body>
->>>>>>> 03c382712fca97b74dbaa62e3ded248cec43418e
 </html>
