@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-Transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ログイン　FC2 - 無料ホームページ アクセス解析 ブログ レンタルサーバー SEO 対策 等 -</title>
+<meta name="description" content="無料レンタル アクセス解析" />
+<meta name="keywords" content="FC2,blog,ブログ,ホームページ,無料,アクセス解析,カウンター,掲示板,BBS,アイコン,レンタルサーバー,ショッピングモール,ショッピングカート,携帯,メールフォーム,アダルト" />
+<meta name="robots" content="noindex,nofollow,noarchive">
+
+<meta name="author" content="FC2,Inc." />
+<meta name="copyright" content="Copyright (c) 1999- FC2, Inc. All Rights Reserved." />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="canonical" href="//fc2.com/"><link rel="start" href="//fc2.com/">
+<link rel="shortcut icon" href="//static.fc2.com/share/image/favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="//static.fc2.com/share/css/common.css" />
+<link rel="stylesheet" type="text/css" href="//static.fc2.com/share/fc2parts/css/share.css" />
+<link rel="stylesheet" type="text/css" href="//static.fc2.com/fc2com/css/fc2com_default.css?12122102" /><!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="//static.fc2.com/fc2com/css/ie.css" media="all" />
+<![endif]-->
+
+<script type="text/javascript" src="//fc2.com/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="//static.fc2.com/fc2com/js/tab_panel.js"></script>
+<script type="text/javascript" src="//static.fc2.com/share/fc2parts/js/common_design.js"></script>
+<script type="text/javascript" src="//static.fc2.com/fc2com/ja/loginform.js"></script>
+<link rel="stylesheet" type="text/css" href="//static.fc2.com/fc2com/css/in-out.css" media="all" />
+
+
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6Lei-TgbAAAAAOAA8V5rTTQL2cshy7cwkSQUiZZm"></script>
+
+        <script type="text/javascript">
+        $(function(){
+                var duringCaptcha = false;
+                $('form[name="form_login"]').submit(function(e){
+                        if(!login_form_check()) {
+                        return false;
+                }
+                                e.preventDefault();
+            
+				                if(document.form_login.recaptchaep.value.length > 0){
+                        $('form[name="form_login"]').unbind(e);
+                        $('form[name="form_login"]').submit();
+                        return false;
+                }
+
+                grecaptcha.enterprise.ready(function () {
+                                $.post("https://secure.id.fc2.com/api/preLogin.php", {'email' : document.form_login.email.value },
+                                function(data){
+                                        dataArray = JSON.parse(data);
+                                        if('result' in dataArray && dataArray.result == 'pass'){
+                                                $('form[name="form_login"]').unbind(e);
+                                                $('form[name="form_login"]').submit();
+                                                return;
+                                        }
+
+                                        if(!duringCaptcha) {
+                                                grecaptcha.enterprise.execute("6Lei-TgbAAAAAOAA8V5rTTQL2cshy7cwkSQUiZZm", {action: "sent"}).then(function (token) {
+                                                        document.form_login.recaptchaep.value = token;
+                                                        $('form[name="form_login"]').unbind(e);
+                                                        $('form[name="form_login"]').submit();
+                                                });
+                                        }
+                                });
+                });
+		                                return true;
+                });
+        });
+        </script>
+
+</head>
+
+<body>
+<!-- header_box -->
+<div id="sh_header_box">
+	<div id="sh_header_col">
+		<div class="sh_search">
+		</div>
+		<div class="sh_langselect">
+		<select onchange="javascript:location.replace('https://' + document.domain + '/' + this.options[this.selectedIndex].value);"><option value="">Language</option><option value="ja/login.php?ref=livechat">日本語</option><option value="en/login.php?ref=livechat">English</option><option value="tw/login.php?ref=livechat">繁體中文</option><option value="cn/login.php?ref=livechat">简体中文</option><option value="th/login.php?ref=livechat">ภาษาไทย</option><option value="ko/login.php?ref=livechat">한국어</option><option value="de/login.php?ref=livechat">Deutsch</option><option value="es/login.php?ref=livechat">Español</option><option value="ru/login.php?ref=livechat">Русский</option><option value="fr/login.php?ref=livechat">Français</option><option value="id/login.php?ref=livechat">Indonesia</option><option value="pt/login.php?ref=livechat">Português</option><option value="vi/login.php?ref=livechat">Tiếng Việt</option></select>		</div>
+		<div class="sh_header_nav">
+		</div>
+	</div>
+</div>
+<!-- /header_box -->
+
+<div id="container" class="clear">
+	<div id="header" class="whenIE7below">
+		<h1><a href="//fc2.com/">FC2 total Web Solutions</a></h1>
+                    <!-- ゾロ目キャンペーン ここから -->
+            <div class="lottery_header_logo"><a href="//secure.id.fc2.com/pr/2024/zorome/" target="_blank" title="本日はゾロ目キャンペーン！"><img src="//static.fc2.com/fc2com/img/campaign/lottery/lottery_03.svg" alt="本日はゾロ目キャンペーン！" width="26" height="26"></a></div>
+            <!-- ゾロ目キャンペーン ここまで -->
+            </div>
+
+	<h2 class="sh_heading_main_b_wide"><span>
+		FC2IDへログインします。ログイン情報を入力し[ログイン]ボタンをクリックしてください。		</span></h2>
+	<div id="login-content">
+		
+				<form name="form_login" method="post" action="https://secure.id.fc2.com/index.php?mode=login&switch_language=ja">
+			<ul>
+								<li>登録メールアドレス：</li>
+				<li><input name="email" type="text" id="email" value="" class="input_fc2id_login" /></li>
+				<li>パスワード：</li>
+				<li><input name="pass" type="password" id="pass"  maxlength="16" class="input_fc2id_login" /></li>
+                				<li>
+
+<!-- TLS1.1 -->
+<script>
+window.tlsVersion = function(data) {
+  var version = data.tls_version.split(' ');
+  if(version[0] != 'TLS' || version[1] < 1.2){
+    document.write('<p><strong><a href="https://fc2.com/tls.html" target="_blank">TLS1.2未対応です。サイトの機能が利用できなくなるため、お使いのブラウザの更新・設定変更を行ってください</a></strong></p>');
+  }
+};
+</script>
+<script src="https://tls.fc2.com/a/check?callback=tlsVersion"></script>
+
+					<p class="sh_login_ja" align="center" style="margin-top:12px;"><a>
+					<input name="image" type="image" value="ログイン" width="200" height="47" src="https://secure.id.fc2.com/image/fc2footer/blank.gif" />
+					<img width="200" height="47" alt="" src="https://secure.id.fc2.com/image/fc2footer/blank.gif" />
+					</a></p>
+				</li>
+				<li>
+				<div align="center">
+					<label><input name="keep_login" type="checkbox" id="keep_login" onclick="alert_keep_login()" value="1" /> ログイン状態を維持</label>
+					<input name="done" type="hidden" id="done" value="livechat" />
+                    			<input name="recaptcha" type="hidden" id="recaptcha" value="" />
+					<input name="recaptchaep" type="hidden" id="recaptchaep" value="" />
+                </div>
+				</li>
+			</ul>
+			<img src="//static.fc2.com/share/fc2parts/image/sh_help_icon.gif" width="20" height="20" alt="" class="icon_help" />
+			<a href="http://id.fc2.com/remind.php">メールアドレス／パスワードを忘れた？</a>						<br />
+			<img src="//static.fc2.com/share/fc2parts/image/sh_help_icon.gif" width="20" height="20" alt="" class="icon_help" /> <a href="https://help.fc2.com/fc2id/qa/group4" target="_blank">ログインできない</a>		</form>
+			<br /><br />			<div class="regist_new_around" align="center">
+			<h3 class="sh_regist_ja"><a href="https://secure.id.fc2.com/signup.php?switch_language=ja&ref=livechat"><img width="200" height="47" alt="FC2ID取得" src="//static.fc2.com/share/fc2footermenu/blank.gif" /></a></h3>
+			<p class="sh_login_text">FC2IDをお持ちでない方</p>
+			<img src="//static.fc2.com/share/fc2parts/image/sh_help_icon.gif" width="20" height="20" alt="" class="icon_help" /><a href="//help.fc2.com/fc2id/qa/group2/4" target="_blank">FC2IDってなんですか？</a>			</div>
+		
+		
+	</div><!-- /login-content -->
+
+<!-- header_ad 468x60 -->
+	<div id="ad_banner468x60">
+	<iframe src="//media5.fc2.com/1302/" style="width:468px;height:60px;border:none;" scrolling="no"></iframe>
+<!-- FC2管理用 -->
+<img src="//media.fc2.com/counter_img.php?id=3761" width="1" height="1">
+<!-- FC2管理用 -->
+
+
+	</div>
+<!-- /header_ad 468x60 -->
+	<div id="ad-content" class="clear">
+		<ul id="ad">
+<li class="pr">PR</li>
+<li>
+<center>
+
+<iframe src="//media5.fc2.com/1271/" style="width:300px;height:250px;border:none;" scrolling="no"></iframe>
+
+</center>
+</li>
+<!--<li><p>テキスト記入欄</p></li>-->
+</ul>
+</center>
+</li>
+<!--<li><p>テキスト記入欄</p></li>-->
+</ul><!-- FC2管理用 --><img src="//media.fc2.com/counter_img.php?id=401" width="1" height="1"><!-- FC2管理用 -->			</div>
+	<br clear="all" />
+</div><!--/container-->
+
+	<div id="ad-footer" align="center">
+       <!-- FC2管理用 --><img src="//media.fc2.com/counter_img.php?id=1303" width="1" height="1"><!-- FC2管理用 -->	</div>
+
+	<div id="ad_overlay" style="style="z-index: ; position: ; text-align: ; width: %; visibility: ; -webkit-transform: (1.01); left: ; -webkit-transform-origin-x: %; -webkit-transform-origin-y: %; top: ; display: ; "">
+      	</div>
+	<script type="text/javascript" src="//static.fc2.com/fc2com/js/overlay4tablet.js?7774159"></script>
+	<script type="text/javascript">FC2AdTabletOverlay('ad_overlay');</script>
+
+<!-- FC2広告View管理用 --><img src="//media.fc2.com/counter_img.php?id=838" width="1" height="1"><!-- /FC2管理用 -->
+    <!-- ja版共通フッタここから -->
+    <div id="sh_fc2footer_fix">
+        <div id="sh_fc2footer_menu">
+            <div id="sh_fc2tooter_tab">
+                <div><span class="sh_footer_rnd5"></span><span class="sh_footer_rnd4"></span><span class="sh_footer_rnd3"></span><span class="sh_footer_rnd2"></span><span class="sh_footer_rnd1"></span></div>
+                <ul>
+                    <li class="sh_request"><a href="https://request.fc2.com/ja?service_id=0" title="リクエスト">リクエスト</a></li>
+                    <li class="sh_kiyaku"><a href="https://help.fc2.com/common/tos/ja" title="利用規約">利用規約</a></li>
+                    <li class="sh_shogai"><a href="//fc2support.blog.fc2.com/">障害情報</a></li>
+                    <li class="sh_pagetop"><a href="javascript:scroller(0);" title="このページの先頭へ">ページトップへ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="sh_fc2footer">
+            <div id="sh_fc2footermenu">
+                <ul>
+                    <li><a href="//fc2.com/" title="FC2ホームへ"><img src="//static.fc2.com/share/fc2parts/image/fc2logo.png" alt="FC2ホームへ" class="fc2top" /></a></li>
+                    <li><img src="//static.fc2.com/share/fc2parts/image/sh_help_icon.gif" width="20" height="20" alt="" /><a href="https://help.fc2.com/" target="_blank">FC2ヘルプ</a></li>
+                    <li><a href="https://help.fc2.com/inquiry">お問い合わせ</a></li>
+                    <li class="information"><a href="https://fc2.com/company.html" rel="nofollow">会社概要</a></li>
+                    <li><a href="https://fc2.com/privacy.html" rel="nofollow">プライバシーポリシー</a></li>
+                    <li><a href="https://help.fc2.com/copyrights/tos/ja" rel="nofollow">著作権ガイドライン</a></li>
+                    <li><a href="//fc2.com/en/2257.html" rel="nofollow" title="18 USC 2257 Record-Keeping Requirements">18 USC 2257 Record-Keeping Requirements</a></li>
+                    <li class="information"><a href="//form1ssl.fc2.com/form/?id=5d66515d8b37e2ab" rel="nofollow" title="Report Content">Report Content</a></li>
+                    <li><a href="//help.fc2.com/common/tos/en#contentCompliantPolicy" rel="nofollow" title="Content Compliant Policy">Content Compliant Policy</a></li>
+                    <li><a href="//help.fc2.com/anti_human_trafficking_policy/tos/en" rel="nofollow" title="Anti-Human Trafficking Policy">Anti-Human Trafficking Policy</a></li>
+                </ul>
+                                    <p class="copyright">Copyright(c)1999 FC2.com. FC2 is a registered trademark of FC2, Inc.</p>  <div id="copyright-root"></div>  <script src="/fc2dc/footer.js" defer></script>                            </div><!-- /sh_fc2footermenu -->
+        </div><!-- /sh_fc2footer -->
+    </div><!-- /sh_fc2footer_fix -->
+    <!-- /ja版共通フッタ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12020025-9']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script type="text/javascript" src="https://gdpr.fc2.com/share/js/gdpr/pp_agreement.pc.ja.20180518.js"></script>
+
+</body>
+</html>
+

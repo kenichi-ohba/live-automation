@@ -1,0 +1,54 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+bin/
+data/
+
+### 🌟 UpaLive Custom & Large Files (Pushエラー対策) 🌟 ###
+# インストーラーと納品パッケージのフォルダを除外
+Output/
+release_package/
+
+# 動画・メディアファイル（巨大ファイル）を除外
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.flv
+*.ts
+*.wmv
+
+# 実行ファイル・アーカイブ（巨大な生成物）を除外
+*.exe
+*.jar
+*.zip
