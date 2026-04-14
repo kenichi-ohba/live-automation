@@ -1,313 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <title>アカウント設定登録 - FC2 Live Automation</title>
-    <link rel="icon" th:href="@{/UpaLive_Icon.ico}" type="image/x-icon" />
+    <link rel="icon" th:href="@{/UpaLive_Icon.ico}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 text-gray-800">
-    <nav class="bg-blue-600 text-white p-4 shadow-md mb-8">
-      <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-xl font-bold">📡 UpaLive</h1>
-        <div class="space-x-4">
-          <a th:href="@{/}" class="hover:text-blue-200">ダッシュボード</a>
-          <a
-            th:href="@{/accounts}"
-            class="font-bold border-b-2 border-white pb-1"
-            >アカウント(動画)管理</a
-          >
+</head>
+<body class="bg-gray-100 text-gray-800">
+    
+    <nav class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a th:href="@{/}" class="text-xl font-bold tracking-wider flex items-center">
+                <img th:src="@{/UpaLive_Logo.png}" alt="Logo" class="h-8 w-8 mr-2 rounded bg-white p-0.5">
+                UpaLive
+            </a>
+            <div class="space-x-6 text-sm font-bold">
+                <a th:href="@{/}" class="text-blue-200 hover:text-white transition">ダッシュボード</a>
+                <a th:href="@{/accounts}" class="border-b-2 border-white pb-1">アカウント(素材)管理</a>
+            </div>
         </div>
-      </div>
     </nav>
 
-    <div class="container mx-auto px-4 pb-8 max-w-4xl">
-      <h1 class="text-3xl font-bold mb-6 text-gray-700 flex items-center">
-        <span class="mr-3">⚙️</span> アカウント（素材）の登録・編集
-      </h1>
+    <div class="container mx-auto px-4 pb-8 pt-8 max-w-4xl">
+        <h2 class="text-2xl font-bold text-gray-700 flex items-center mb-6">
+            <span class="mr-2">⚙️</span> アカウント（素材）の登録・編集
+        </h2>
+        
+        <form th:action="@{/save}" th:object="${account}" method="post" class="space-y-6">
+            <input type="hidden" th:field="*{id}" id="accountIdField" />
+            <input type="hidden" th:field="*{status}" />
+            <input type="hidden" th:field="*{currentLoop}" />
+            <input type="hidden" th:field="*{broadcastUrl}" />
 
-      <form
-        th:action="@{/save}"
-        th:object="${account}"
-        method="post"
-        class="space-y-6"
-      >
-        <input type="hidden" th:field="*{id}" />
-        <input type="hidden" th:field="*{status}" />
-        <input type="hidden" th:field="*{currentLoop}" />
-        <input type="hidden" th:field="*{broadcastUrl}" />
-
-        <div
-          class="bg-white shadow-md rounded-lg p-6 border-l-4 border-indigo-500"
-        >
-          <h2 class="text-xl font-bold mb-4 border-b pb-2 text-indigo-800">
-            0. 管理用情報
-          </h2>
-          <div>
-            <label class="block text-sm font-bold mb-1 text-indigo-900"
-              >アカウント管理名 (一覧で表示される名前)</label
-            >
-            <input
-              type="text"
-              th:field="*{accountName}"
-              class="w-full border rounded px-3 py-2 bg-white text-gray-800"
-              placeholder="例: メイン垢・ゲーム実況用"
-            />
-            <p class="text-xs text-gray-500 mt-1">
-              ※空欄の場合は保存時に「番組タイトル」が自動で割り当てられます。
-            </p>
-          </div>
-        </div>
-
-        <div class="bg-white shadow-md rounded-lg p-6">
-          <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">
-            1. システム・接続設定
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-bold mb-1"
-                >ログインメールアドレス</label
-              >
-              <input
-                type="email"
-                th:field="*{email}"
-                class="w-full border rounded px-3 py-2"
-                required
-                placeholder="example@gmail.com"
-              />
-            </div>
-            <div>
-              <label class="block text-sm font-bold mb-1">パスワード</label>
-              <input
-                type="password"
-                th:field="*{pass}"
-                class="w-full border rounded px-3 py-2"
-                placeholder="変更しない場合は空欄"
-              />
-            </div>
-            <div class="md:col-span-2">
-              <label class="block text-sm font-bold mb-1 text-blue-600"
-                >配信動画のパス (PC上の場所)</label
-              >
-              <input
-                type="text"
-                th:field="*{videoPath}"
-                class="w-full border rounded px-3 py-2"
-                required
-                placeholder="C:\videos\movie.mp4"
-              />
-              <p class="text-xs text-indigo-500 mt-1 font-bold">
-                ※保存時に動画の長さ（再生時間）を自動解析して取得します！
-              </p>
-            </div>
-            <div>
-              <label class="block text-sm font-bold mb-1"
-                >サーバーURL (RTMP)</label
-              >
-              <input
-                type="text"
-                th:field="*{serverUrl}"
-                class="w-full border rounded px-3 py-2"
-                required
-                placeholder="rtmp://media.live.fc2.com/live"
-              />
-            </div>
-            <div>
-              <label class="block text-sm font-bold mb-1">ストリームキー</label>
-              <input
-                type="password"
-                th:field="*{streamKey}"
-                class="w-full border rounded px-3 py-2"
-                placeholder="変更しない場合は空欄"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="bg-white shadow-md rounded-lg p-6 border-l-4 border-blue-500"
-        >
-          <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">
-            2. 番組画像 ＆ 有料切り替え
-          </h2>
-          <div class="space-y-4">
-            <div class="p-3 bg-blue-50 rounded">
-              <label class="inline-flex items-center font-bold">
-                <input
-                  type="checkbox"
-                  th:field="*{useThumbnail}"
-                  class="form-checkbox h-5 w-5 text-blue-600"
-                />
-                <span class="ml-2"
-                  >番組画像（サムネイル）をアップロードする</span
-                >
-              </label>
-              <div class="mt-2 ml-7">
-                <input
-                  type="text"
-                  th:field="*{thumbnailPath}"
-                  class="w-full border rounded px-3 py-2 bg-white"
-                  placeholder="C:\images\thumb.jpg"
-                />
-              </div>
-            </div>
-
-            <div class="p-4 bg-yellow-50 rounded border border-yellow-200">
-              <label class="block font-bold mb-2 text-yellow-800"
-                >有料配信への自動切り替え時間</label
-              >
-              <div class="flex items-center space-x-4">
-                <div class="flex items-center">
-                  <input
-                    type="number"
-                    th:field="*{paidSwitchMinute}"
-                    min="0"
-                    class="border rounded px-3 py-2 w-24 bg-white text-center"
-                  />
-                  <span class="ml-2 font-bold text-gray-700">分</span>
+            <div class="bg-white shadow-md rounded-lg p-6 border-l-4 border-indigo-500">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2 text-indigo-800">0. 管理用情報</h2>
+                <div>
+                    <label class="block text-sm font-bold mb-1 text-indigo-900">アカウント管理名 (一覧で表示される名前)</label>
+                    <input type="text" th:field="*{accountName}" class="w-full border rounded px-3 py-2 bg-white text-gray-800" placeholder="例: 名前・動画">
+                    <p class="text-xs text-gray-500 mt-1">※空欄の場合は保存時に「番組タイトル」が自動で割り当てられます。</p>
                 </div>
-                <div class="flex items-center">
-                  <input
-                    type="number"
-                    th:field="*{paidSwitchSecond}"
-                    min="0"
-                    class="border rounded px-3 py-2 w-24 bg-white text-center"
-                    placeholder="5000"
-                  />
-                  <span class="ml-2 font-bold text-gray-700">秒</span>
-                </div>
-              </div>
-              <div
-                class="mt-4 pt-3 border-t border-yellow-200 flex items-center"
-              >
-                <label class="text-sm font-bold text-gray-600 mr-3"
-                  >操作ラグの補正（秒）:</label
-                >
-                <input
-                  type="number"
-                  th:field="*{switchLagSeconds}"
-                  min="0"
-                  max="30"
-                  class="border rounded px-2 py-1 w-16 bg-white text-center"
-                  placeholder="5"
-                />
-              </div>
-              <p class="text-xs text-gray-500 mt-1">
-                ※無料配信の場合は無視されます。
-              </p>
             </div>
-          </div>
-        </div>
 
-        <div class="bg-white shadow-md rounded-lg p-6">
-          <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">
-            3. FC2配信詳細設定
-          </h2>
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-bold mb-1">番組タイトル</label>
-              <input
-                type="text"
-                th:field="*{title}"
-                class="w-full border rounded px-3 py-2"
-              />
-            </div>
-            <div>
-              <label class="block text-sm font-bold mb-1"
-                >番組情報（説明文）</label
-              >
-              <textarea
-                th:field="*{info}"
-                class="w-full border rounded px-3 py-2 h-20"
-              ></textarea>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-bold mb-1">カテゴリー</label>
-                <select
-                  th:field="*{category}"
-                  class="w-full border rounded px-3 py-2 bg-white"
-                >
-                  <option value="0">選択してください</option>
-                  <option value="1">雑談</option>
-                  <option value="2">ゲーム</option>
-                  <option value="3">作業</option>
-                  <option value="4">動画</option>
-                  <option value="9">音声</option>
-                  <option value="5">その他</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-sm font-bold mb-1">配信場所</label>
-                <div class="mt-2 space-x-4">
-                  <label
-                    ><input type="radio" th:field="*{adultflg}" value="0" />
-                    一般</label
-                  >
-                  <label class="text-red-600 font-bold"
-                    ><input type="radio" th:field="*{adultflg}" value="1" />
-                    アダルト</label
-                  >
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-bold mb-1">課金設定</label>
-                <div class="mt-2 space-x-4">
-                  <label
-                    ><input type="radio" th:field="*{feeflg}" value="0" />
-                    無料配信</label
-                  >
-                  <label class="text-green-600 font-bold"
-                    ><input type="radio" th:field="*{feeflg}" value="1" />
-                    有料配信</label
-                  >
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-bold mb-1">ユーザー制限</label>
-                <select
-                  th:field="*{loginonlyflg}"
-                  class="w-full border rounded px-3 py-2 bg-white"
-                >
-                  <option value="0">制限なし</option>
-                  <option value="1">ログインユーザー限定</option>
-                  <option value="2">ポイント所持者限定</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">1. システム・接続設定</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="block text-sm font-bold mb-1">ログインメールアドレス</label><input type="email" th:field="*{email}" class="w-full border rounded px-3 py-2" required placeholder="example@gmail.com"></div>
+                    <div><label class="block text-sm font-bold mb-1">パスワード</label><input type="password" th:field="*{pass}" class="w-full border rounded px-3 py-2" placeholder="変更しない場合は空欄"></div>
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold mb-1 text-pink-600">📺 視聴用 配信URL (実際のライブページURL)</label>
+                        <input type="url" th:field="*{customLiveUrl}" class="w-full border rounded px-3 py-2 bg-pink-50" placeholder="例: https://live.fc2.com/12345678/">
+                        <p class="text-xs text-gray-500 mt-1 font-bold">※ダッシュボードからワンクリックで配信画面を確認するために使用します。</p>
+                    </div>
 
-        <div class="bg-gray-800 text-white shadow-md rounded-lg p-6">
-          <h2 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2">
-            4. ブラウザ設定
-          </h2>
-          <div class="flex flex-col justify-center">
-            <label class="inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                th:field="*{showBrowser}"
-                class="form-checkbox h-6 w-6 text-blue-500"
-              />
-              <span class="ml-2 text-sm font-bold"
-                >起動時にブラウザ画面を表示する（監視用）</span
-              >
-            </label>
-            <p class="text-xs text-gray-400 mt-1">
-              ※OFFにすると裏側で高速動作します（推奨）
-            </p>
-          </div>
-        </div>
+                    <div class="md:col-span-2"><label class="block text-sm font-bold mb-1 text-blue-600">配信動画のパス (PC上の場所)</label><input type="text" th:field="*{videoPath}" class="w-full border rounded px-3 py-2" required placeholder="C:\videos\movie.mp4"><p class="text-xs text-indigo-500 mt-1 font-bold">※保存時に動画の長さを自動解析して取得します。</p></div>
+                    <div><label class="block text-sm font-bold mb-1">サーバーURL (RTMP)</label><input type="text" th:field="*{serverUrl}" class="w-full border rounded px-3 py-2" required placeholder="rtmp://media.live.fc2.com/live"></div>
+                    <div><label class="block text-sm font-bold mb-1">ストリームキー</label><input type="password" th:field="*{streamKey}" class="w-full border rounded px-3 py-2" placeholder="変更しない場合は空欄"></div>
+                </div>
+            </div>
 
-        <div class="flex justify-center pt-4 pb-8">
-          <button
-            type="submit"
-            class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-12 rounded-full shadow-lg text-lg transition duration-200"
-          >
-            アカウント情報を保存する
-          </button>
-        </div>
-      </form>
+            <div class="bg-white shadow-md rounded-lg p-6 border-l-4 border-blue-500">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">2. 番組画像 ＆ 有料切り替え</h2>
+                <div class="space-y-4">
+                    <div class="p-3 bg-blue-50 rounded">
+                        <label class="inline-flex items-center font-bold">
+                            <input type="checkbox" th:field="*{useThumbnail}" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2">番組画像（サムネイル）をアップロードする</span>
+                        </label>
+                        <div class="mt-2 ml-7"><input type="text" th:field="*{thumbnailPath}" class="w-full border rounded px-3 py-2 bg-white" placeholder="C:\images\thumb.jpg"></div>
+                    </div>
+
+                    <div class="p-4 bg-yellow-50 rounded border border-yellow-200">
+                        <label class="block font-bold mb-2 text-yellow-800">有料配信への自動切り替え時間</label>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center">
+                                <input type="number" th:field="*{paidSwitchMinute}" min="0" class="border rounded px-3 py-2 w-24 bg-white text-center" placeholder="0">
+                                <span class="ml-2 font-bold text-gray-700">分</span>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="number" th:field="*{paidSwitchSecond}" min="0" class="border rounded px-3 py-2 w-24 bg-white text-center" placeholder="5000">
+                                <span class="ml-2 font-bold text-gray-700">秒</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 font-bold">※分を空欄にして「秒」だけでの指定も可能です。</p>
+                        
+                        <div class="mt-4 pt-3 border-t border-yellow-200 flex items-center">
+                            <label class="text-sm font-bold text-gray-600 mr-3">操作ラグの補正（秒）:</label>
+                            <input type="number" th:field="*{switchLagSeconds}" min="0" max="30" class="border rounded px-2 py-1 w-16 bg-white text-center" placeholder="5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">3. FC2配信詳細設定</h2>
+                <div class="space-y-4">
+                    <div><label class="block text-sm font-bold mb-1">番組タイトル</label><input type="text" th:field="*{title}" class="w-full border rounded px-3 py-2"></div>
+                    <div><label class="block text-sm font-bold mb-1">番組情報（説明文）</label><textarea th:field="*{info}" class="w-full border rounded px-3 py-2 h-20"></textarea></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-bold mb-1">カテゴリー</label><select th:field="*{category}" class="w-full border rounded px-3 py-2 bg-white"><option value="0">選択してください</option><option value="1">雑談</option><option value="2">ゲーム</option><option value="3">作業</option><option value="4">動画</option><option value="9">音声</option><option value="5">その他</option></select></div>
+                        <div><label class="block text-sm font-bold mb-1">配信場所</label><div class="mt-2 space-x-4"><label><input type="radio" th:field="*{adultflg}" value="0"> 一般</label><label class="text-red-600 font-bold"><input type="radio" th:field="*{adultflg}" value="1"> アダルト</label></div></div>
+                        <div><label class="block text-sm font-bold mb-1">課金設定</label><div class="mt-2 space-x-4"><label><input type="radio" th:field="*{feeflg}" value="0"> 無料配信</label><label class="text-green-600 font-bold"><input type="radio" th:field="*{feeflg}" value="1"> 有料配信</label></div></div>
+                        <div><label class="block text-sm font-bold mb-1">ユーザー制限</label><select th:field="*{loginonlyflg}" class="w-full border rounded px-3 py-2 bg-white"><option value="0">制限なし</option><option value="1">ログインユーザー限定</option><option value="2">ポイント所持者限定</option></select></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 text-white shadow-md rounded-lg p-6">
+                <h2 class="text-xl font-bold mb-4 border-b border-gray-600 pb-2">4. ブラウザ設定</h2>
+                <div class="flex flex-col justify-center">
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" th:field="*{showBrowser}" id="showBrowserCheck" class="form-checkbox h-6 w-6 text-blue-500">
+                        <span class="ml-2 text-sm font-bold">起動時にブラウザ画面を表示する（現状必須）</span>
+                    </label>
+                    <p class="text-xs text-yellow-400 mt-1 font-bold">※現在バックグラウンド処理に対応中のため、必ずチェックを入れて運用してください。</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center pt-4 pb-8">
+                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-12 rounded-full shadow-lg text-lg transition duration-200">
+                    アカウント素材を保存する
+                </button>
+            </div>
+        </form>
     </div>
-  </body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const idField = document.getElementById("accountIdField").value;
+            const checkField = document.getElementById("showBrowserCheck");
+            if (!idField && checkField) { checkField.checked = true; }
+        });
+    </script>
+</body>
 </html>
