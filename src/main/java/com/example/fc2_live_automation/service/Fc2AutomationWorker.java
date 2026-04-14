@@ -3,6 +3,7 @@ package com.example.fc2_live_automation.service;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.LoadState;
 import com.example.fc2_live_automation.model.Fc2Account;
+import com.example.fc2_live_automation.model.Fc2Preset;
 import com.example.fc2_live_automation.repository.Fc2AccountRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class Fc2AutomationWorker {
     private final Map<Long, List<String>> memoryLogs = new ConcurrentHashMap<>();
     private final Map<Long, String> latestVideoTimes = new ConcurrentHashMap<>();
     private final Map<Long, Boolean> streamReadyFlags = new ConcurrentHashMap<>();
+    
+    // プリセット管理用マップ
+    private final Map<String, Thread> activePresetThreads = new ConcurrentHashMap<>();
 
     public Fc2AutomationWorker(Fc2AccountRepository repository) {
         this.repository = repository;
@@ -92,37 +96,48 @@ public class Fc2AutomationWorker {
 
     @Async
     public void startStreamingProcess(Fc2Account account) {
+        runStreamingLogic(account, false);
+    }
+
+    /**
+     * コア配信ロジック
+     */
+    private void runStreamingLogic(Fc2Account account, boolean isPresetMode) {
         Long id = account.getId();
         stopSignals.put(id, false);
         memoryLogs.put(id, new ArrayList<>());
 
-        String scheduledTimeStr = account.getScheduledStartTime();
-        if (scheduledTimeStr != null && !scheduledTimeStr.isEmpty()) {
-            try {
-                LocalDateTime scheduledTime = LocalDateTime.parse(scheduledTimeStr);
-                if (LocalDateTime.now().isBefore(scheduledTime)) {
-                    addLog(id, "⏳ 【予約待機】 指定された日時 (" + scheduledTimeStr.replace("T", " ") + ") まで待機します...");
-                    while (!isStopped(id) && LocalDateTime.now().isBefore(scheduledTime)) {
-                        // 🌟 修正ポイント：try-catchで囲みました
-                        try { Thread.sleep(5000); } catch (InterruptedException ignore) {}
+        // スレッドの停止フラグ（毒）をクリア
+        Thread.interrupted();
+
+        if (!isPresetMode) {
+            String scheduledTimeStr = account.getScheduledStartTime();
+            if (scheduledTimeStr != null && !scheduledTimeStr.isEmpty()) {
+                try {
+                    LocalDateTime scheduledTime = LocalDateTime.parse(scheduledTimeStr);
+                    if (LocalDateTime.now().isBefore(scheduledTime)) {
+                        addLog(id, "⏳ 【予約待機】 指定された日時まで待機します...");
+                        while (!isStopped(id) && LocalDateTime.now().isBefore(scheduledTime)) {
+                            try { Thread.sleep(5000); } catch (InterruptedException e) { handleInterrupt(isPresetMode); return; }
+                        }
+                        if (isStopped(id)) return;
                     }
-                    if (isStopped(id)) return;
-                    addLog(id, "▶ 予約時間になりました！配信プロセスを開始します。");
-                } else {
-                    addLog(id, "▶ 指定された日時は既に過ぎているため、即時開始します。");
+                } catch (Exception e) {
+                    addLog(id, "⚠️ 予約日時の形式が読み取れませんでした。即時開始します。");
                 }
-            } catch (Exception e) {
-                addLog(id, "⚠️ 予約日時の形式が読み取れませんでした。即時開始します。");
             }
         }
 
-        int loopMax = account.getLoopCount() <= 0 ? 9999 : account.getLoopCount();
+        int loopMax = isPresetMode ? 1 : (account.getLoopCount() <= 0 ? 9999 : account.getLoopCount());
         int currentCycle = 0;
 
         while (!isStopped(id) && currentCycle < loopMax) {
+            if (isPresetMode && Thread.currentThread().isInterrupted()) return; 
+
             currentCycle++;
             Fc2Account loopState = repository.findById(id).orElse(account);
             loopState.setCurrentLoop(currentCycle);
+            loopState.setStatus("RUNNING");
             repository.save(loopState);
 
             addLog(id, "🔄 【配信サイクル " + currentCycle + "回目 開始】");
@@ -131,56 +146,68 @@ public class Fc2AutomationWorker {
 
             for (int i = 1; i <= maxRetries; i++) {
                 if (isStopped(id)) return;
+                if (isPresetMode && Thread.currentThread().isInterrupted()) return;
+                
                 addLog(id, "▶ ログイン・配信設定試行 (" + i + "/" + maxRetries + ")");
                 try {
                     if (executePlaywrightProcess(account)) {
                         cycleSuccess = true;
                         break;
                     }
+                } catch (InterruptedException e) {
+                    addLog(id, "⏹ 停止信号を受信しました。処理を完全に中断します。");
+                    stopStreamingProcess(id); 
+                    handleInterrupt(isPresetMode);
+                    return; 
                 } catch (Exception e) {
                     String msg = e.getMessage();
                     if (msg != null && msg.contains("STOPPED")) return;
-                    addLog(id, "❌ 試行 " + i + " 失敗: " + e.getClass().getName());
+                    addLog(id, "❌ 試行 " + i + " 失敗: " + e.getMessage());
                     stopBrowsers(id);
                 }
+                
                 if (i < maxRetries && !isStopped(id)) {
                     addLog(id, "⏳ 5秒後に再試行します...");
-                    try { Thread.sleep(5000); } catch (InterruptedException ignore) {}
+                    try { 
+                        Thread.sleep(5000); 
+                    } catch (InterruptedException ie) { 
+                        handleInterrupt(isPresetMode);
+                        return; 
+                    }
                 }
             }
 
             if (!cycleSuccess || isStopped(id)) break;
+            if (isPresetMode && Thread.currentThread().isInterrupted()) break;
 
-            if (!isStopped(id) && currentCycle < loopMax) {
+            if (!isPresetMode && currentCycle < loopMax) {
                 int waitMins = account.getLoopWaitMinutes() != null ? account.getLoopWaitMinutes() : 0;
                 if (waitMins > 0) {
                     addLog(id, "☕ 【休憩】 次の配信まで " + waitMins + " 分間待機します...");
                     long waitMillis = waitMins * 60 * 1000L;
                     long startWait = System.currentTimeMillis();
-                    long lastLogTime = 0;
-                    
                     while (!isStopped(id) && (System.currentTimeMillis() - startWait) < waitMillis) {
-                        long remainSec = (waitMillis - (System.currentTimeMillis() - startWait)) / 1000;
-                        if (System.currentTimeMillis() - lastLogTime > 60000) { 
-                            addLog(id, "⏳ 休憩中... 残り約 " + (remainSec / 60) + " 分");
-                            lastLogTime = System.currentTimeMillis();
-                        }
-                        // 🌟 修正ポイント：try-catchで囲みました
-                        try { Thread.sleep(5000); } catch (InterruptedException ignore) {}
+                        try { Thread.sleep(5000); } catch (InterruptedException e) { handleInterrupt(isPresetMode); return; }
                     }
                 } else {
                     addLog(id, "⏳ 次の配信サイクルまで30秒待機します（サーバー切断待ち）...");
-                    try { Thread.sleep(30000); } catch (InterruptedException ignore) {}
+                    try { Thread.sleep(30000); } catch (InterruptedException e) { handleInterrupt(isPresetMode); return; }
                 }
             }
         }
 
         if (!isStopped(id)) {
-            addLog(id, "✅ 全ての配信ループ（" + currentCycle + "回）が完了しました。");
+            addLog(id, "✅ 配信完了しました。");
             Fc2Account finalState = repository.findById(id).orElse(account);
             finalState.setStatus("IDLE");
             finalState.setCurrentLoop(0);
             repository.save(finalState);
+        }
+    }
+
+    private void handleInterrupt(boolean isPresetMode) {
+        if (isPresetMode) {
+            Thread.currentThread().interrupt(); // プリセットモードの時だけフラグを伝達
         }
     }
 
@@ -270,7 +297,6 @@ public class Fc2AutomationWorker {
 
             Fc2Account latest = repository.findById(id).orElse(account);
             latest.setBroadcastUrl(broadcastUrl);
-            latest.setStatus("RUNNING");
             repository.save(latest);
 
             page.waitForTimeout(3000);
@@ -283,7 +309,8 @@ public class Fc2AutomationWorker {
 
             int waited = 0;
             while (!Boolean.TRUE.equals(streamReadyFlags.get(id)) && waited < 60) {
-                Thread.sleep(1000); waited++; checkStop(id);
+                try { Thread.sleep(1000); } catch (InterruptedException e) { throw e; }
+                waited++; checkStop(id);
             }
 
             if (page.locator(".js-toolStartBtn").count() > 0) {
@@ -307,6 +334,7 @@ public class Fc2AutomationWorker {
             }
             
             while (!isStopped(id) && activeProcesses.containsKey(id)) {
+                checkStop(id);
                 if (!hasSwitchedToPaid && switchTargetTime > 0 && System.currentTimeMillis() >= switchTargetTime) {
                     try {
                         if (page.locator(".js-switchFeeBtn").count() > 0) {
@@ -320,7 +348,7 @@ public class Fc2AutomationWorker {
                     } catch (Exception e) {}
                     hasSwitchedToPaid = true;
                 }
-                Thread.sleep(2000);
+                try { Thread.sleep(2000); } catch (InterruptedException e) { throw e; }
             }
 
             try {
@@ -330,14 +358,18 @@ public class Fc2AutomationWorker {
             } catch (Exception e) {}
 
             return true;
+        } catch (PlaywrightException pe) {
+            throw new Exception("Playwrightエラー: " + pe.getMessage());
         } finally {
             if (browser != null) { try { browser.close(); } catch (Exception ignore) {} }
             activeBrowsers.remove(id);
         }
     }
 
-    private void checkStop(Long id) throws Exception {
-        if (Boolean.TRUE.equals(stopSignals.get(id))) throw new Exception("STOPPED");
+    private void checkStop(Long id) throws InterruptedException {
+        if (Boolean.TRUE.equals(stopSignals.get(id)) || Thread.currentThread().isInterrupted()) {
+            throw new InterruptedException("STOPPED");
+        }
     }
 
     private boolean isStopped(Long id) {
@@ -387,7 +419,7 @@ public class Fc2AutomationWorker {
             try {
                 process.waitFor();
                 if (activeProcesses.get(id) == process) activeProcesses.remove(id);
-                if (System.currentTimeMillis() - startTime < 10000) addLog(id, "❌ 警告: FFmpegが数秒で異常終了しました。");
+                if (System.currentTimeMillis() - startTime < 10000) addLog(id, "❌ 警告: FFmpegが異常終了しました。");
                 else addLog(id, "⏹ 動画の再生が完了しました。");
             } catch (Exception e) {}
         }).start();
@@ -404,7 +436,7 @@ public class Fc2AutomationWorker {
         if (account != null) {
             account.setStatus("IDLE");
             account.setCurrentLoop(0); 
-            addLog(accountId, "⏹ 強制停止命令により終了しました。");
+            addLog(accountId, "⏹ 強制停止処理が完了しました。");
             repository.save(account);
         }
     }
@@ -412,11 +444,77 @@ public class Fc2AutomationWorker {
     private void stopBrowsers(Long id) {
         Browser b = activeBrowsers.get(id);
         if (b != null) {
-            try {
-                b.close();
-            } catch (Exception ignore) {
-            }
+            try { b.close(); } catch (Exception ignore) {}
         }
         activeBrowsers.remove(id);
+    }
+
+    // ==========================================
+    // 🌟 プリセット（番組表）連続再生ロジック
+    // ==========================================
+    
+    public void startPresetProcess(Fc2Preset preset, List<Fc2Account> playlist) {
+        String presetName = preset.getPresetName();
+
+        if (activePresetThreads.containsKey(presetName)) {
+            System.out.println("⚠️ プリセット [" + presetName + "] はすでに稼働中です。");
+            return;
+        }
+
+        Thread presetThread = new Thread(() -> {
+            try {
+                System.out.println("▶️ プリセット [" + presetName + "] の連続再生を開始します！");
+                
+                // 🌟 修正ポイント1: int型のため、nullチェックは不要。そのまま代入。
+                int maxLoop = preset.getLoopCount();
+                int currentLoop = 1;
+
+                while ((maxLoop == 0 || currentLoop <= maxLoop) && !Thread.currentThread().isInterrupted()) {
+                    System.out.println("🔄 プリセット [" + presetName + "] - " + currentLoop + "周目を開始");
+
+                    List<Fc2Account> currentPlaylist = new ArrayList<>(playlist);
+                    if (preset.isShuffleMode()) {
+                        java.util.Collections.shuffle(currentPlaylist);
+                    }
+
+                    for (Fc2Account account : currentPlaylist) {
+                        if (Thread.currentThread().isInterrupted()) throw new InterruptedException();
+
+                        System.out.println("🎬 次の動画を開始: " + account.getAccountName());
+                        
+                        runStreamingLogic(account, true);
+                    }
+
+                    System.out.println("✅ プリセット [" + presetName + "] - " + currentLoop + "周目が完了");
+
+                    // 🌟 修正ポイント2: Integer型のため、nullチェックが【必須】。
+                    if (preset.getLoopWaitMinutes() != null && preset.getLoopWaitMinutes() > 0) {
+                        System.out.println("⏳ " + preset.getLoopWaitMinutes() + "分間の休憩（待機）に入ります...");
+                        Thread.sleep(preset.getLoopWaitMinutes() * 60 * 1000L);
+                    }
+                    
+                    currentLoop++;
+                }
+                if (!Thread.currentThread().isInterrupted()) {
+                    System.out.println("🎉 プリセット [" + presetName + "] の全ループが完了しました！");
+                }
+
+            } catch (InterruptedException e) {
+                System.out.println("⏹ プリセット [" + presetName + "] が完全に停止されました。");
+            } finally {
+                activePresetThreads.remove(presetName);
+            }
+        });
+
+        activePresetThreads.put(presetName, presetThread);
+        presetThread.start();
+    }
+
+    public void stopPresetProcess(String presetName) {
+        Thread thread = activePresetThreads.get(presetName);
+        if (thread != null && thread.isAlive()) {
+            System.out.println("🛑 プリセット [" + presetName + "] の停止シグナルを送信しました。");
+            thread.interrupt(); 
+        }
     }
 }
