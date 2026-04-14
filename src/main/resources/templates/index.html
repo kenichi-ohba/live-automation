@@ -1,245 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/UpaLive_Icon.ico" />
-    <title>UpaLive Automation - 管理ダッシュボード</title>
+<head>
+    <meta charset="UTF-8">
+    <title>ダッシュボード - FC2 Live Automation</title>
+    <link rel="icon" th:href="@{/UpaLive_Icon.ico}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      #log-content {
-        font-family: "Consolas", monospace;
-      }
-      .status-badge-running {
-        animation: pulse 2s infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.6;
-        }
-      }
+        .log-window { display: none; }
+        .log-window.active { display: block; }
     </style>
-  </head>
-  <body class="bg-gray-100 text-gray-900">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
     <div class="container mx-auto px-4 py-8">
-      
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex items-center space-x-4">
-          <img src="/UpaLive_Logo.png" alt="UpaLive Logo" class="h-16 w-auto" />
-          <div class="flex flex-col">
-            <h1 class="text-4xl font-bold text-pink-500">UpaLive Automation</h1>
-            <p class="text-gray-500 text-sm">FC2 Live Automated Streaming System</p>
-          </div>
+        <div class="flex justify-between items-center mb-8 bg-white p-6 rounded-lg shadow-sm">
+            <h1 class="text-3xl font-bold text-blue-600 flex items-center">
+                <span class="mr-3">📡</span> UpaLive - 自動配信コントロールパネル
+            </h1>
+            <a th:href="@{/add}" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-200">
+                ＋ 新規配信設定を追加
+            </a>
         </div>
-        <a href="/add" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-md">+ 新規追加</a>
-      </div>
 
-      <div
-        class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200"
-      >
-        <table class="min-w-full">
-          <thead class="bg-gray-50 border-b">
-            <tr
-              class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
-            >
-              <th class="px-6 py-3">ID</th>
-              <th class="px-6 py-3">アカウント情報</th>
-              <th class="px-6 py-3">ステータス</th>
-              <th class="px-6 py-3 text-center">操作</th>
-            </tr>
-          </thead>
-          <tbody id="account-table-body">
-            <tr
-              th:each="account : ${accounts}"
-              th:id="'row-' + ${account.id}"
-              class="border-b hover:bg-gray-50"
-            >
-              <td
-                class="px-6 py-4 text-sm text-gray-400"
-                th:text="${account.id}"
-              >
-                1
-              </td>
-              <td class="px-6 py-4">
-                <div class="text-sm font-bold" th:text="${account.email}">
-                  email
-                </div>
-                <div class="text-xs text-gray-500" th:text="${account.title}">
-                  title
-                </div>
-              </td>
-              <td class="px-6 py-4 status-cell" th:data-id="${account.id}">
-                <span
-                  th:if="${account.status == 'STARTING'}"
-                  class="px-3 py-1 rounded-full text-xs font-bold bg-yellow-500 text-white animate-pulse"
-                  >準備中...</span
-                >
-                <span
-                  th:if="${account.status == 'RUNNING'}"
-                  class="px-3 py-1 rounded-full text-xs font-bold bg-green-500 text-white status-badge-running"
-                  >配信中</span
-                >
-                <span
-                  th:if="${account.status == 'IDLE'}"
-                  class="px-3 py-1 rounded-full text-xs font-bold bg-gray-400 text-white"
-                  >停止中</span
-                >
-                <span
-                  th:if="${account.status == 'ERROR'}"
-                  class="px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white"
-                  >ERROR</span
-                >
-              </td>
-              <td
-                class="px-6 py-4 text-center action-cell"
-                th:data-id="${account.id}"
-              >
-                <div class="flex justify-center space-x-2">
-                  <button
-                    th:onclick="'showLogs(' + ${account.id} + ')'"
-                    class="text-blue-500 hover:underline text-xs mr-2"
-                  >
-                    ログ
-                  </button>
-
-                  <a
-                    th:if="${account.status == 'RUNNING' || account.status == 'STARTING'}"
-                    th:href="@{/stop/{id}(id=${account.id})}"
-                    class="bg-yellow-500 text-white font-bold py-1 px-4 rounded text-sm"
-                    >停止</a
-                  >
-
-                  <a
-                    th:if="${account.status == 'IDLE' || account.status == 'ERROR'}"
-                    th:href="@{/start/{id}(id=${account.id})}"
-                    class="bg-green-500 text-white font-bold py-1 px-4 rounded text-sm"
-                    >開始</a
-                  >
-
-                  <a
-                    th:href="@{/edit/{id}(id=${account.id})}"
-                    class="text-gray-400 hover:text-gray-600 font-bold py-1 px-2"
-                    >編集</a
-                  >
-                  <a
-                    th:href="@{/delete/{id}(id=${account.id})}"
-                    onclick="return confirm('削除しますか？');"
-                    class="text-red-400 hover:text-red-600 font-bold py-1 px-2"
-                    >削除</a
-                  >
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div
-      id="log-modal"
-      class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
-    >
-      <div
-        class="bg-white rounded-lg w-11/12 h-5/6 flex flex-col overflow-hidden shadow-2xl"
-      >
-        <div class="p-4 border-b flex justify-between items-center bg-gray-50">
-          <h3 class="font-bold text-gray-700">リアルタイムログ (最新100行)</h3>
-          <button onclick="closeLogs()" class="text-2xl">&times;</button>
+        <div th:if="${#lists.isEmpty(accounts)}" class="bg-white rounded-lg shadow p-12 text-center text-gray-500">
+            <p class="text-xl">現在、登録されている配信設定はありません。</p>
+            <p class="mt-2">右上の「新規配信設定を追加」ボタンから、最初のアカウントを登録してください。</p>
         </div>
-        <pre
-          id="log-content"
-          class="flex-1 bg-gray-900 text-green-400 p-4 overflow-y-auto text-xs whitespace-pre-wrap"
-        ></pre>
-      </div>
+
+        <div th:if="${not #lists.isEmpty(accounts)}">
+            <div th:each="presetGroup : ${groupedAccounts}">
+                
+                <div class="mt-8 mb-4 flex items-center justify-between border-b-2 border-indigo-200 pb-2">
+                    <div class="flex items-baseline">
+                        <h2 class="text-2xl font-bold text-indigo-900" th:text="${presetGroup.key}">プリセット名</h2>
+                        <a th:href="@{/accounts(preset=${presetGroup.key})}" class="ml-4 text-sm text-indigo-500 hover:text-indigo-800 font-bold underline transition">
+                            🔍 このグループの素材一覧を見る ↗
+                        </a>
+                    </div>
+                    <button th:if="${presetGroup.key != '未設定 (個別アカウント)'}" class="text-sm bg-indigo-100 text-indigo-700 font-bold py-1 px-4 rounded hover:bg-indigo-200 transition">
+                        ▶ このグループを一括開始
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div th:each="account : ${presetGroup.value}" class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition">
+                        
+                        <div class="p-4 flex justify-between items-center" 
+                             th:classappend="${account.status == 'RUNNING' ? 'bg-green-50 border-b border-green-200' : 'bg-gray-50 border-b border-gray-200'}">
+                            
+                            <span th:if="${account.status == 'RUNNING'}" class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                                ● 配信中
+                            </span>
+                            <span th:if="${account.status != 'RUNNING'}" class="bg-gray-400 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                待機中
+                            </span>
+
+                            <a th:if="${account.status == 'RUNNING' && account.customLiveUrl != null && !account.customLiveUrl.isEmpty()}" 
+                               th:href="${account.customLiveUrl}" target="_blank" 
+                               class="text-sm text-blue-600 hover:text-blue-800 font-bold underline">
+                                配信画面を開く ↗
+                            </a>
+                            <a th:if="${account.status == 'RUNNING' && (account.customLiveUrl == null || account.customLiveUrl.isEmpty())}" 
+                               th:href="${account.broadcastUrl}" target="_blank" 
+                               class="text-sm text-blue-600 hover:text-blue-800 font-bold underline">
+                                配信画面を開く ↗
+                            </a>
+                        </div>
+
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2 truncate" th:text="${account.title != null && !account.title.isEmpty() ? account.title : '無題の配信'}">番組タイトル</h3>
+                            <p class="text-sm text-gray-500 mb-4 truncate" th:text="${account.email}">メールアドレス</p>
+
+                            <div class="text-sm bg-gray-50 p-3 rounded mb-4 space-y-1">
+                                <p th:if="${account.scheduledStartTime != null && !account.scheduledStartTime.isEmpty()}" class="text-indigo-600 font-bold">
+                                    ⏰ 予約: <span th:text="${#strings.replace(account.scheduledStartTime, 'T', ' ')}"></span>
+                                </p>
+                                <p class="text-gray-600">
+                                    <span class="font-bold">ループ:</span> 
+                                    <span th:text="${account.currentLoop}">0</span> / <span th:text="${account.loopCount == 0 ? '無限' : account.loopCount}"></span> 回
+                                </p>
+                                <p th:if="${account.loopWaitMinutes > 0}" class="text-gray-600">
+                                    <span class="font-bold">待機:</span> <span th:text="${account.loopWaitMinutes}"></span> 分間
+                                </p>
+                                <p th:if="${account.feeflg == 1}" class="text-gray-600">
+                                    <span class="font-bold">有料切替:</span> 
+                                    <span th:text="${account.formattedPaidSwitchTime != null ? account.formattedPaidSwitchTime : '未計算(再保存で取得)'}"></span>
+                                    <span class="text-xs text-red-400" th:text="'(' + ${account.switchLagSeconds} + '秒前実行)'"></span>
+                                </p>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t pt-4">
+                                <div class="space-x-2">
+                                    <a th:if="${account.status != 'RUNNING'}" th:href="@{/start/{id}(id=${account.id})}" 
+                                       class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm transition">
+                                        ▶ 開始
+                                    </a>
+                                    <a th:if="${account.status == 'RUNNING'}" th:href="@{/stop/{id}(id=${account.id})}" 
+                                       class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-sm transition">
+                                        ⏹ 停止
+                                    </a>
+                                    <button th:onclick="'toggleLog(' + ${account.id} + ')'" 
+                                            class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded text-sm transition">
+                                        📋 ログ
+                                    </button>
+                                </div>
+                                <div class="space-x-1">
+                                    <a th:href="@{/edit/{id}(id=${account.id})}" class="text-gray-500 hover:text-blue-600 text-sm" title="編集">✏️</a>
+                                    <a th:href="@{/delete/{id}(id=${account.id})}" class="text-gray-500 hover:text-red-600 text-sm ml-2" onclick="return confirm('本当に削除しますか？');" title="削除">🗑️</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div th:id="'log-container-' + ${account.id}" class="log-window bg-black text-green-400 p-4 text-xs font-mono h-48 overflow-y-auto border-t border-gray-700 hidden">
+                            <ul th:id="'log-list-' + ${account.id}"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-      let currentLogId = null;
-      let logInterval = null;
-
-      // 🌟 3秒ごとに全アカウントのステータスをAPIから取得して画面を書き換える
-      async function refreshDashboard() {
-        try {
-          const response = await fetch("/api/accounts");
-          const accounts = await response.json();
-
-          accounts.forEach((acc) => {
-            const statusCell = document.querySelector(
-              `.status-cell[data-id="${acc.id}"]`,
-            );
-            const actionCell = document.querySelector(
-              `.action-cell[data-id="${acc.id}"]`,
-            );
-
-            if (statusCell && actionCell) {
-              // 🌟 追加：ループ回数の文字列を作成（例: "1/3回" または "2回目(無限)"）
-              const current = acc.currentLoop || 0;
-              const loopText =
-                acc.loopCount > 0
-                  ? `${current}/${acc.loopCount}回`
-                  : `${current}回目(無限)`;
-
-              // ステータス表示の更新
-              let sHtml = "";
-              if (acc.status === "RUNNING") {
-                sHtml = `<a href="${acc.broadcastUrl}" target="_blank" class="px-3 py-1 rounded-full text-xs font-bold bg-green-500 text-white status-badge-running">● 配信中 (${loopText})</a>`;
-              } else if (acc.status === "STARTING") {
-                sHtml = `<span class="px-3 py-1 rounded-full text-xs font-bold bg-yellow-500 text-white animate-pulse">準備中... (${loopText})</span>`;
-              } else if (acc.status === "ERROR") {
-                sHtml = `<span class="px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white">ERROR</span>`;
-              } else {
-                sHtml = `<span class="px-3 py-1 rounded-full text-xs font-bold bg-gray-400 text-white">停止中</span>`;
-              }
-              statusCell.innerHTML = sHtml;
-
-              // ボタンの更新 (STARTING または RUNNING のときは「停止」を出す)
-              const isActive =
-                acc.status === "RUNNING" || acc.status === "STARTING";
-              actionCell.innerHTML = `
-                            <div class="flex justify-center items-center space-x-2">
-                                <button onclick="showLogs(${acc.id})" class="text-blue-500 hover:underline text-xs mr-2">ログ</button>
-                                ${
-                                  isActive
-                                    ? `<a href="/stop/${acc.id}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded text-sm shadow">停止</a>`
-                                    : `<a href="/start/${acc.id}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded text-sm shadow">開始</a>`
-                                }
-                                <a href="/edit/${acc.id}" class="text-gray-400 hover:text-gray-600 font-bold py-1 px-2">編集</a>
-                                <a href="/delete/${acc.id}" onclick="return confirm('削除しますか？');" class="text-red-400 hover:text-red-600 font-bold py-1 px-2">削除</a>
-                            </div>`;
+        function toggleLog(accountId) {
+            const logContainer = document.getElementById('log-container-' + accountId);
+            if (logContainer.classList.contains('hidden')) {
+                logContainer.classList.remove('hidden');
+                fetchLogs(accountId);
+                window['logInterval_' + accountId] = setInterval(() => fetchLogs(accountId), 3000);
+            } else {
+                logContainer.classList.add('hidden');
+                clearInterval(window['logInterval_' + accountId]);
             }
-          });
-        } catch (e) {
-          console.error("Poll error:", e);
         }
-      }
 
-      async function fetchLogs() {
-        if (!currentLogId) return;
-        const res = await fetch("/api/logs/" + currentLogId);
-        const logs = await res.json();
-        const box = document.getElementById("log-content");
-        box.innerText = logs.length ? logs.join("\n") : "ログを取得中...";
-        box.scrollTop = box.scrollHeight;
-      }
+        function fetchLogs(accountId) {
+            fetch('/api/logs/' + accountId)
+                .then(response => response.json())
+                .then(logs => {
+                    const logList = document.getElementById('log-list-' + accountId);
+                    logList.innerHTML = '';
+                    logs.forEach(log => {
+                        const li = document.createElement('li');
+                        li.textContent = log;
+                        li.className = 'mb-1';
+                        logList.appendChild(li);
+                    });
+                    const container = document.getElementById('log-container-' + accountId);
+                    container.scrollTop = container.scrollHeight;
+                })
+                .catch(error => console.error('Error fetching logs:', error));
+        }
 
-      function showLogs(id) {
-        currentLogId = id;
-        document.getElementById("log-modal").classList.remove("hidden");
-        fetchLogs();
-        if (logInterval) clearInterval(logInterval);
-        logInterval = setInterval(fetchLogs, 2000);
-      }
-
-      function closeLogs() {
-        document.getElementById("log-modal").classList.add("hidden");
-        currentLogId = null;
-        clearInterval(logInterval);
-      }
-
-      setInterval(refreshDashboard, 3000); // 3秒おきにステータス更新
+        setInterval(() => {
+            fetch('/api/accounts').then(response => response.json()).then(accounts => {});
+        }, 5000);
     </script>
-  </body>
+</body>
 </html>

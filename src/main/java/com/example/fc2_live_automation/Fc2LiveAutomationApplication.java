@@ -18,8 +18,10 @@ public class Fc2LiveAutomationApplication {
     @EventListener(ApplicationReadyEvent.class)
     public void openBrowserAfterStartup() {
         try {
-            String url = "http://localhost:8081/"; // ※必要に応じて8080などに変更してください
-            String os = System.getProperty("os.name").toLowerCase();
+           // String url = "http://localhost:8081/"; // ※必要に応じて8080などに変更してください
+            String url = "http://localhost:8082/"; // ※必要に応じて8080などに変更してください
+            
+           String os = System.getProperty("os.name").toLowerCase();
             
             if (os.contains("win")) {
                 new ProcessBuilder("rundll32", "url.dll,FileProtocolHandler", url).start();

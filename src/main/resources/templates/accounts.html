@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント(動画)管理 - FC2 Live Automation</title>
+    <link rel="icon" th:href="@{/UpaLive_Icon.ico}" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <nav class="bg-blue-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">📡 UpaLive</h1>
+            <div class="space-x-4">
+                <a th:href="@{/}" class="hover:text-blue-200 whitespace-nowrap">ダッシュボード</a>
+                <a th:href="@{/accounts}" class="font-bold border-b-2 border-white pb-1 whitespace-nowrap">アカウント(動画)管理</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-6 space-y-4 md:space-y-0">
+            <h2 class="text-2xl font-bold text-gray-700 flex items-center">
+                <span class="mr-2">🎞️</span> 登録済みアカウント（素材）一覧
+            </h2>
+            <a th:href="@{/add}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full shadow transition whitespace-nowrap">
+                ＋ 新規アカウント登録
+            </a>
+        </div>
+
+        <div class="bg-white p-4 rounded-lg shadow mb-6 flex flex-wrap gap-4 items-center border-l-4 border-indigo-500">
+            <div class="flex items-center">
+                <label class="font-bold text-gray-600 text-sm mr-2 whitespace-nowrap">📂 プリセット絞り込み:</label>
+                <select id="presetFilter" class="border rounded px-3 py-1.5 text-sm bg-gray-50 focus:ring-blue-500 focus:border-blue-500" onchange="applyFilters()">
+                    <option value="ALL">すべて表示</option>
+                    <option value="UNASSIGNED">未設定 (個別アカウント)</option>
+                </select>
+            </div>
+            
+            <div class="flex items-center">
+                <label class="font-bold text-gray-600 text-sm mr-2 whitespace-nowrap">⇅ 並び替え:</label>
+                <select id="sortSelect" class="border rounded px-3 py-1.5 text-sm bg-gray-50 focus:ring-blue-500 focus:border-blue-500" onchange="applyFilters()">
+                    <option value="id_asc">登録が古い順</option>
+                    <option value="id_desc">登録が新しい順</option>
+                    <option value="name_asc">名前順 (A-Z, あ-ん)</option>
+                    <option value="status_active">稼働ステータス (配信中を上に)</option>
+                </select>
+            </div>
+            
+            <button onclick="resetFilters()" class="text-sm text-gray-500 hover:text-red-500 underline ml-auto whitespace-nowrap">
+                条件をリセット
+            </button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow overflow-x-auto w-full">
+            <table class="min-w-full leading-normal" id="accountsTable">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-600 text-sm leading-normal">
+                        <th class="py-3 px-6 text-left whitespace-nowrap">管理名 / 所属プリセット</th>
+                        <th class="py-3 px-6 text-center whitespace-nowrap">運用ステータス</th>
+                        <th class="py-3 px-6 text-left whitespace-nowrap">動画情報 / 有料切替</th>
+                        <th class="py-3 px-6 text-center whitespace-nowrap">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm" id="accountsBody">
+                    <tr th:each="account : ${accounts}" class="account-row border-b border-gray-200 hover:bg-gray-50"
+                        th:data-id="${account.id}"
+                        th:data-preset="${account.presetName != null && !account.presetName.isEmpty() ? account.presetName : 'UNASSIGNED'}"
+                        th:data-name="${account.accountName}"
+                        th:data-status="${account.status == 'RUNNING' ? '1' : (account.presetName != null && !account.presetName.isEmpty() ? '2' : '3')}">
+                        
+                        <td class="py-3 px-6 text-left">
+                            <div class="font-bold text-blue-600 text-base whitespace-nowrap" th:text="${account.accountName}">管理名</div>
+                            <div class="mt-1">
+                                <span th:if="${account.presetName != null && !account.presetName.isEmpty()}" 
+                                      class="bg-indigo-100 text-indigo-700 text-[10px] px-2 py-0.5 rounded border border-indigo-200 font-bold preset-badge whitespace-nowrap inline-block">
+                                    📂 プリセット: <span class="preset-name-text">[[${account.presetName}]]</span>
+                                </span>
+                                <span th:unless="${account.presetName != null && !account.presetName.isEmpty()}" 
+                                      class="text-gray-400 text-[10px] whitespace-nowrap">
+                                    個別設定 (未割当)
+                                </span>
+                            </div>
+                        </td>
+
+                        <td class="py-3 px-6 text-center">
+                            <div th:if="${account.status == 'RUNNING'}" class="flex justify-center">
+                                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse whitespace-nowrap inline-block">● 配信中</span>
+                            </div>
+                            <div th:if="${account.status != 'RUNNING' && account.presetName != null && !account.presetName.isEmpty()}" class="flex justify-center">
+                                <span class="bg-orange-400 text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap inline-block">⏳ 待機中</span>
+                            </div>
+                            <div th:if="${account.status != 'RUNNING' && (account.presetName == null || account.presetName.isEmpty())}" class="flex justify-center">
+                                <span class="bg-gray-400 text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap inline-block">⚪ 停止中</span>
+                            </div>
+                        </td>
+
+                        <td class="py-3 px-6 text-left min-w-[250px]">
+                            <div class="truncate w-48 md:w-64 text-gray-500 font-mono text-[10px]" th:text="${account.videoPath}"></div>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded text-xs font-bold border border-indigo-100 whitespace-nowrap">
+                                    ⏱️ 再生時間: [[${account.videoDuration != null ? account.videoDuration : '未解析'}]]
+                                </span>
+                                <span th:if="${account.feeflg == 1}" class="bg-yellow-50 text-yellow-800 px-2 py-0.5 rounded text-xs font-bold border border-yellow-200 whitespace-nowrap">
+                                    💰 有料切替: <span th:text="${account.formattedPaidSwitchTime}"></span>
+                                </span>
+                            </div>
+                        </td>
+
+                        <td class="py-3 px-6 text-center">
+                            <div class="flex justify-center space-x-3">
+                                <a th:href="@{/edit/{id}(id=${account.id})}" class="text-blue-500 hover:text-blue-700 font-bold text-xs whitespace-nowrap">✏️ 編集</a>
+                                <a th:href="@{/delete/{id}(id=${account.id})}" class="text-red-500 hover:text-red-700 font-bold text-xs whitespace-nowrap" onclick="return confirm('削除しますか？');">🗑️ 削除</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(accounts)}" id="emptyRow">
+                        <td colspan="4" class="py-12 px-6 text-center text-gray-500">
+                            素材アカウントが登録されていません。
+                        </td>
+                    </tr>
+                    <tr id="noResultRow" style="display: none;">
+                        <td colspan="4" class="py-12 px-6 text-center text-gray-500">
+                            条件に一致するアカウントが見つかりません。
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            populatePresetDropdown();
+            checkUrlParameters();
+        });
+
+        function populatePresetDropdown() {
+            const presetSelect = document.getElementById('presetFilter');
+            const badges = document.querySelectorAll('.preset-name-text');
+            const uniquePresets = new Set();
+            
+            badges.forEach(badge => {
+                const name = badge.textContent.trim();
+                if (name) uniquePresets.add(name);
+            });
+
+            uniquePresets.forEach(preset => {
+                const option = document.createElement('option');
+                option.value = preset;
+                option.textContent = `📂 ${preset}`;
+                presetSelect.appendChild(option);
+            });
+        }
+
+        function checkUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetPreset = urlParams.get('preset');
+            
+            if (targetPreset) {
+                const presetSelect = document.getElementById('presetFilter');
+                if (Array.from(presetSelect.options).some(opt => opt.value === targetPreset)) {
+                    presetSelect.value = targetPreset;
+                } else if (targetPreset === '未設定 (個別アカウント)') {
+                    presetSelect.value = 'UNASSIGNED';
+                }
+                applyFilters();
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('presetFilter').value = 'ALL';
+            document.getElementById('sortSelect').value = 'id_asc';
+            window.history.replaceState({}, document.title, window.location.pathname);
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const filterValue = document.getElementById('presetFilter').value;
+            const sortValue = document.getElementById('sortSelect').value;
+            const tbody = document.getElementById('accountsBody');
+            const rows = Array.from(tbody.querySelectorAll('.account-row'));
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const preset = row.getAttribute('data-preset');
+                if (filterValue === 'ALL' || preset === filterValue) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            const noResultRow = document.getElementById('noResultRow');
+            if (noResultRow) noResultRow.style.display = (visibleCount === 0 && rows.length > 0) ? '' : 'none';
+
+            rows.sort((a, b) => {
+                if (sortValue === 'id_asc') {
+                    return parseInt(a.getAttribute('data-id')) - parseInt(b.getAttribute('data-id'));
+                } else if (sortValue === 'id_desc') {
+                    return parseInt(b.getAttribute('data-id')) - parseInt(a.getAttribute('data-id'));
+                } else if (sortValue === 'name_asc') {
+                    return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'), 'ja');
+                } else if (sortValue === 'status_active') {
+                    return parseInt(a.getAttribute('data-status')) - parseInt(b.getAttribute('data-status'));
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+</body>
+</html>

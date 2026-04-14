@@ -2,10 +2,11 @@ package com.example.fc2_live_automation.controller;
 
 import com.example.fc2_live_automation.model.Fc2Account;
 import com.example.fc2_live_automation.service.AccountService;
-import com.example.fc2_live_automation.service.Fc2AutomationWorker; // 🌟 これを追加しました
+import com.example.fc2_live_automation.service.Fc2AutomationWorker;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +20,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class AccountController {
 
     private final AccountService accountService;
-    private final Fc2AutomationWorker fc2AutomationWorker; // 🌟 ログ取得用にWorkerを追加
+    private final Fc2AutomationWorker fc2AutomationWorker;
 
-    // 🌟 コンストラクタも修正し、Workerを受け取れるようにしました
     public AccountController(AccountService accountService, Fc2AutomationWorker fc2AutomationWorker) {
         this.accountService = accountService;
         this.fc2AutomationWorker = fc2AutomationWorker;
     }
 
+    // 🌟 ダッシュボード（今回はそのまま。フェーズ3以降でプリセット専用に作り変えます）
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("accounts", accountService.getAllAccounts());
+        List<Fc2Account> accounts = accountService.getAllAccounts();
+        Map<String, List<Fc2Account>> groupedAccounts = accounts.stream()
+            .collect(Collectors.groupingBy(a -> 
+                (a.getPresetName() == null || a.getPresetName().trim().isEmpty()) 
+                    ? "未設定 (個別アカウント)" 
+                    : a.getPresetName()
+            ));
+        model.addAttribute("accounts", accounts);
+        model.addAttribute("groupedAccounts", groupedAccounts);
         return "index";
+    }
+
+    // 🌟 新規追加：アカウント（素材）管理画面の表示
+    @GetMapping("/accounts")
+    public String accountsList(Model model) {
+        model.addAttribute("accounts", accountService.getAllAccounts());
+        return "accounts";
     }
 
     @GetMapping("/add")
@@ -42,10 +58,9 @@ public class AccountController {
     @PostMapping("/save")
     public String saveAccount(@ModelAttribute Fc2Account account) {
         accountService.saveAccount(account);
-        return "redirect:/";
+        return "redirect:/accounts"; // 🌟 保存後は「アカウント一覧」に戻る
     }
 
-    // 🌟 新規追加：編集画面を開く窓口（新規登録画面を使い回します）
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Fc2Account account = accountService.getAccountById(id);
@@ -53,11 +68,10 @@ public class AccountController {
         return "add-account";
     }
 
-    // 🌟 新規追加：削除する窓口
     @GetMapping("/delete/{id}")
     public String deleteAccount(@PathVariable("id") Long id, Model model) {
         accountService.deleteAccount(id);
-        return "redirect:/";
+        return "redirect:/accounts"; // 🌟 削除後も「アカウント一覧」に戻る
     }
 
     @GetMapping("/start/{id}")
@@ -66,28 +80,21 @@ public class AccountController {
         return "redirect:/";
     }
 
-    // 🌟 新規追加：停止ボタンが押された時の窓口
     @GetMapping("/stop/{id}")
     public String stopStreaming(@PathVariable Long id) {
-        // serviceの中で repository.save("IDLE") と 
-        // worker.stopStreamingProcess(id) が両方呼ばれているか確認してください
         accountService.stopStreaming(id); 
         return "redirect:/";
     }
 
-    // 🌟 画面更新用に、全アカウントの最新状態をJSON形式で返す窓口
     @GetMapping("/api/accounts")
     @ResponseBody
     public List<Fc2Account> getAccountsApi() {
         return accountService.getAllAccounts();
     }
 
-    // 🌟 特定アカウントのログを取得するAPI（ここを修正しました！）
     @GetMapping("/api/logs/{id}")
     @ResponseBody
     public List<String> getLogs(@PathVariable Long id) {
-        // 古い「アカウント情報からの取得」をやめ、Workerのメモリから最新のログを直接引っ張ってきます
         return fc2AutomationWorker.getLogs(id);
     }
-    
 }
