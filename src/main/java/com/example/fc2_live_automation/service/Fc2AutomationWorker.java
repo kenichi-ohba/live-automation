@@ -90,7 +90,7 @@ public class Fc2AutomationWorker {
         memoryLogs.putIfAbsent(id, new ArrayList<>());
         var logs = memoryLogs.get(id);
         synchronized (logs) {
-            if (logs.size() >= 100) logs.removeFirst(); // Java 21+ syntax
+            if (logs.size() >= 100) logs.removeFirst();
             logs.add(message);
         }
         logger.info("[Account {}] {}", id, message);
@@ -101,7 +101,7 @@ public class Fc2AutomationWorker {
         presetLogs.putIfAbsent(presetName, new ArrayList<>());
         var logs = presetLogs.get(presetName);
         synchronized (logs) {
-            if (logs.size() >= 50) logs.removeFirst(); // Java 21+ syntax
+            if (logs.size() >= 50) logs.removeFirst();
             logs.add(message);
         }
         logger.info("[Preset {}] {}", presetName, message);
@@ -126,23 +126,43 @@ public class Fc2AutomationWorker {
         if (isStopRequested(id, presetName)) throw new InterruptedException("STOPPED");
     }
 
-    // =========================================================================
-    // 🌟 原点回帰：JavaScriptによる画面要素の強制クリック（一番確実な突破方法）
-    // =========================================================================
-    private void forceClickBySelector(Page page, String selector) {
+    private void pollAndClick(Page page, String selector, int timeoutMs) {
+        long end = System.currentTimeMillis() + timeoutMs;
+        while (System.currentTimeMillis() < end) {
+            try {
+                var js = "() => {" +
+                         "  var btns = Array.from(document.querySelectorAll('" + selector + "'));" +
+                         "  var visible = btns.filter(b => b.offsetWidth > 0 || b.offsetHeight > 0 || b.getClientRects().length > 0);" +
+                         "  if (visible.length > 0) {" +
+                         "    visible[visible.length - 1].click();" +
+                         "    return true;" +
+                         "  }" +
+                         "  return false;" +
+                         "}";
+                Boolean clicked = (Boolean) page.evaluate(js);
+                if (Boolean.TRUE.equals(clicked)) return;
+            } catch (Exception ignore) {}
+            try { Thread.sleep(500); } catch (Exception ignore) {}
+        }
+    }
+    
+    private void forceClickByText(Page page, String text) {
         try {
-            var js = "document.querySelectorAll('" + selector + "').forEach(el => { if(el.offsetParent !== null) el.click(); });";
+            var js = "Array.from(document.querySelectorAll('a, button, span, div, label')).filter(el => el.textContent.includes('" + text + "')).forEach(btn => { if (btn.offsetParent !== null) btn.click(); });";
             page.evaluate(js);
         } catch (Exception ignore) {}
     }
 
-    private void forceClickByText(Page page, String text) {
+    private int parseTimeToSeconds(String timeStr) {
+        if (timeStr == null || timeStr.isBlank() || timeStr.equals("取得不可")) return 0;
         try {
-            var js = "Array.from(document.querySelectorAll('a, button, span, div')).filter(el => el.textContent.includes('" + text + "')).forEach(btn => { if (btn.offsetParent !== null) btn.click(); });";
-            page.evaluate(js);
-        } catch (Exception ignore) {}
+            var parts = timeStr.split(":");
+            int h = Integer.parseInt(parts[0]);
+            int m = Integer.parseInt(parts[1]);
+            int s = Integer.parseInt(parts[2]);
+            return h * 3600 + m * 60 + s;
+        } catch (Exception e) { return 0; }
     }
-    // =========================================================================
 
     private void runStreamingLogic(Fc2Account account, boolean isPresetMode, String presetName) {
         var id = account.getId();
@@ -240,7 +260,7 @@ public class Fc2AutomationWorker {
 
             var context = browser.newContext(new Browser.NewContextOptions()
                     .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
-                    .setPermissions(List.of("camera", "microphone", "notifications"))); // Java 9+ syntax
+                    .setPermissions(List.of("camera", "microphone", "notifications"))); 
             
             var page = context.newPage();
             
@@ -261,8 +281,37 @@ public class Fc2AutomationWorker {
             if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] ログイン完了、設定画面へ移行");
 
             checkStop(id, presetName);
-            page.navigate("https://live.fc2.com/live_start/");
-            page.locator("#title").waitFor();
+            
+            // ==============================================================
+            // 🌟 修正ポイント：キャンペーンページ等への遷移を検知しオプトアウト処理を実行
+            // ==============================================================
+            page.waitForTimeout(2000); 
+            if (!page.url().contains("live_start")) {
+                if (!presetName.isBlank()) addPresetLog(presetName, "⚠️ キャンペーンページを検知。オプトアウト処理を行います。");
+                try {
+                    // ゾロ目キャンペーン等の「次回から表示しない」チェックボックスがあればチェックする
+                    var jsCheckbox = "() => { let cb = document.querySelector('#noDisplayCampaign'); if(cb) cb.click(); }";
+                    page.evaluate(jsCheckbox);
+                    page.waitForTimeout(1000);
+                    
+                    // 「サービスへログインする」等のスキップリンクを強制クリック
+                    forceClickByText(page, "サービスへログイン");
+                    page.waitForTimeout(2000);
+                } catch (Exception e) {}
+                
+                // それでも遷移しない場合は強制的にURL移動
+                if (!page.url().contains("live_start")) {
+                    page.navigate("https://live.fc2.com/live_start/");
+                    page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+                    page.waitForTimeout(2000);
+                }
+            }
+
+            try {
+                page.locator("#title").waitFor(new Locator.WaitForOptions().setTimeout(10000));
+            } catch (Exception e) {
+                throw new Exception("配信画面の読み込みに失敗しました（リダイレクト・タイムアウト）");
+            }
 
             checkStop(id, presetName);
             page.locator("#title").fill(account.getTitle() != null && !account.getTitle().isBlank() ? account.getTitle() : "自動配信");
@@ -283,21 +332,14 @@ public class Fc2AutomationWorker {
             }
 
             checkStop(id, presetName);
+            
             page.locator("#submit").click();
-            
-            page.waitForTimeout(2000); // 画面遷移・モーダル出現を確実に待つ
-
-            // 🌟 復活：初期の「最強突破」ロジック（JSでの強制クリック）
-            forceClickBySelector(page, ".js-popupWindow .js-yesBtn"); // 画像なし警告
-            page.waitForTimeout(1000);
-            
-            forceClickByText(page, "利用規約に同意して配信する"); // 規約
-            page.waitForTimeout(1000);
-
-            forceClickBySelector(page, "#age_ok_btn"); // 18歳以上（アダルト時）
-            
-            page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+            page.waitForLoadState(LoadState.NETWORKIDLE);
             page.waitForTimeout(3000); 
+
+            pollAndClick(page, "#age_ok_btn", 5000);
+            pollAndClick(page, ".js-agreeBtn", 5000);
+            forceClickByText(page, "利用規約に同意して配信する");
 
             var broadcastUrl = page.url();
             var latest = repository.findById(id).orElse(account);
@@ -316,30 +358,31 @@ public class Fc2AutomationWorker {
                 waited++;
             }
 
-            // ツール配信開始ボタンも強制クリック
-            forceClickBySelector(page, ".js-toolStartBtn");
+            pollAndClick(page, ".js-toolStartBtn", 5000);
+            page.waitForTimeout(1000); 
+            pollAndClick(page, ".js-popupWindow .js-yesBtn", 5000);
 
-            int totalSeconds = ((account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() : 0) * 60) + 
+            int targetSeconds = ((account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() : 0) * 60) + 
                                (account.getPaidSwitchSecond() != null ? account.getPaidSwitchSecond() : 0);
-            long switchTime = (totalSeconds > 0) ? System.currentTimeMillis() + (totalSeconds * 1000L) : -1;
-            boolean switched = (totalSeconds <= 0);
+            boolean switched = (targetSeconds <= 0);
 
-            while (!isStopRequested(id, presetName) && activeProcesses.containsKey(id)) {
-                if (!switched && switchTime > 0 && System.currentTimeMillis() >= switchTime) {
-                    try {
-                        if (page.locator(".js-switchFeeBtn").isVisible()) {
-                            // 有料切替ボタンを強制クリック
-                            forceClickBySelector(page, ".js-switchFeeBtn");
-                            page.waitForTimeout(1000);
+            Process ffmpegProcess = activeProcesses.get(id);
+            
+            while (!isStopRequested(id, presetName) && ffmpegProcess != null && ffmpegProcess.isAlive()) {
+                if (!switched && targetSeconds > 0) {
+                    var vTimeStr = latestVideoTimes.getOrDefault(id, "00:00:00");
+                    int currentSeconds = parseTimeToSeconds(vTimeStr);
+                    
+                    if (currentSeconds >= targetSeconds) {
+                        try {
+                            page.evaluate("() => { let btn = document.querySelector('.js-switchFeeBtn'); if(btn) btn.click(); }");
+                            Thread.sleep(1000);
+                            pollAndClick(page, ".js-popupWindow .js-yesBtn", 5000);
                             
-                            // 有料切替の確認モーダルの「はい」を強制クリック
-                            forceClickBySelector(page, ".js-popupWindow .js-yesBtn");
-                            
-                            var vTime = latestVideoTimes.getOrDefault(id, "取得不可");
-                            if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 有料放送へ切り替え完了 (再生時間: " + vTime + ")");
-                        }
-                    } catch (Exception e) {}
-                    switched = true;
+                            if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 有料放送へ切り替え完了 (再生時間: " + vTimeStr + ")");
+                        } catch (Exception e) {}
+                        switched = true;
+                    }
                 }
                 Thread.sleep(1000);
             }
@@ -363,18 +406,34 @@ public class Fc2AutomationWorker {
         var safePath = getSafeWindowsShortPath(account.getVideoPath().replaceAll("^\"|\"$", "").trim());
         var rtmpUrl = account.getServerUrl().endsWith("/") ? account.getServerUrl() + account.getStreamKey() : account.getServerUrl() + "/" + account.getStreamKey();
         
-        var pb = new ProcessBuilder(
-            ffmpegPath, "-re", "-i", safePath, 
-            "-c:v", "libx264", "-preset", "veryfast", "-b:v", "2000k", 
-            "-maxrate", "2000k", "-bufsize", "4000k", "-pix_fmt", "yuv420p", "-g", "60", 
-            "-c:a", "aac", "-b:a", "128k", "-ar", "44100", 
-            "-f", "flv", rtmpUrl
-        );
+        boolean hasNoAudio = account.getVideoDuration() != null && account.getVideoDuration().contains("音声なし");
+        
+        List<String> command = new ArrayList<>();
+        command.add(ffmpegPath);
+        command.add("-re");
+        command.add("-i"); command.add(safePath);
+        
+        if (hasNoAudio) {
+            command.add("-f"); command.add("lavfi");
+            command.add("-i"); command.add("anullsrc"); 
+        }
+        
+        command.addAll(List.of("-c:v", "libx264", "-preset", "veryfast", "-b:v", "2000k", 
+                               "-maxrate", "2000k", "-bufsize", "4000k", "-pix_fmt", "yuv420p", "-g", "60", 
+                               "-c:a", "aac", "-b:a", "128k", "-ar", "44100"));
+        
+        if (hasNoAudio) {
+            command.add("-shortest"); 
+            command.addAll(List.of("-map", "0:v:0", "-map", "1:a:0")); 
+        }
+        
+        command.addAll(List.of("-f", "flv", rtmpUrl));
+        
+        var pb = new ProcessBuilder(command);
         pb.redirectErrorStream(true);
         var process = pb.start();
         activeProcesses.put(id, process);
 
-        // 🌟 Java 21+ 対応：軽量なVirtual Threadを使用してログを監視するモダンな書き方
         Thread.startVirtualThread(() -> {
             try (var isr = new InputStreamReader(process.getInputStream(), Charset.forName("Shift_JIS"))) {
                 int c; 
@@ -382,7 +441,7 @@ public class Fc2AutomationWorker {
                 while ((c = isr.read()) != -1) {
                     char ch = (char) c;
                     if (ch == '\r' || ch == '\n') {
-                        if (!sb.isEmpty()) { // Java 15+ syntax
+                        if (!sb.isEmpty()) { 
                             var line = sb.toString();
                             sb.setLength(0);
                             if (line.contains("time=")) {

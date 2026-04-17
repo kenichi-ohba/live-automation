@@ -19,7 +19,6 @@ public class AccountService {
         this.worker = worker;
     }
 
-    // 🌟 修正：データの入れ物側で自動計算されるようになったので、そのまま返すだけでOK！
     public List<Fc2Account> getAllAccounts() {
         return repository.findAll();
     }
@@ -29,6 +28,23 @@ public class AccountService {
     }
 
     public void saveAccount(Fc2Account account) {
+        
+        // 🌟 追加：編集時にパスワードやストリームキーが空欄なら、元のDBデータを維持して上書きを防ぐ
+        if (account.getId() != null) {
+            Fc2Account existing = repository.findById(account.getId()).orElse(null);
+            if (existing != null) {
+                if (account.getPass() == null || account.getPass().isBlank()) {
+                    account.setPass(existing.getPass());
+                }
+                if (account.getStreamKey() == null || account.getStreamKey().isBlank()) {
+                    account.setStreamKey(existing.getStreamKey());
+                }
+                if (account.getEmail() == null || account.getEmail().isBlank()) {
+                    account.setEmail(existing.getEmail());
+                }
+            }
+        }
+
         if (account.getStatus() == null || account.getStatus().isEmpty()) {
             account.setStatus("IDLE");
         }

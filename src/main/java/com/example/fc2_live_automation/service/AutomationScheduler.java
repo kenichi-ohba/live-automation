@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import jakarta.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,43 @@ public class AutomationScheduler {
         this.accountRepository = accountRepository;
         this.presetRepository = presetRepository;
         this.worker = worker;
+    }
+
+    // ==========================================
+    // 🌟 追加：アプリ起動時に実行されるクリーンアップ処理
+    // 途中でアプリが落ちた場合に取り残される「ゴースト状態」をリセットします
+    // ==========================================
+    @PostConstruct
+    public void resetGhostStatusesOnStartup() {
+        logger.info("🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします");
+
+        // 1. プリセットのリセット
+        List<Fc2Preset> runningPresets = presetRepository.findAll().stream()
+                .filter(p -> "RUNNING".equals(p.getStatus()))
+                .collect(Collectors.toList());
+        for (Fc2Preset preset : runningPresets) {
+            preset.setStatus("IDLE");
+            preset.setCurrentLoop(0);
+        }
+        if (!runningPresets.isEmpty()) {
+            presetRepository.saveAll(runningPresets);
+        }
+
+        // 2. アカウントのリセット
+        List<Fc2Account> runningAccounts = accountRepository.findAll().stream()
+                .filter(a -> "RUNNING".equals(a.getStatus()))
+                .collect(Collectors.toList());
+        for (Fc2Account acc : runningAccounts) {
+            acc.setStatus("IDLE");
+            acc.setCurrentLoop(0);
+            acc.setBroadcastUrl(""); // 念のため古いURLも消去
+        }
+        if (!runningAccounts.isEmpty()) {
+            accountRepository.saveAll(runningAccounts);
+        }
+
+        logger.info("✅ クリーンアップ完了: プリセット {} 件、アカウント {} 件を停止状態に戻しました", 
+                    runningPresets.size(), runningAccounts.size());
     }
 
     // 🌟 1分ごと（60000ミリ秒）に自動で実行されるパトロールメソッド
@@ -87,6 +125,7 @@ public class AutomationScheduler {
                         
                         // 二重起動防止
                         acc.setScheduledStartTime("");
+                        acc.setStatus("RUNNING"); // 🌟 追加：個別アカウントも起動時にRUNNINGにする
                         accountRepository.save(acc);
 
                         worker.startStreamingProcess(acc);

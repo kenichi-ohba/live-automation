@@ -22,9 +22,14 @@
                 <img th:src="@{/UpaLive_Logo.png}" alt="Logo" class="h-8 w-8 mr-2 rounded bg-white p-0.5">
                 UpaLive
             </a>
-            <div class="space-x-6 text-sm font-bold">
-                <a th:href="@{/}" class="border-b-2 border-white pb-1">ダッシュボード</a>
-                <a th:href="@{/accounts}" class="text-blue-200 hover:text-white transition">アカウント(素材)管理</a>
+            <div class="flex items-center space-x-6">
+                <button onclick="forceReload()" class="bg-blue-800 hover:bg-blue-900 text-white text-xs font-bold py-2 px-3 rounded shadow transition flex items-center border border-blue-400">
+                    <span class="mr-1">🔄</span> 最新に更新
+                </button>
+                <div class="space-x-6 text-sm font-bold hidden sm:block">
+                    <a th:href="@{/}" class="border-b-2 border-white pb-1">ダッシュボード</a>
+                    <a th:href="@{/accounts}" class="text-blue-200 hover:text-white transition">アカウント(素材)管理</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -160,6 +165,52 @@
     </div>
 
     <script>
+        // ==========================================
+        // 🌟 スマート・オートリロード機能（状態を記憶して更新）
+        // ==========================================
+        
+        function saveStateAndReload() {
+            // スクロール位置と <details> の開閉状態を記憶
+            sessionStorage.setItem('upaScrollY', window.scrollY);
+            const detailsState = Array.from(document.querySelectorAll('details')).map(d => d.open);
+            sessionStorage.setItem('upaDetailsState', JSON.stringify(detailsState));
+            window.location.reload();
+        }
+
+        function forceReload() {
+            saveStateAndReload();
+        }
+
+        // 10秒に1回、自動で画面を最新情報に更新する
+        setInterval(() => {
+            const scheduleModal = document.getElementById('scheduleModal');
+            const logModal = document.getElementById('logModal');
+            
+            // ログを見ている時や予約設定をしている最中は更新しない（邪魔しない）
+            if ((scheduleModal && !scheduleModal.classList.contains('hidden')) ||
+                (logModal && !logModal.classList.contains('hidden'))) {
+                return;
+            }
+            saveStateAndReload();
+        }, 10000);
+
+        // ページ読み込み時に状態を復元して、チカチカ感（リロード感）をなくす
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedDetails = JSON.parse(sessionStorage.getItem('upaDetailsState'));
+            if (savedDetails) {
+                document.querySelectorAll('details').forEach((d, i) => {
+                    if (savedDetails[i] !== undefined) d.open = savedDetails[i];
+                });
+            }
+            const savedScrollY = sessionStorage.getItem('upaScrollY');
+            if (savedScrollY) {
+                window.scrollTo(0, parseInt(savedScrollY));
+            }
+        });
+
+        // ==========================================
+        // 既存のモーダル制御・カウントダウン・ログ取得処理
+        // ==========================================
         function openScheduleModal(presetName) {
             document.getElementById('modalPresetName').value = presetName;
             document.getElementById('scheduleModal').classList.remove('hidden');
@@ -183,13 +234,6 @@
                 if (diffMs <= 0) {
                     display.innerText = "🚀 起動待機中...";
                     el.classList.add('bg-yellow-300', 'animate-pulse');
-                    
-                    if (!el.dataset.reloading) {
-                        el.dataset.reloading = "true";
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 10000); 
-                    }
                 } else {
                     const hours = Math.floor(diffMs / (1000 * 60 * 60));
                     const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
