@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.WaitUntilState;
 import com.example.fc2_live_automation.model.Fc2Account;
 import com.example.fc2_live_automation.model.Fc2Preset;
 import com.example.fc2_live_automation.repository.Fc2AccountRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +26,18 @@ import java.util.regex.Pattern;
 @Service
 public class Fc2AutomationWorker {
 
+    // 🌟 プロ仕様のファイル出力対応ロガーを追加
+    private static final Logger logger = LoggerFactory.getLogger(Fc2AutomationWorker.class);
+
     private final Fc2AccountRepository repository;
     private final Map<Long, Process> activeProcesses = new ConcurrentHashMap<>();
     private final Map<Long, Browser> activeBrowsers = new ConcurrentHashMap<>();
-    
-    // 🌟 絶対消えない停止フラグ管理
     private final Map<Long, Boolean> stopSignals = new ConcurrentHashMap<>();
-    private final Map<String, Boolean> presetStopSignals = new ConcurrentHashMap<>();
 
     private final Map<Long, List<String>> memoryLogs = new ConcurrentHashMap<>();
     private final Map<Long, String> latestVideoTimes = new ConcurrentHashMap<>();
     private final Map<Long, Boolean> streamReadyFlags = new ConcurrentHashMap<>();
     
-    // スレッド管理用
     private final Map<String, Thread> activePresetThreads = new ConcurrentHashMap<>();
     private final Map<Long, Thread> activeAccountThreads = new ConcurrentHashMap<>();
 
@@ -49,7 +50,7 @@ public class Fc2AutomationWorker {
         try {
             String os = System.getProperty("os.name").toLowerCase();
             if (os.contains("win")) {
-                System.out.println("🧹 起動時クリーンアップ: ゾンビ化したFFmpegプロセスを停止します");
+                logger.info("🧹 起動時クリーンアップ: ゾンビ化したFFmpegプロセスを停止します");
                 new ProcessBuilder("taskkill", "/F", "/IM", "ffmpeg.exe", "/T").start().waitFor();
             }
         } catch (Exception ignore) {}
@@ -93,7 +94,8 @@ public class Fc2AutomationWorker {
             if (logs.size() >= 100) logs.remove(0);
             logs.add(message);
         }
-        System.out.println("[Account " + id + "] " + message);
+        // 🌟 System.out.println から logger.info に変更（ファイルにも出力される）
+        logger.info("[Account {}] {}", id, message);
     }
 
     public List<String> getLogs(Long id) {
@@ -115,7 +117,7 @@ public class Fc2AutomationWorker {
         memoryLogs.put(id, new ArrayList<>());
         activeAccountThreads.put(id, Thread.currentThread());
 
-        Thread.interrupted(); // 過去の割り込みをクリア
+        Thread.interrupted();
 
         try {
             if (!isPresetMode) {
@@ -194,7 +196,7 @@ public class Fc2AutomationWorker {
                             try { Thread.sleep(5000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); return; }
                         }
                     } else {
-                        addLog(id, "⏳ 次の配信サイクルまで30秒待機します（サーバー切断待ち）...");
+                        addLog(id, "⏳ 次の配信サイクルまで30秒待機します（サーバーの切断リセット待ち）...");
                         try { Thread.sleep(30000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); return; }
                     }
                 }
@@ -324,7 +326,6 @@ public class Fc2AutomationWorker {
 
             Fc2Account latest = repository.findById(id).orElse(account);
             latest.setBroadcastUrl(broadcastUrl);
-            latest.setStatus("RUNNING");
             repository.save(latest);
 
             page.waitForTimeout(3000);
@@ -427,7 +428,6 @@ public class Fc2AutomationWorker {
                 addLog(id, "⚠️ 動画の再生が終了した（FFmpegが停止した）ため、監視ループを抜けました。");
             }
 
-            // 🌟 どんな理由であれ、必ず「配信終了ボタン」を押して安全に切断する
             try {
                 addLog(id, "⏹ FC2サーバーのセッションを安全に切断します...");
                 if (page.locator(".js-toolStopBtn").count() > 0) {
@@ -460,6 +460,7 @@ public class Fc2AutomationWorker {
             throw new Exception("STOPPED");
         }
     }
+
 
     private void startFfmpegProcess(Fc2Account account) throws Exception {
         Long id = account.getId();
@@ -524,7 +525,8 @@ public class Fc2AutomationWorker {
                                     }
                                 }
                             } else if (!line.startsWith("frame=")) {
-                                addLog(id, "[FFmpeg] " + line);
+                                // FFmpegのログも logger.info で出力
+                                logger.info("[FFmpeg Account {}] {}", id, line);
                             }
                         }
                     } else {
@@ -553,9 +555,6 @@ public class Fc2AutomationWorker {
         }).start();
     }
 
-    /**
-     * 🌟 単体アカウントの強制停止（FC2セッションを安全に閉じる）
-     */
     public void stopStreamingProcess(Long accountId) {
         addLog(accountId, "🛑 停止ボタンが押されました。安全な切断処理を開始します...");
         stopSignals.put(accountId, true);
@@ -597,23 +596,19 @@ public class Fc2AutomationWorker {
         String presetName = preset.getPresetName();
 
         if (activePresetThreads.containsKey(presetName)) {
-            System.out.println("⚠️ プリセット [" + presetName + "] はすでに稼働中です。");
+            logger.warn("⚠️ プリセット [{}] はすでに稼働中です。", presetName);
             return;
         }
 
-        // 🌟 プリセット開始時に停止フラグをリセット
-        presetStopSignals.put(presetName, false);
-
         Thread presetThread = new Thread(() -> {
             try {
-                System.out.println("▶️ プリセット [" + presetName + "] の連続再生を開始します！");
+                logger.info("▶️ プリセット [{}] の連続再生を開始します！", presetName);
                 
                 int maxLoop = preset.getLoopCount();
                 int currentLoop = 1;
 
-                // 🌟 絶対フラグ（presetStopSignals）を確認して進行を制御
-                while ((maxLoop == 0 || currentLoop <= maxLoop) && !presetStopSignals.getOrDefault(presetName, false)) {
-                    System.out.println("🔄 プリセット [" + presetName + "] - " + currentLoop + "周目を開始");
+                while ((maxLoop == 0 || currentLoop <= maxLoop) && !Thread.currentThread().isInterrupted()) {
+                    logger.info("🔄 プリセット [{}] - {}周目を開始", presetName, currentLoop);
 
                     List<Fc2Account> currentPlaylist = new ArrayList<>(playlist);
                     if (preset.isShuffleMode()) {
@@ -621,35 +616,28 @@ public class Fc2AutomationWorker {
                     }
 
                     for (Fc2Account account : currentPlaylist) {
-                        if (presetStopSignals.getOrDefault(presetName, false)) break;
+                        if (Thread.currentThread().isInterrupted()) throw new InterruptedException();
 
-                        System.out.println("🎬 次の動画を開始: " + account.getAccountName());
+                        logger.info("🎬 次の動画を開始: {}", account.getAccountName());
                         
                         runStreamingLogic(account, true);
                     }
 
-                    if (presetStopSignals.getOrDefault(presetName, false)) break;
-
-                    System.out.println("✅ プリセット [" + presetName + "] - " + currentLoop + "周目が完了");
+                    logger.info("✅ プリセット [{}] - {}周目が完了", presetName, currentLoop);
 
                     if (preset.getLoopWaitMinutes() != null && preset.getLoopWaitMinutes() > 0) {
-                        System.out.println("⏳ " + preset.getLoopWaitMinutes() + "分間の休憩（待機）に入ります...");
-                        long waitMillis = preset.getLoopWaitMinutes() * 60 * 1000L;
-                        long startWait = System.currentTimeMillis();
-                        while (!presetStopSignals.getOrDefault(presetName, false) && (System.currentTimeMillis() - startWait) < waitMillis) {
-                            try { Thread.sleep(2000); } catch (InterruptedException e) { break; }
-                        }
+                        logger.info("⏳ {}分間の休憩（待機）に入ります...", preset.getLoopWaitMinutes());
+                        Thread.sleep(preset.getLoopWaitMinutes() * 60 * 1000L);
                     }
                     
                     currentLoop++;
                 }
-                
-                if (!presetStopSignals.getOrDefault(presetName, false)) {
-                    System.out.println("🎉 プリセット [" + presetName + "] の全ループが完了しました！");
-                } else {
-                    System.out.println("⏹ プリセット [" + presetName + "] はユーザーにより安全にループ終了されました。");
+                if (!Thread.currentThread().isInterrupted()) {
+                    logger.info("🎉 プリセット [{}] の全ループが完了しました！", presetName);
                 }
 
+            } catch (InterruptedException e) {
+                logger.info("⏹ プリセット [{}] が安全に停止されました。", presetName);
             } finally {
                 activePresetThreads.remove(presetName);
             }
@@ -659,30 +647,11 @@ public class Fc2AutomationWorker {
         presetThread.start();
     }
 
-    /**
-     * 🌟 プリセットの強制停止（現在動いているアカウントも連動して止める）
-     */
     public void stopPresetProcess(String presetName) {
-        System.out.println("🛑 プリセット [" + presetName + "] のループ停止ボタンが押されました。");
-        
-        // 1. プリセット全体の進行をシャットアウトする絶対フラグを立てる
-        presetStopSignals.put(presetName, true);
-        
-        // 2. プリセットのスレッドを起こす
         Thread thread = activePresetThreads.get(presetName);
         if (thread != null && thread.isAlive()) {
+            logger.info("🛑 プリセット [{}] の停止シグナルを送信しました。", presetName);
             thread.interrupt(); 
-        }
-
-        // 3. このプリセットに所属して「現在配信中」のアカウントに対しても、即座に終了処理を発動させる
-        for (Fc2Account acc : repository.findAll()) {
-            if (presetName.equals(acc.getPresetName())) {
-                Long id = acc.getId();
-                if (activeAccountThreads.containsKey(id) || "RUNNING".equals(acc.getStatus())) {
-                    System.out.println("🛑 連動停止: 現在配信中のアカウント [" + acc.getAccountName() + "] を安全に終了します。");
-                    stopStreamingProcess(id);
-                }
-            }
         }
     }
 }
