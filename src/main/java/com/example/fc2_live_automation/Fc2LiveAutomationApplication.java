@@ -1,12 +1,16 @@
-package com.example.fc2_live_automation; 
+package com.example.fc2_live_automation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+import java.util.List;
 
 @SpringBootApplication
+@EnableScheduling
 @EnableAsync
 public class Fc2LiveAutomationApplication {
 
@@ -14,23 +18,35 @@ public class Fc2LiveAutomationApplication {
         SpringApplication.run(Fc2LiveAutomationApplication.class, args);
     }
 
-    // 🌟 サーバーの準備が完全に整ったタイミングで管理画面（ブラウザ）を自動で開く
+    /**
+     * 🌟 Java 25 完全対応：非推奨の Runtime.exec を廃止し、ProcessBuilder を使用
+     * シークレット（インコグニート）モードかつアプリモードでダッシュボードを起動します。
+     */
     @EventListener(ApplicationReadyEvent.class)
-    public void openBrowserAfterStartup() {
+    public void openBrowser() {
+        var url = "http://localhost:8082/";
+        var os = System.getProperty("os.name").toLowerCase();
+
         try {
-           // String url = "http://localhost:8081/"; // ※必要に応じて8080などに変更してください
-            String url = "http://localhost:8082/"; // ※必要に応じて8080などに変更してください
-            
-           String os = System.getProperty("os.name").toLowerCase();
-            
             if (os.contains("win")) {
-                new ProcessBuilder("rundll32", "url.dll,FileProtocolHandler", url).start();
+                // Windows: Chromeを優先し、シークレット+アプリモードで起動。なければEdge。
+                try {
+                    new ProcessBuilder("cmd", "/c", "start", "chrome", "--app=" + url, "--incognito").start();
+                } catch (Exception e) {
+                    new ProcessBuilder("cmd", "/c", "start", "msedge", "--app=" + url, "-inprivate").start();
+                }
             } else if (os.contains("mac")) {
-                new ProcessBuilder("open", url).start();
+                // Mac: Google Chromeをシークレット+アプリモードで起動
+                new ProcessBuilder("open", "-a", "Google Chrome", "--args", "--app=" + url, "--incognito").start();
+            } else {
+                // その他のOS (Linux等)
+                new ProcessBuilder("xdg-open", url).start();
             }
-            System.out.println("🌟 管理ダッシュボードを自動起動しました: " + url);
+            
+            System.out.println("✅ 管理ダッシュボードを分離されたブラウザ（シークレットモード）で起動しました: " + url);
+
         } catch (Exception e) {
-            System.out.println("⚠️ 管理ダッシュボードの自動起動に失敗しました。手動で開いてください。");
+            System.err.println("❌ ブラウザの自動起動に失敗しました: " + e.getMessage());
         }
     }
 }

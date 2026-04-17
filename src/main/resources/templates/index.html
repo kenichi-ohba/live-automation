@@ -8,8 +8,6 @@
     <style>
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
-        
-        /* 🌟 ログウィンドウ用のスクロールバー装飾 */
         #logContent::-webkit-scrollbar { width: 8px; }
         #logContent::-webkit-scrollbar-track { background: #1f2937; }
         #logContent::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
@@ -54,14 +52,33 @@
                         </div>
                     </div>
                     
-                    <div class="mt-4 md:mt-0 flex space-x-2 items-center">
-                        <div th:each="account : ${presetGroup.value}" th:if="${account.status == 'RUNNING' && account.customLiveUrl != null && !account.customLiveUrl.isEmpty()}">
-                            <a th:href="${account.customLiveUrl}" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold py-2 px-4 rounded shadow-md transition animate-pulse flex items-center border border-pink-700">
-                                <span class="mr-1">📺</span> 配信画面を見る
+                    <div class="mt-4 md:mt-0 flex space-x-2 items-center" th:with="presetObj=${presetMap.get(presetGroup.key)}">
+                        
+                        <div th:each="account : ${presetGroup.value}" th:if="${account.status == 'RUNNING' && not #strings.isEmpty(account.broadcastUrl)}">
+                            <a th:href="${account.broadcastUrl}" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold py-2 px-4 rounded shadow-md transition animate-pulse flex items-center border border-pink-700">
+                                <span class="mr-1">📺</span> 配信画面
                             </a>
                         </div>
+
+                        <button type="button" th:data-name="${presetGroup.key}" onclick="openLogWindow(this.getAttribute('data-name'))" class="bg-gray-600 hover:bg-gray-700 text-white text-sm font-bold py-2 px-4 rounded shadow transition">📝 ログ</button>
                         
-                        <a th:href="@{/presets/start(name=${presetGroup.key})}" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2 px-4 rounded shadow transition">▶ 再生開始</a>
+                        <th:block th:if="${presetObj != null}">
+                            <th:block th:if="${not #strings.isEmpty(presetObj.scheduledStartTime)}">
+                                <form th:action="@{/schedule/cancel}" method="post" class="inline">
+                                    <input type="hidden" name="presetName" th:value="${presetGroup.key}" />
+                                    <button type="submit" class="bg-yellow-100 border border-yellow-500 text-yellow-800 text-sm font-bold py-1 px-3 rounded shadow-sm flex flex-col items-center justify-center hover:bg-yellow-200 transition js-countdown" th:data-time="${presetObj.scheduledStartTime}" title="クリックで予約取り消し">
+                                        <div>🕒 予約待機中</div>
+                                        <div class="text-xs time-display">計算中...</div>
+                                    </button>
+                                </form>
+                            </th:block>
+
+                            <th:block th:unless="${not #strings.isEmpty(presetObj.scheduledStartTime)}">
+                                <button type="button" th:data-name="${presetGroup.key}" onclick="openScheduleModal(this.getAttribute('data-name'))" class="bg-green-500 hover:bg-green-600 text-white text-sm font-bold py-2 px-4 rounded shadow transition">⏰ 予約設定</button>
+                                <a th:href="@{/presets/start(name=${presetGroup.key})}" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2 px-4 rounded shadow transition">▶ 再生開始</a>
+                            </th:block>
+                        </th:block>
+
                         <a th:href="@{/presets/stop(name=${presetGroup.key})}" class="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-2 px-4 rounded shadow transition" onclick="return confirm('このプリセットの連続再生を終了しますか？');">⏹ ループ停止</a>
                     </div>
                 </div>
@@ -98,14 +115,12 @@
                                     </div>
                                 </div>
 
-                                <div class="flex space-x-2 w-full md:w-auto justify-end items-center">
-                                    <button type="button" th:onclick="'openLogWindow(' + ${account.id} + ', \'' + ${account.accountName} + '\')'" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-1.5 px-3 rounded text-xs transition shadow border border-gray-700">📝 ログ</button>
-
-                                    <a th:if="${account.status != 'RUNNING'}" th:href="@{/start/{id}(id=${account.id})}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1.5 px-3 rounded text-xs transition">▶ 個別開始</a>
-                                    <a th:if="${account.status == 'RUNNING'}" th:href="@{/stop/{id}(id=${account.id})}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1.5 px-3 rounded text-xs transition">⏹ 停止</a>
-                                    
-                                    <a th:if="${account.status == 'RUNNING' && account.customLiveUrl != null && !account.customLiveUrl.isEmpty()}" th:href="${account.customLiveUrl}" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-1.5 px-3 rounded text-xs transition shadow border border-pink-700">📺 配信画面</a>
+                                <div class="w-full md:w-auto flex justify-end mt-2 md:mt-0">
+                                    <a th:href="@{/edit/{id}(id=${account.id})}" class="bg-white hover:bg-gray-100 text-gray-600 border border-gray-300 text-xs font-bold py-1.5 px-3 rounded shadow-sm transition flex items-center">
+                                        ✏️ 編集
+                                    </a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -114,29 +129,91 @@
         </div>
     </div>
 
-    <div id="logModal" class="hidden fixed bottom-4 right-4 w-[450px] h-[350px] bg-gray-900 text-gray-300 rounded-lg shadow-2xl flex flex-col z-50 border border-gray-700 overflow-hidden transform transition-all duration-300">
-        <div class="bg-gray-800 p-3 border-b border-gray-700 flex justify-between items-center cursor-move" id="logHeader">
+    <div id="scheduleModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-96 transform transition-all">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">⏰ 予約開始の設定</h3>
+            <form th:action="@{/schedule/set}" method="post">
+                <input type="hidden" name="presetName" id="modalPresetName" value="" />
+                <p class="text-sm text-gray-600 mb-4">選択した日時に、このプリセットの再生を自動で開始します。</p>
+                <div class="mb-5">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">予約開始日時</label>
+                    <input type="datetime-local" name="scheduledTime" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeScheduleModal()" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded transition">キャンセル</button>
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition">予約を確定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="logModal" class="hidden fixed bottom-4 right-4 w-[450px] h-[350px] bg-gray-900 text-gray-300 rounded-lg shadow-2xl flex flex-col z-50 border border-gray-700 overflow-hidden">
+        <div class="bg-gray-800 p-3 border-b border-gray-700 flex justify-between items-center cursor-move">
             <h3 class="font-bold text-sm text-green-400 flex items-center">
                 <span class="mr-2 animate-pulse">▶</span> 
-                <span id="logTargetName">アカウント名</span> - Live Log
+                <span id="logTargetName">プリセット名</span> - 動作ログ
             </h3>
             <button onclick="closeLogWindow()" class="text-gray-400 hover:text-white font-bold text-lg leading-none">&times;</button>
         </div>
         <div id="logContent" class="flex-grow p-3 overflow-y-auto text-xs font-mono whitespace-pre-wrap leading-relaxed">
-            </div>
+        </div>
     </div>
 
     <script>
-        let logInterval = null;
-        let currentAccountId = null;
+        function openScheduleModal(presetName) {
+            document.getElementById('modalPresetName').value = presetName;
+            document.getElementById('scheduleModal').classList.remove('hidden');
+        }
+        function closeScheduleModal() {
+            document.getElementById('scheduleModal').classList.add('hidden');
+        }
 
-        function openLogWindow(accountId, accountName) {
-            currentAccountId = accountId;
-            document.getElementById('logTargetName').innerText = accountName;
-            const modal = document.getElementById('logModal');
-            modal.classList.remove('hidden');
+        function updateCountdowns() {
+            const elements = document.querySelectorAll('.js-countdown');
+            const now = new Date();
             
-            // 最初に1回取得し、その後2秒ごとに自動更新
+            elements.forEach(el => {
+                const timeStr = el.getAttribute('data-time');
+                if (!timeStr) return;
+                
+                const targetTime = new Date(timeStr);
+                const diffMs = targetTime - now;
+                const display = el.querySelector('.time-display');
+                
+                if (diffMs <= 0) {
+                    display.innerText = "🚀 起動待機中...";
+                    el.classList.add('bg-yellow-300', 'animate-pulse');
+                    
+                    if (!el.dataset.reloading) {
+                        el.dataset.reloading = "true";
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 10000); 
+                    }
+                } else {
+                    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+                    const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+                    const secs = Math.floor((diffMs % (1000 * 60)) / 1000);
+                    
+                    let text = "あと ";
+                    if (hours > 0) text += hours + "時間 ";
+                    if (mins > 0 || hours > 0) text += mins + "分 ";
+                    text += secs + "秒";
+                    display.innerText = text;
+                }
+            });
+        }
+        setInterval(updateCountdowns, 1000);
+        updateCountdowns();
+
+        let logInterval = null;
+        let currentPresetName = null;
+
+        function openLogWindow(presetName) {
+            currentPresetName = presetName;
+            document.getElementById('logTargetName').innerText = presetName;
+            document.getElementById('logModal').classList.remove('hidden');
+            
             fetchLogs();
             if (logInterval) clearInterval(logInterval);
             logInterval = setInterval(fetchLogs, 2000);
@@ -148,45 +225,31 @@
                 clearInterval(logInterval);
                 logInterval = null;
             }
-            currentAccountId = null;
+            currentPresetName = null;
         }
 
         function fetchLogs() {
-            if (!currentAccountId) return;
+            if (!currentPresetName) return;
             
-            fetch('/api/logs/' + currentAccountId)
+            fetch('/api/logs/preset/' + encodeURIComponent(currentPresetName))
                 .then(response => response.json())
                 .then(data => {
                     const contentBox = document.getElementById('logContent');
                     
                     if (data.length === 0) {
-                        contentBox.innerHTML = '<span class="text-gray-500">ログはまだありません... (待機中)</span>';
+                        contentBox.innerHTML = '<span class="text-gray-500">システム待機中...</span>';
                     } else {
-                        // ログに色をつける簡単な処理
                         let html = '';
                         data.forEach(line => {
-                            if (line.includes('❌') || line.includes('エラー') || line.includes('failed')) {
-                                html += `<div class="text-red-400">${line}</div>`;
-                            } else if (line.includes('✅') || line.includes('完了')) {
-                                html += `<div class="text-green-400 font-bold">${line}</div>`;
-                            } else if (line.includes('⚠️')) {
-                                html += `<div class="text-yellow-400">${line}</div>`;
-                            } else if (line.includes('FFmpeg')) {
-                                html += `<div class="text-gray-400">${line}</div>`;
-                            } else {
-                                html += `<div class="text-gray-200">${line}</div>`;
-                            }
+                            if (line.includes('❌')) html += `<div class="text-red-400">${line}</div>`;
+                            else if (line.includes('✅') || line.includes('🏁')) html += `<div class="text-green-400 font-bold">${line}</div>`;
+                            else if (line.includes('💰')) html += `<div class="text-yellow-400 font-bold">${line}</div>`;
+                            else html += `<div class="text-gray-200">${line}</div>`;
                         });
                         
-                        // 下にスクロールすべきか判定
                         const isScrolledToBottom = contentBox.scrollHeight - contentBox.clientHeight <= contentBox.scrollTop + 50;
-                        
                         contentBox.innerHTML = html;
-                        
-                        // ユーザーが上にスクロールして読んでいない場合のみ、自動で一番下へスクロール
-                        if (isScrolledToBottom) {
-                            contentBox.scrollTop = contentBox.scrollHeight;
-                        }
+                        if (isScrolledToBottom) contentBox.scrollTop = contentBox.scrollHeight;
                     }
                 })
                 .catch(err => console.error("ログ取得エラー:", err));

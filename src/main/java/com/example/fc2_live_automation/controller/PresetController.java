@@ -2,8 +2,8 @@ package com.example.fc2_live_automation.controller;
 
 import com.example.fc2_live_automation.model.Fc2Account;
 import com.example.fc2_live_automation.model.Fc2Preset;
+import com.example.fc2_live_automation.repository.Fc2AccountRepository;
 import com.example.fc2_live_automation.repository.Fc2PresetRepository;
-import com.example.fc2_live_automation.service.AccountService;
 import com.example.fc2_live_automation.service.Fc2AutomationWorker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,55 +17,136 @@ import java.util.stream.Collectors;
 public class PresetController {
 
     private final Fc2PresetRepository presetRepository;
-    private final AccountService accountService;
+    private final Fc2AccountRepository accountRepository;
     private final Fc2AutomationWorker worker;
 
-    public PresetController(Fc2PresetRepository presetRepository, AccountService accountService, Fc2AutomationWorker worker) {
+    public PresetController(Fc2PresetRepository presetRepository, 
+                            Fc2AccountRepository accountRepository,
+                            Fc2AutomationWorker worker) {
         this.presetRepository = presetRepository;
-        this.accountService = accountService;
+        this.accountRepository = accountRepository;
         this.worker = worker;
     }
 
     @GetMapping("/add")
-    public String showPresetForm(Model model) {
+    public String showAddForm(Model model) {
         model.addAttribute("preset", new Fc2Preset());
-        model.addAttribute("allAccounts", accountService.getAllAccounts());
+        
+        // 🌟 修正：新規作成時は、左側の候補に「すべてのアカウント」を表示する
+        List<Fc2Account> availableAccounts = accountRepository.findAll();
+        
+        model.addAttribute("availableAccounts", availableAccounts);
+        model.addAttribute("playlist", List.of()); // 新規作成時は右側（再生リスト）は空
+        
         return "preset-form";
     }
 
     @GetMapping("/editByName")
-    public String editPresetByName(@RequestParam String name, Model model) {
+    public String editPresetByName(@RequestParam("name") String name, Model model) {
         Fc2Preset preset = presetRepository.findAll().stream()
                 .filter(p -> name.equals(p.getPresetName()))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("見つかりません: " + name));
-        
+                .orElse(new Fc2Preset());
+        preset.setPresetName(name);
+
+        // 右側：このプリセットに所属するアカウントを displayOrder 順で取得
+        List<Fc2Account> playlist = accountRepository.findAllByOrderByDisplayOrderAsc().stream()
+                .filter(a -> name.equals(a.getPresetName()))
+                .collect(Collectors.toList());
+
+        // 🌟 修正：左側には「このプリセット『以外』のすべてのアカウント」を表示する
+        // （他のプリセットに属しているものも表示し、大庭さんの未登録フィルターで絞り込めるようにする）
+        List<Fc2Account> availableAccounts = accountRepository.findAll().stream()
+                .filter(a -> a.getPresetName() == null || !a.getPresetName().equals(name))
+                .collect(Collectors.toList());
+
         model.addAttribute("preset", preset);
-        model.addAttribute("allAccounts", accountService.getAllAccounts());
+        model.addAttribute("playlist", playlist);
+        model.addAttribute("availableAccounts", availableAccounts);
+
         return "preset-form";
     }
 
     @PostMapping("/save")
-    public String savePreset(@ModelAttribute Fc2Preset preset) {
-        if (preset.getStatus() == null || preset.getStatus().isEmpty()) {
-            preset.setStatus("IDLE");
-        }
-        if (preset.getCurrentLoop() == null) {
-            preset.setCurrentLoop(0);
-        }
+    public String savePreset(@ModelAttribute Fc2Preset preset, @RequestParam(required = false) List<Long> playlistIds) {
         
+        Fc2Preset existing = presetRepository.findAll().stream()
+                .filter(p -> preset.getPresetName().equals(p.getPresetName()))
+                .findFirst()
+                .orElse(null);
+
+        if (existing != null) {
+            preset.setId(existing.getId()); 
+            preset.setStatus(existing.getStatus());
+            preset.setCurrentLoop(existing.getCurrentLoop());
+            preset.setScheduledStartTime(existing.getScheduledStartTime());
+        } else {
+            if (preset.getStatus() == null || preset.getStatus().isEmpty()) preset.setStatus("IDLE");
+            if (preset.getCurrentLoop() == null) preset.setCurrentLoop(0);
+        }
+
+        // 1. プリセット本体を保存
         presetRepository.save(preset);
-        
-        if (preset.getAccountIds() != null && !preset.getAccountIds().isEmpty()) {
-            String[] ids = preset.getAccountIds().split(",");
-            for (String idStr : ids) {
-                try {
-                    Long accountId = Long.parseLong(idStr);
-                    Fc2Account acc = accountService.getAccountById(accountId);
+
+        // 2. プレイリスト（所属アカウント）の順番を更新
+        if (playlistIds != null) {
+            for (int i = 0; i < playlistIds.size(); i++) {
+                Long accId = playlistIds.get(i);
+                Fc2Account acc = accountRepository.findById(accId).orElse(null);
+                if (acc != null) {
                     acc.setPresetName(preset.getPresetName());
-                    accountService.saveAccount(acc);
-                } catch (Exception e) {}
+                    acc.setDisplayOrder(i);
+                    accountRepository.save(acc);
+                }
             }
+        }
+        
+        // 3. このプリセットから外されたアカウントの紐付けを解除
+        List<Fc2Account> allInPreset = accountRepository.findAll().stream()
+                .filter(a -> preset.getPresetName().equals(a.getPresetName()))
+                .collect(Collectors.toList());
+        
+        for (Fc2Account acc : allInPreset) {
+            if (playlistIds == null || !playlistIds.contains(acc.getId())) {
+                acc.setPresetName("");
+                acc.setDisplayOrder(999); 
+                accountRepository.save(acc);
+            }
+        }
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/start")
+    public String startPreset(@RequestParam("name") String name) {
+        Fc2Preset preset = presetRepository.findAll().stream()
+                .filter(p -> name.equals(p.getPresetName()))
+                .findFirst()
+                .orElse(null);
+
+        if (preset != null) {
+            List<Fc2Account> playlist = accountRepository.findAllByOrderByDisplayOrderAsc().stream()
+                    .filter(a -> name.equals(a.getPresetName()))
+                    .collect(Collectors.toList());
+            
+            preset.setStatus("RUNNING");
+            presetRepository.save(preset);
+            worker.startPresetProcess(preset, playlist);
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/stop")
+    public String stopPreset(@RequestParam("name") String name) {
+        Fc2Preset preset = presetRepository.findAll().stream()
+                .filter(p -> name.equals(p.getPresetName()))
+                .findFirst()
+                .orElse(null);
+
+        if (preset != null) {
+            preset.setStatus("IDLE");
+            presetRepository.save(preset);
+            worker.stopPresetProcess(name);
         }
         return "redirect:/";
     }
@@ -73,36 +154,6 @@ public class PresetController {
     @GetMapping("/delete/{id}")
     public String deletePreset(@PathVariable Long id) {
         presetRepository.deleteById(id);
-        return "redirect:/";
-    }
-
-    // ==========================================
-    // 🌟 プリセットの一括再生・停止 コントロール
-    // ==========================================
-    
-    @GetMapping("/start")
-    public String startPreset(@RequestParam String name) {
-        // 名前からプリセット情報を検索
-        Fc2Preset preset = presetRepository.findAll().stream()
-                .filter(p -> name.equals(p.getPresetName()))
-                .findFirst().orElse(null);
-        
-        if (preset != null && preset.getAccountIds() != null) {
-            // カンマ区切りのIDから、実際のアカウント情報を取得して並べる
-            List<Fc2Account> playlist = accountService.getAllAccounts().stream()
-                    .filter(acc -> name.equals(acc.getPresetName()))
-                    .collect(Collectors.toList());
-            
-            // Workerに「このプリセットを、このプレイリストで再生して！」と命令
-            worker.startPresetProcess(preset, playlist);
-        }
-        return "redirect:/";
-    }
-
-    @GetMapping("/stop")
-    public String stopPreset(@RequestParam String name) {
-        // Workerに「このプリセットを止めて！」と命令
-        worker.stopPresetProcess(name);
         return "redirect:/";
     }
 }

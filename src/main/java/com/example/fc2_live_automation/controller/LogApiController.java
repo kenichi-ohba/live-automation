@@ -15,9 +15,9 @@ public class LogApiController {
         this.worker = worker;
     }
 
-    // 画面からのリクエストに対して、そのアカウントの最新ログ100行をJSONで返す
-    @GetMapping("/{id}")
-    public List<String> getAccountLogs(@PathVariable Long id) {
-        return worker.getLogs(id);
+    // 🌟 アカウントIDではなく、プリセット名でログを取得する
+    @GetMapping("/preset/{name}")
+    public List<String> getPresetLogs(@PathVariable String name) {
+        return worker.getPresetLogs(name);
     }
 }

@@ -5,6 +5,7 @@
     <title>プリセット（番組表）設定 - FC2 Live Automation</title>
     <link rel="icon" th:href="@{/UpaLive_Icon.ico}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-800">
     
@@ -41,11 +42,7 @@
                                 <label class="block text-sm font-bold mb-1 text-gray-700">プリセット名</label>
                                 <input type="text" th:field="*{presetName}" required class="w-full border rounded px-3 py-2 bg-white" placeholder="例: 深夜アニメ・ループ枠">
                             </div>
-                            <div class="bg-gray-50 p-3 rounded border border-gray-200">
-                                <label class="block text-sm font-bold mb-1 text-gray-700">⏰ 予約開始日時 <span class="text-xs font-normal text-gray-500">(オプション)</span></label>
-                                <input type="datetime-local" th:field="*{scheduledStartTime}" class="w-full border rounded px-3 py-2 bg-white mb-2">
-                                <div class="text-xs font-bold text-green-700 bg-green-100 px-2 py-1 rounded inline-block">※空欄のまま保存すると「即時開始」になります</div>
-                            </div>
+                            
                             <div class="grid grid-cols-2 gap-2">
                                 <div><label class="block text-sm font-bold mb-1 text-gray-700">ループ回数</label><input type="number" th:field="*{loopCount}" min="0" class="w-full border rounded px-3 py-2 bg-white" placeholder="0"><p class="text-[10px] text-gray-500 mt-1">※0で無限</p></div>
                                 <div><label class="block text-sm font-bold mb-1 text-gray-700">待機(休憩)</label><input type="number" th:field="*{loopWaitMinutes}" min="0" class="w-full border rounded px-3 py-2 bg-white" placeholder="分"><p class="text-[10px] text-gray-500 mt-1">※1周終了後</p></div>
@@ -84,7 +81,7 @@
                                     </div>
                                 </div>
                                 <ul id="availableList" class="space-y-2 overflow-y-auto flex-grow pr-1">
-                                    <li th:each="account : ${allAccounts}" 
+                                    <li th:each="account : ${availableAccounts}" 
                                         class="candidate-item bg-white p-2 rounded shadow-sm border border-gray-200 flex justify-between items-center cursor-pointer hover:bg-blue-50 transition" 
                                         th:data-id="${account.id}" 
                                         th:data-name="${account.accountName}"
@@ -103,7 +100,25 @@
 
                             <div class="border rounded bg-indigo-50 p-2 flex flex-col h-full">
                                 <h3 class="font-bold text-sm text-indigo-500 mb-2 text-center flex-shrink-0">再生する順番 (上から)</h3>
-                                <ul id="selectedList" class="space-y-2 overflow-y-auto flex-grow pr-1"></ul>
+                                <ul id="selectedList" class="space-y-2 overflow-y-auto flex-grow pr-1">
+                                    <th:block th:each="acc : ${playlist}">
+                                        <li class="bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center" 
+                                            th:data-id="${acc.id}" th:data-name="${acc.accountName}" th:data-preset="${acc.presetName}">
+                                            <div class="flex items-center w-full">
+                                                <span class="mr-2 text-gray-400 cursor-move">↕</span>
+                                                <div class="flex flex-col w-full pr-2">
+                                                    <div class="truncate text-sm font-bold text-indigo-900" th:text="${acc.accountName}"></div>
+                                                </div>
+                                                <div class="flex space-x-1 ml-2 flex-shrink-0">
+                                                    <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveUp(this.parentElement.parentElement.parentElement)">▲</button>
+                                                    <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveDown(this.parentElement.parentElement.parentElement)">▼</button>
+                                                    <button type="button" class="text-red-500 font-bold px-2 ml-2" onclick="removeFromList(this.parentElement.parentElement.parentElement)">×</button>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="playlistIds" th:value="${acc.id}">
+                                        </li>
+                                    </th:block>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -119,16 +134,14 @@
     </div>
 
     <script th:inline="javascript">
-        const existingIds = /*[[${preset.accountIds != null ? preset.accountIds : ''}]]*/ '';
+        // 🌟 追加: ドラッグ＆ドロップを有効化
         document.addEventListener('DOMContentLoaded', () => {
-            if (existingIds) {
-                const ids = existingIds.split(',');
-                const availableList = document.getElementById('availableList');
-                ids.forEach(id => {
-                    const li = availableList.querySelector(`li[data-id="${id}"]`);
-                    if (li) addToList(li);
-                });
-            }
+            Sortable.create(document.getElementById('selectedList'), {
+                animation: 150,
+                handle: '.cursor-move',
+                ghostClass: 'bg-indigo-100'
+            });
+            updateCount();
         });
 
         /* 🌟 検索・ソート・登録状況フィルタリング機能 */
@@ -159,31 +172,36 @@
             items.forEach(li => ul.appendChild(li));
         }
 
-        /* 🌟 リスト移動ロジック (preset情報も引き継ぐように修正) */
+        /* 🌟 リスト移動ロジック */
         function addToList(item) {
             const selectedList = document.getElementById('selectedList');
             if (selectedList.children.length >= 10) { alert('最大10個までです。'); return; }
             item.parentElement.removeChild(item);
             
             const presetName = item.getAttribute('data-preset');
+            const id = item.getAttribute('data-id');
+            const name = item.getAttribute('data-name');
+            
             const li = document.createElement('li');
             li.className = "bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center";
-            li.setAttribute('data-id', item.getAttribute('data-id')); 
-            li.setAttribute('data-name', item.getAttribute('data-name'));
+            li.setAttribute('data-id', id); 
+            li.setAttribute('data-name', name);
             li.setAttribute('data-preset', presetName);
             
             li.innerHTML = `
                 <div class="flex items-center w-full">
                     <span class="mr-2 text-gray-400 cursor-move">↕</span>
                     <div class="flex flex-col w-full pr-2">
-                        <div class="truncate text-sm font-bold text-indigo-900">${item.getAttribute('data-name')}</div>
+                        <div class="truncate text-sm font-bold text-indigo-900">${name}</div>
                     </div>
                     <div class="flex space-x-1 ml-2 flex-shrink-0">
                         <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveUp(this.parentElement.parentElement.parentElement)">▲</button>
                         <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveDown(this.parentElement.parentElement.parentElement)">▼</button>
                         <button type="button" class="text-red-500 font-bold px-2 ml-2" onclick="removeFromList(this.parentElement.parentElement.parentElement)">×</button>
                     </div>
-                </div>`;
+                </div>
+                <input type="hidden" name="playlistIds" value="${id}">
+            `;
             selectedList.appendChild(li); 
             updateCount();
         }
@@ -210,17 +228,16 @@
             `;
             availableList.appendChild(li); 
             updateCount(); 
-            filterCandidates(); // 戻した時に検索・フィルタを再適用
+            filterCandidates(); 
         }
 
         function moveUp(item) { const prev = item.previousElementSibling; if (prev) item.parentElement.insertBefore(item, prev); }
         function moveDown(item) { const next = item.nextElementSibling; if (next) item.parentElement.insertBefore(next, item); }
         function updateCount() { document.getElementById('selectedCount').innerText = `${document.getElementById('selectedList').children.length} / 10 選択中`; }
+        
         function submitPresetForm() {
             const selectedList = document.getElementById('selectedList');
             if (selectedList.children.length === 0) { alert('アカウントを選択してください。'); return; }
-            const ids = Array.from(selectedList.children).map(li => li.getAttribute('data-id'));
-            document.getElementById('accountIdsField').value = ids.join(',');
             document.getElementById('presetForm').submit();
         }
     </script>

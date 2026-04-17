@@ -19,19 +19,13 @@ public class AccountService {
         this.worker = worker;
     }
 
-    // 🌟 修正ポイント：DBから取り出した直後に、全員分の時間をフォーマットする
+    // 🌟 修正：データの入れ物側で自動計算されるようになったので、そのまま返すだけでOK！
     public List<Fc2Account> getAllAccounts() {
-        List<Fc2Account> accounts = repository.findAll();
-        for (Fc2Account account : accounts) {
-            formatDisplayData(account); // 一人ずつ計算してセット
-        }
-        return accounts;
+        return repository.findAll();
     }
 
     public Fc2Account getAccountById(Long id) {
-        Fc2Account account = repository.findById(id).orElseThrow(() -> new RuntimeException("Account not found"));
-        formatDisplayData(account);
-        return account;
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Account not found"));
     }
 
     public void saveAccount(Fc2Account account) {
@@ -62,28 +56,6 @@ public class AccountService {
 
     public void stopStreaming(Long id) {
         worker.stopStreamingProcess(id);
-    }
-
-    // ==========================================
-    // 💡 データベースの値を読み取って「〇時間〇分〇秒」のテキストを作る魔法
-    // ==========================================
-    private void formatDisplayData(Fc2Account account) {
-        int mins = (account.getPaidSwitchMinute() != null) ? account.getPaidSwitchMinute() : 0;
-        int secs = (account.getPaidSwitchSecond() != null) ? account.getPaidSwitchSecond() : 0;
-        int totalSeconds = (mins * 60) + secs;
-        
-        if (totalSeconds <= 0) {
-            account.setFormattedPaidSwitchTime("0秒 (即時)");
-        } else {
-            int h = totalSeconds / 3600;
-            int m = (totalSeconds % 3600) / 60;
-            int s = totalSeconds % 60;
-            if (h > 0) {
-                account.setFormattedPaidSwitchTime(String.format("%d時間%02d分%02d秒", h, m, s));
-            } else {
-                account.setFormattedPaidSwitchTime(String.format("%d分%02d秒", m, s));
-            }
-        }
     }
 
     // ==========================================

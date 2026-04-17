@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
 
 @Entity
 public class Fc2Account {
@@ -50,20 +49,30 @@ public class Fc2Account {
     private String scheduledStartTime;
     private Integer loopWaitMinutes = 0;
     private String presetName;
+    private Integer displayOrder = 0;
 
-    // 🌟 DBには保存せず、画面に渡すためだけの「一時的な箱」
-    @Transient
-    private String formattedPaidSwitchTime;
-
+    // ==========================================
+    // 🌟 ダッシュボード表示用の計算メソッド
+    // ==========================================
+    
+    /**
+     * 有料切替時間を「02分00秒」のような形式で画面に渡します。
+     * フィールド（箱）ではなく、メソッドでその場で計算して返します。
+     */
     public String getFormattedPaidSwitchTime() {
-        return formattedPaidSwitchTime;
+        int m = (this.paidSwitchMinute != null) ? this.paidSwitchMinute : 0;
+        int s = (this.paidSwitchSecond != null) ? this.paidSwitchSecond : 0;
+        
+        if (m == 0 && s == 0) {
+            return "設定なし";
+        }
+        return String.format("%02d分%02d秒", m, s);
     }
 
-    public void setFormattedPaidSwitchTime(String formattedPaidSwitchTime) {
-        this.formattedPaidSwitchTime = formattedPaidSwitchTime;
-    }
+    // ==========================================
+    // 🌟 標準的な Getter & Setter
+    // ==========================================
 
-    // Getter & Setter
     public Long getId() {
         return id;
     }
@@ -310,5 +319,13 @@ public class Fc2Account {
 
     public void setPresetName(String presetName) {
         this.presetName = presetName;
+    }
+
+    public Integer getDisplayOrder() {
+        return displayOrder;
+    }
+
+    public void setDisplayOrder(Integer displayOrder) {
+        this.displayOrder = displayOrder;
     }
 }
