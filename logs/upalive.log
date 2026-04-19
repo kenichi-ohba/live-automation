@@ -1,21 +1,21 @@
-2026-04-17T16:47:10.868+09:00  INFO 24296 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 24296 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T16:47:10.872+09:00  INFO 24296 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T16:47:12.742+09:00  INFO 24296 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T16:47:12.836+09:00  INFO 24296 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 2 JPA repository interfaces.
-2026-04-17T16:47:13.653+09:00  INFO 24296 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T16:47:13.696+09:00  INFO 24296 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T16:47:13.698+09:00  INFO 24296 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T16:47:13.798+09:00  INFO 24296 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T16:47:13.799+09:00  INFO 24296 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2872 ms
-2026-04-17T16:47:14.226+09:00  INFO 24296 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T16:47:14.300+09:00  INFO 24296 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T16:47:14.355+09:00  INFO 24296 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T16:47:14.711+09:00  INFO 24296 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T16:47:14.763+09:00  INFO 24296 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T16:47:15.192+09:00  INFO 24296 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T16:47:15.195+09:00  INFO 24296 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T16:47:15.238+09:00  WARN 24296 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T16:47:15.279+09:00  INFO 24296 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-04-19T19:29:58.655+09:00  INFO 45172 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 45172 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-19T19:29:58.675+09:00  INFO 45172 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-19T19:30:02.396+09:00  INFO 45172 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-19T19:30:02.533+09:00  INFO 45172 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 112 ms. Found 2 JPA repository interfaces.
+2026-04-19T19:30:04.262+09:00  INFO 45172 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-19T19:30:04.297+09:00  INFO 45172 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-19T19:30:04.300+09:00  INFO 45172 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-19T19:30:04.495+09:00  INFO 45172 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-19T19:30:04.497+09:00  INFO 45172 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5546 ms
+2026-04-19T19:30:06.002+09:00  INFO 45172 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-19T19:30:06.195+09:00  INFO 45172 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-19T19:30:06.279+09:00  INFO 45172 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-19T19:30:06.942+09:00  INFO 45172 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-19T19:30:07.043+09:00  INFO 45172 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-19T19:30:07.791+09:00  INFO 45172 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-19T19:30:07.796+09:00  INFO 45172 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-19T19:30:07.858+09:00  WARN 45172 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-19T19:30:07.893+09:00  INFO 45172 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -23,290 +23,52 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-17T16:47:16.283+09:00  INFO 24296 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T16:47:16.351+09:00  INFO 24296 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T16:47:17.320+09:00  WARN 24296 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T16:47:17.352+09:00  INFO 24296 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T16:47:18.528+09:00  INFO 24296 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T16:47:18.743+09:00  INFO 24296 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T16:47:18.798+09:00  INFO 24296 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 8.383 seconds (process running for 9.104)
-2026-04-17T16:47:19.283+09:00  INFO 24296 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T16:47:19.285+09:00  INFO 24296 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T16:47:19.288+09:00  INFO 24296 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-04-17T16:49:18.798+09:00  INFO 24296 --- [fc2-live-automation] [scheduling-1] c.e.f.service.AutomationScheduler        : ⏰ 予約時間到達: プリセット [テストリスト] を自動起動します！
-2026-04-17T16:49:18.816+09:00  INFO 24296 --- [fc2-live-automation] [scheduling-1] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T16:49:18.832+09:00  INFO 24296 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [test1] の配信準備を開始します
-2026-04-17T16:49:29.491+09:00  INFO 24296 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [test1] ログイン完了、設定画面へ移行
-2026-04-17T16:49:33.071+09:00  INFO 24296 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [test1] FFmpegによる映像送信を開始しました
-2026-04-17T16:59:20.047+09:00  INFO 24296 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [test1] 配信枠を終了しました
-2026-04-17T16:59:20.048+09:00  INFO 24296 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [test1] 試行失敗: Operation interrupted
-2026-04-17T16:59:20.054+09:00  INFO 24296 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T16:59:47.430+09:00  INFO 27068 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 27068 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T16:59:47.433+09:00  INFO 27068 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T16:59:48.703+09:00  INFO 27068 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T16:59:48.796+09:00  INFO 27068 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 2 JPA repository interfaces.
-2026-04-17T16:59:49.710+09:00  INFO 27068 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T16:59:49.729+09:00  INFO 27068 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T16:59:49.730+09:00  INFO 27068 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T16:59:49.824+09:00  INFO 27068 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T16:59:49.825+09:00  INFO 27068 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2333 ms
-2026-04-17T16:59:50.220+09:00  INFO 27068 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T16:59:50.348+09:00  INFO 27068 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T16:59:50.434+09:00  INFO 27068 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T16:59:50.766+09:00  INFO 27068 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T16:59:50.810+09:00  INFO 27068 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T16:59:51.113+09:00  INFO 27068 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T16:59:51.117+09:00  INFO 27068 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T16:59:51.154+09:00  WARN 27068 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T16:59:51.195+09:00  INFO 27068 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T16:59:52.299+09:00  INFO 27068 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T16:59:52.363+09:00  INFO 27068 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T16:59:53.091+09:00  WARN 27068 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T16:59:53.127+09:00  INFO 27068 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T16:59:53.836+09:00  INFO 27068 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T16:59:53.926+09:00  INFO 27068 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T16:59:53.946+09:00  INFO 27068 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 6.969 seconds (process running for 7.65)
-2026-04-17T16:59:54.370+09:00  INFO 27068 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T16:59:54.372+09:00  INFO 27068 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T16:59:54.378+09:00  INFO 27068 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-04-17T17:02:53.947+09:00  INFO 27068 --- [fc2-live-automation] [scheduling-1] c.e.f.service.AutomationScheduler        : ⏰ 予約時間到達: プリセット [テストリスト] を自動起動します！
-2026-04-17T17:02:53.952+09:00  INFO 27068 --- [fc2-live-automation] [scheduling-1] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T17:02:53.962+09:00  INFO 27068 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [test1] の配信準備を開始します
-2026-04-17T17:03:04.669+09:00  INFO 27068 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [test1] ログイン完了、設定画面へ移行
-2026-04-17T17:03:08.262+09:00  INFO 27068 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [test1] FFmpegによる映像送信を開始しました
-2026-04-17T17:05:31.092+09:00  INFO 27068 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [test1] 配信枠を終了しました
-2026-04-17T17:05:31.094+09:00  INFO 27068 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [test1] 試行失敗: Operation interrupted
-2026-04-17T17:05:31.102+09:00  INFO 27068 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T17:47:50.328+09:00  INFO 32040 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 32040 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T17:47:50.331+09:00  INFO 32040 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T17:47:51.837+09:00  INFO 32040 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T17:47:51.926+09:00  INFO 32040 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 2 JPA repository interfaces.
-2026-04-17T17:47:52.886+09:00  INFO 32040 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T17:47:52.923+09:00  INFO 32040 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T17:47:52.924+09:00  INFO 32040 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T17:47:53.026+09:00  INFO 32040 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T17:47:53.027+09:00  INFO 32040 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2614 ms
-2026-04-17T17:47:53.424+09:00  INFO 32040 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T17:47:53.613+09:00  INFO 32040 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T17:47:53.689+09:00  INFO 32040 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T17:47:54.112+09:00  INFO 32040 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T17:47:54.189+09:00  INFO 32040 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T17:47:54.618+09:00  INFO 32040 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T17:47:54.621+09:00  INFO 32040 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T17:47:54.657+09:00  WARN 32040 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T17:47:54.684+09:00  INFO 32040 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T17:47:55.623+09:00  INFO 32040 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T17:47:55.727+09:00  INFO 32040 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T17:47:56.477+09:00  WARN 32040 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T17:47:56.508+09:00  INFO 32040 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T17:47:57.376+09:00  INFO 32040 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T17:47:57.512+09:00  INFO 32040 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T17:47:57.551+09:00  INFO 32040 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.801 seconds (process running for 8.679)
-2026-04-17T17:47:58.005+09:00  INFO 32040 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T17:47:58.006+09:00  INFO 32040 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T17:47:58.010+09:00  INFO 32040 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-04-17T17:49:33.593+09:00  INFO 32040 --- [fc2-live-automation] [http-nio-8082-exec-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T17:49:33.604+09:00  INFO 32040 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [] の配信準備を開始します
-2026-04-17T17:49:45.042+09:00  INFO 32040 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [] ログイン完了、設定画面へ移行
-2026-04-17T17:49:48.685+09:00  INFO 32040 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [] FFmpegによる映像送信を開始しました
-2026-04-17T17:52:39.801+09:00  INFO 32040 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [] 配信枠を終了しました
-2026-04-17T17:52:39.802+09:00  INFO 32040 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Account 65] ⏹ 停止命令を受信し、処理を中断しました。
-2026-04-17T17:52:39.803+09:00  INFO 32040 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [] の処理を安全に中断しました
-2026-04-17T17:52:39.806+09:00  INFO 32040 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T17:54:43.507+09:00  INFO 32040 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T17:54:43.513+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T17:54:52.917+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T17:54:55.744+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T17:54:55.744+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: 設定画面の要素が見つかりません
-2026-04-17T17:55:09.709+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T17:55:12.590+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T17:55:12.590+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: 設定画面の要素が見つかりません
-2026-04-17T17:55:26.934+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T17:55:29.765+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T17:55:29.766+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: 設定画面の要素が見つかりません
-2026-04-17T17:55:29.779+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T17:55:39.077+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T17:55:41.957+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T17:55:41.957+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: 設定画面の要素が見つかりません
-2026-04-17T17:55:56.272+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T17:55:59.069+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T17:55:59.070+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: 設定画面の要素が見つかりません
-2026-04-17T17:56:13.158+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T17:56:15.894+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T17:56:15.895+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: 設定画面の要素が見つかりません
-2026-04-17T17:56:15.904+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [test1] の配信準備を開始します
-2026-04-17T17:56:25.187+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [test1] ログイン完了、設定画面へ移行
-2026-04-17T17:56:28.854+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [test1] FFmpegによる映像送信を開始しました
-2026-04-17T17:58:44.357+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [test1] 配信枠を終了しました
-2026-04-17T17:58:44.359+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [test1] 試行失敗: Operation interrupted
-2026-04-17T17:58:44.366+09:00  INFO 32040 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:01:35.959+09:00  INFO 33660 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 33660 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T18:01:35.963+09:00  INFO 33660 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T18:01:37.273+09:00  INFO 33660 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T18:01:37.365+09:00  INFO 33660 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 2 JPA repository interfaces.
-2026-04-17T18:01:38.108+09:00  INFO 33660 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T18:01:38.127+09:00  INFO 33660 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T18:01:38.128+09:00  INFO 33660 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T18:01:38.236+09:00  INFO 33660 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T18:01:38.236+09:00  INFO 33660 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2210 ms
-2026-04-17T18:01:38.698+09:00  INFO 33660 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T18:01:38.796+09:00  INFO 33660 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T18:01:38.878+09:00  INFO 33660 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T18:01:39.246+09:00  INFO 33660 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T18:01:39.301+09:00  INFO 33660 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T18:01:39.593+09:00  INFO 33660 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T18:01:39.595+09:00  INFO 33660 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T18:01:39.700+09:00  WARN 33660 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T18:01:39.770+09:00  INFO 33660 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T18:01:40.825+09:00  INFO 33660 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T18:01:40.914+09:00  INFO 33660 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T18:01:41.957+09:00  WARN 33660 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T18:01:41.994+09:00  INFO 33660 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T18:01:42.935+09:00  INFO 33660 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T18:01:43.063+09:00  INFO 33660 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T18:01:43.082+09:00  INFO 33660 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.696 seconds (process running for 8.699)
-2026-04-17T18:01:43.557+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T18:01:43.562+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T18:01:43.568+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
-2026-04-17T18:02:54.084+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:02:54.096+09:00  INFO 33660 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T18:03:05.216+09:00  INFO 33660 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T18:03:08.802+09:00  INFO 33660 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
-2026-04-17T18:05:04.945+09:00  INFO 33660 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T18:05:04.947+09:00  INFO 33660 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Operation interrupted
-2026-04-17T18:05:04.958+09:00  INFO 33660 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:05:21.463+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:05:21.470+09:00  INFO 33660 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [test1] の配信準備を開始します
-2026-04-17T18:05:30.698+09:00  INFO 33660 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [test1] ログイン完了、設定画面へ移行
-2026-04-17T18:05:34.233+09:00  INFO 33660 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [test1] FFmpegによる映像送信を開始しました
-2026-04-17T18:14:02.438+09:00  INFO 33660 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [test1] 配信枠を終了しました
-2026-04-17T18:14:02.440+09:00  INFO 33660 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Account 1] ⏹ 停止命令を受信し、処理を中断しました。
-2026-04-17T18:14:02.442+09:00  INFO 33660 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [test1] の処理を安全に中断しました
-2026-04-17T18:14:02.457+09:00  INFO 33660 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:18:29.998+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-1] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:18:30.007+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T18:18:39.087+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T18:18:42.692+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
-2026-04-17T18:21:42.932+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 有料放送へ切り替え完了 (再生時間: 取得不可)
-2026-04-17T18:27:37.175+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T18:27:37.180+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Account 65] ⏹ 停止命令を受信し、処理を中断しました。
-2026-04-17T18:27:37.186+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
-2026-04-17T18:27:37.219+09:00  INFO 33660 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:27:46.461+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:27:46.470+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T18:27:55.574+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T18:27:59.210+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
-2026-04-17T18:28:59.465+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T18:28:59.465+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Error {
-  message='Target page, context or browser has been closed
-  name='TargetClosedError
-  stack='TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\server\dispatchers\dispatcher.js:277:44)
-    at transport.onmessage (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\cli\driver.js:52:57)
-    at Immediate._onImmediate (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\protocol\transport.js:77:34)
-    at process.processImmediate (node:internal/timers:478:21)
-}
-2026-04-17T18:29:13.406+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T18:29:16.978+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
-2026-04-17T18:29:18.506+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T18:29:18.506+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Account 65] ⏹ 停止命令を受信し、処理を中断しました。
-2026-04-17T18:29:18.507+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
-2026-04-17T18:29:18.511+09:00  INFO 33660 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:29:25.758+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-1] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:29:25.764+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T18:29:35.171+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T18:29:37.948+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T18:29:37.948+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: 設定画面の要素が見つかりません
-2026-04-17T18:29:51.705+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T18:29:51.705+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: Error {
-  message='Target page, context or browser has been closed
-  name='TargetClosedError
-  stack='TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\utils\stackTrace.js:50:17)
-    at LongStandingScope._race (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\utils\manualPromise.js:91:52)
-    at LongStandingScope.race (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\utils\manualPromise.js:84:17)
-    at FrameDispatcher._handleCommand (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\server\dispatchers\dispatcher.js:96:36)
-    at DispatcherConnection.dispatch (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\server\dispatchers\dispatcher.js:365:39)
-}
-2026-04-17T18:30:01.146+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T18:30:01.147+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: Error {
-  message='Target page, context or browser has been closed
-  name='TargetClosedError
-  stack='TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\utils\stackTrace.js:50:17)
-    at LongStandingScope._race (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\utils\manualPromise.js:91:52)
-    at LongStandingScope.race (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\utils\manualPromise.js:84:17)
-    at FrameDispatcher._handleCommand (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\server\dispatchers\dispatcher.js:96:36)
-    at DispatcherConnection.dispatch (C:\Users\aikus\AppData\Local\Temp\playwright-java-486730837994093543\package\lib\server\dispatchers\dispatcher.js:365:39)
-}
-Call log:
-- waiting for locator("input[name='email']")
+2026-04-19T19:30:09.414+09:00  INFO 45172 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-19T19:30:09.545+09:00  INFO 45172 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-19T19:30:11.097+09:00  INFO 45172 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-19T19:30:11.394+09:00  INFO 45172 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-19T19:30:11.464+09:00  WARN 45172 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-19T19:30:11.507+09:00  INFO 45172 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-19T19:30:12.997+09:00  INFO 45172 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-19T19:30:13.183+09:00  WARN 45172 --- [fc2-live-automation] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-19T19:30:13.196+09:00  INFO 45172 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-19T19:30:13.201+09:00  INFO 45172 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-19T19:30:13.223+09:00  INFO 45172 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-19T19:30:13.279+09:00  INFO 45172 --- [fc2-live-automation] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
 
-2026-04-17T18:30:01.156+09:00  INFO 33660 --- [fc2-live-automation] [Thread-21] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:31:02.710+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:31:02.716+09:00  INFO 33660 --- [fc2-live-automation] [Thread-28] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T18:31:11.751+09:00  INFO 33660 --- [fc2-live-automation] [Thread-28] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T18:31:15.395+09:00  INFO 33660 --- [fc2-live-automation] [Thread-28] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T18:32:02.432+09:00  INFO 33660 --- [fc2-live-automation] [Thread-28] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T18:32:02.433+09:00  INFO 33660 --- [fc2-live-automation] [Thread-28] c.e.f.service.Fc2AutomationWorker        : [Account 97] ⏹ 停止命令を受信し、処理を中断しました。
-2026-04-17T18:32:02.433+09:00  INFO 33660 --- [fc2-live-automation] [Thread-28] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [out] の処理を安全に中断しました
-2026-04-17T18:32:02.437+09:00  INFO 33660 --- [fc2-live-automation] [Thread-28] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:32:30.929+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:32:30.937+09:00  INFO 33660 --- [fc2-live-automation] [Thread-32] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T18:32:40.620+09:00  INFO 33660 --- [fc2-live-automation] [Thread-32] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T18:32:44.180+09:00  INFO 33660 --- [fc2-live-automation] [Thread-32] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T18:33:05.207+09:00  INFO 33660 --- [fc2-live-automation] [Thread-32] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T18:33:05.207+09:00  INFO 33660 --- [fc2-live-automation] [Thread-32] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: Operation interrupted
-2026-04-17T18:33:05.211+09:00  INFO 33660 --- [fc2-live-automation] [Thread-32] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T18:33:09.985+09:00  INFO 33660 --- [fc2-live-automation] [http-nio-8082-exec-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T18:33:09.993+09:00  INFO 33660 --- [fc2-live-automation] [Thread-36] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T18:33:19.028+09:00  INFO 33660 --- [fc2-live-automation] [Thread-36] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T18:33:22.534+09:00  INFO 33660 --- [fc2-live-automation] [Thread-36] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T18:35:25.774+09:00  INFO 33660 --- [fc2-live-automation] [Thread-36] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T18:52:36.829+09:00  INFO 33660 --- [fc2-live-automation] [Thread-36] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T18:52:36.832+09:00  INFO 33660 --- [fc2-live-automation] [Thread-36] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: Operation interrupted
-2026-04-17T18:52:36.838+09:00  INFO 33660 --- [fc2-live-automation] [Thread-36] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T19:00:56.273+09:00  INFO 35804 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 35804 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T19:00:56.276+09:00  INFO 35804 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T19:00:57.960+09:00  INFO 35804 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T19:00:58.042+09:00  INFO 35804 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 2 JPA repository interfaces.
-2026-04-17T19:00:58.658+09:00  INFO 35804 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T19:00:58.680+09:00  INFO 35804 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T19:00:58.681+09:00  INFO 35804 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T19:00:58.791+09:00  INFO 35804 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T19:00:58.792+09:00  INFO 35804 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2444 ms
-2026-04-17T19:00:59.203+09:00  INFO 35804 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T19:00:59.333+09:00  INFO 35804 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T19:00:59.392+09:00  INFO 35804 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T19:00:59.813+09:00  INFO 35804 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T19:00:59.877+09:00  INFO 35804 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T19:01:00.299+09:00  INFO 35804 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T19:01:00.301+09:00  INFO 35804 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T19:01:00.350+09:00  WARN 35804 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T19:01:00.387+09:00  INFO 35804 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-19T19:30:13.318+09:00 ERROR 45172 --- [fc2-live-automation] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8082 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8082 or configure this application to listen on another port.
+
+2026-04-19T19:32:47.836+09:00  INFO 536 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 536 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-19T19:32:47.840+09:00  INFO 536 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-19T19:32:49.819+09:00  INFO 536 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-19T19:32:49.924+09:00  INFO 536 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85 ms. Found 2 JPA repository interfaces.
+2026-04-19T19:32:50.676+09:00  INFO 536 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-19T19:32:50.727+09:00  INFO 536 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-19T19:32:50.728+09:00  INFO 536 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-19T19:32:50.878+09:00  INFO 536 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-19T19:32:50.879+09:00  INFO 536 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2956 ms
+2026-04-19T19:32:51.583+09:00  INFO 536 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-19T19:32:51.663+09:00  INFO 536 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-19T19:32:51.712+09:00  INFO 536 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-19T19:32:52.074+09:00  INFO 536 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-19T19:32:52.130+09:00  INFO 536 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-19T19:32:52.545+09:00  INFO 536 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-19T19:32:52.555+09:00  INFO 536 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-19T19:32:52.602+09:00  WARN 536 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-19T19:32:52.643+09:00  INFO 536 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -314,34 +76,52 @@ Call log:
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-17T19:01:01.446+09:00  INFO 35804 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T19:01:01.500+09:00  INFO 35804 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T19:01:02.343+09:00  WARN 35804 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T19:01:02.379+09:00  INFO 35804 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T19:01:03.338+09:00  INFO 35804 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T19:01:03.435+09:00  INFO 35804 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T19:01:03.452+09:00  INFO 35804 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.834 seconds (process running for 8.628)
-2026-04-17T19:01:03.866+09:00  INFO 35804 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T19:01:03.867+09:00  INFO 35804 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T19:01:03.869+09:00  INFO 35804 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-04-17T19:08:39.405+09:00  INFO 33412 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 33412 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T19:08:39.408+09:00  INFO 33412 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T19:08:40.940+09:00  INFO 33412 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T19:08:41.016+09:00  INFO 33412 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 2 JPA repository interfaces.
-2026-04-17T19:08:41.599+09:00  INFO 33412 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T19:08:41.617+09:00  INFO 33412 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T19:08:41.619+09:00  INFO 33412 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T19:08:41.703+09:00  INFO 33412 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T19:08:41.703+09:00  INFO 33412 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2227 ms
-2026-04-17T19:08:42.111+09:00  INFO 33412 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T19:08:42.173+09:00  INFO 33412 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T19:08:42.207+09:00  INFO 33412 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T19:08:42.519+09:00  INFO 33412 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T19:08:42.568+09:00  INFO 33412 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T19:08:42.874+09:00  INFO 33412 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T19:08:42.877+09:00  INFO 33412 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T19:08:42.913+09:00  WARN 33412 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T19:08:42.939+09:00  INFO 33412 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-04-19T19:32:53.816+09:00  INFO 536 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-19T19:32:53.905+09:00  INFO 536 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-19T19:32:54.908+09:00  INFO 536 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-19T19:32:55.215+09:00  INFO 536 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-19T19:32:55.339+09:00  WARN 536 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-19T19:32:55.407+09:00  INFO 536 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-19T19:32:56.600+09:00  INFO 536 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-19T19:32:56.695+09:00  WARN 536 --- [fc2-live-automation] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-19T19:32:56.707+09:00  INFO 536 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-19T19:32:56.714+09:00  INFO 536 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-19T19:32:56.750+09:00  INFO 536 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-19T19:32:56.783+09:00  INFO 536 --- [fc2-live-automation] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-19T19:32:56.815+09:00 ERROR 536 --- [fc2-live-automation] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8082 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8082 or configure this application to listen on another port.
+
+2026-04-19T19:33:29.215+09:00  INFO 48568 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 48568 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-19T19:33:29.220+09:00  INFO 48568 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-19T19:33:31.057+09:00  INFO 48568 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-19T19:33:31.151+09:00  INFO 48568 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 2 JPA repository interfaces.
+2026-04-19T19:33:32.042+09:00  INFO 48568 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-19T19:33:32.065+09:00  INFO 48568 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-19T19:33:32.067+09:00  INFO 48568 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-19T19:33:32.169+09:00  INFO 48568 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-19T19:33:32.171+09:00  INFO 48568 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2889 ms
+2026-04-19T19:33:32.825+09:00  INFO 48568 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-19T19:33:32.944+09:00  INFO 48568 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-19T19:33:33.129+09:00  INFO 48568 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-19T19:33:33.594+09:00  INFO 48568 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-19T19:33:33.679+09:00  INFO 48568 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-19T19:33:34.069+09:00  INFO 48568 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-19T19:33:34.071+09:00  INFO 48568 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-19T19:33:34.096+09:00  WARN 48568 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-19T19:33:34.121+09:00  INFO 48568 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -349,34 +129,43 @@ Call log:
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-17T19:08:43.761+09:00  INFO 33412 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T19:08:43.824+09:00  INFO 33412 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T19:08:44.701+09:00  WARN 33412 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T19:08:44.743+09:00  INFO 33412 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T19:08:45.674+09:00  INFO 33412 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T19:08:45.805+09:00  INFO 33412 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T19:08:45.832+09:00  INFO 33412 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.015 seconds (process running for 7.821)
-2026-04-17T19:08:46.269+09:00  INFO 33412 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T19:08:46.270+09:00  INFO 33412 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T19:08:46.272+09:00  INFO 33412 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-04-17T19:12:32.835+09:00  INFO 36364 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 36364 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T19:12:32.837+09:00  INFO 36364 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T19:12:34.891+09:00  INFO 36364 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T19:12:35.042+09:00  INFO 36364 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 132 ms. Found 2 JPA repository interfaces.
-2026-04-17T19:12:35.950+09:00  INFO 36364 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T19:12:35.997+09:00  INFO 36364 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T19:12:36.006+09:00  INFO 36364 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T19:12:36.225+09:00  INFO 36364 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T19:12:36.227+09:00  INFO 36364 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3317 ms
-2026-04-17T19:12:36.921+09:00  INFO 36364 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T19:12:37.007+09:00  INFO 36364 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T19:12:37.056+09:00  INFO 36364 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T19:12:37.466+09:00  INFO 36364 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T19:12:37.525+09:00  INFO 36364 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T19:12:37.775+09:00  INFO 36364 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T19:12:37.777+09:00  INFO 36364 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T19:12:37.803+09:00  WARN 36364 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T19:12:37.831+09:00  INFO 36364 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-04-19T19:33:35.038+09:00  INFO 48568 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-19T19:33:35.113+09:00  INFO 48568 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-19T19:33:36.199+09:00  INFO 48568 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-19T19:33:36.501+09:00  INFO 48568 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-19T19:33:36.804+09:00  WARN 48568 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-19T19:33:36.929+09:00  INFO 48568 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-19T19:33:38.921+09:00  INFO 48568 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-19T19:33:39.089+09:00  INFO 48568 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-19T19:33:39.117+09:00  INFO 48568 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 10.484 seconds (process running for 11.122)
+2026-04-19T19:33:40.043+09:00  INFO 48568 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-19T19:33:40.047+09:00  INFO 48568 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-19T19:33:40.053+09:00  INFO 48568 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-04-19T19:34:30.769+09:00  INFO 48568 --- [fc2-live-automation] [http-nio-8082-exec-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ▶️ プリセットの連続再生を開始します
+2026-04-19T19:34:30.781+09:00  INFO 48568 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎬 [すず] の配信準備を開始します
+2026-04-19T19:34:52.772+09:00  INFO 48568 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ✅ [すず] ログイン完了、設定画面へ移行
+2026-04-19T19:34:54.789+09:00  INFO 48568 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
+2026-04-19T19:35:40.016+09:00  INFO 48568 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎥 [すず] FFmpegによる映像送信を開始しました
+2026-04-19T19:35:57.145+09:00  INFO 48568 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🏁 [すず] 配信枠を終了しました
+2026-04-19T19:35:57.158+09:00  INFO 48568 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-19T19:43:26.092+09:00  INFO 45020 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 45020 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-19T19:43:26.097+09:00  INFO 45020 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-19T19:43:28.217+09:00  INFO 45020 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-19T19:43:28.310+09:00  INFO 45020 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 2 JPA repository interfaces.
+2026-04-19T19:43:29.149+09:00  INFO 45020 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-19T19:43:29.195+09:00  INFO 45020 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-19T19:43:29.197+09:00  INFO 45020 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-19T19:43:29.330+09:00  INFO 45020 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-19T19:43:29.332+09:00  INFO 45020 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3172 ms
+2026-04-19T19:43:29.926+09:00  INFO 45020 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-19T19:43:30.055+09:00  INFO 45020 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-19T19:43:30.205+09:00  INFO 45020 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-19T19:43:30.773+09:00  INFO 45020 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-19T19:43:30.906+09:00  INFO 45020 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-19T19:43:31.326+09:00  INFO 45020 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-19T19:43:31.329+09:00  INFO 45020 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-19T19:43:31.376+09:00  WARN 45020 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-19T19:43:31.405+09:00  INFO 45020 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -384,34 +173,50 @@ Call log:
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-17T19:12:38.793+09:00  INFO 36364 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T19:12:38.864+09:00  INFO 36364 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T19:12:39.838+09:00  WARN 36364 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T19:12:39.890+09:00  INFO 36364 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T19:12:40.899+09:00  INFO 36364 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T19:12:41.005+09:00  INFO 36364 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T19:12:41.025+09:00  INFO 36364 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 8.69 seconds (process running for 9.493)
-2026-04-17T19:12:41.476+09:00  INFO 36364 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T19:12:41.487+09:00  INFO 36364 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T19:12:41.491+09:00  INFO 36364 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-04-17T19:15:58.433+09:00  INFO 20548 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 20548 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T19:15:58.436+09:00  INFO 20548 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T19:15:59.665+09:00  INFO 20548 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T19:15:59.751+09:00  INFO 20548 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 2 JPA repository interfaces.
-2026-04-17T19:16:00.435+09:00  INFO 20548 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T19:16:00.455+09:00  INFO 20548 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T19:16:00.456+09:00  INFO 20548 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T19:16:00.570+09:00  INFO 20548 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T19:16:00.571+09:00  INFO 20548 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2077 ms
-2026-04-17T19:16:01.057+09:00  INFO 20548 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T19:16:01.155+09:00  INFO 20548 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T19:16:01.229+09:00  INFO 20548 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T19:16:01.672+09:00  INFO 20548 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T19:16:01.717+09:00  INFO 20548 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T19:16:02.077+09:00  INFO 20548 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T19:16:02.083+09:00  INFO 20548 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T19:16:02.130+09:00  WARN 20548 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T19:16:02.160+09:00  INFO 20548 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-04-19T19:43:32.486+09:00  INFO 45020 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-19T19:43:32.569+09:00  INFO 45020 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-19T19:43:33.635+09:00  INFO 45020 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-19T19:43:33.869+09:00  INFO 45020 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-19T19:43:33.930+09:00  WARN 45020 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-19T19:43:33.982+09:00  INFO 45020 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-19T19:43:35.063+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-19T19:43:35.064+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-19T19:43:35.064+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.b.f.s.DefaultListableBeanFactory     : Obtaining singleton bean 'multipartResolver' in thread "RMI TCP Connection(2)-127.0.0.1" while other thread holds singleton lock for other beans [openTelemetry]
+2026-04-19T19:43:35.066+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.b.f.s.DefaultListableBeanFactory     : Obtaining singleton bean 'webEndpointServletHandlerMapping' in thread "RMI TCP Connection(2)-127.0.0.1" while other thread holds singleton lock for other beans [openTelemetry]
+2026-04-19T19:43:35.067+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.b.f.s.DefaultListableBeanFactory     : Obtaining singleton bean 'org.springframework.boot.actuate.autoconfigure.endpoint.web.servlet.WebMvcEndpointManagementContextConfiguration' in thread "RMI TCP Connection(2)-127.0.0.1" while other thread holds singleton lock for other beans [org.springframework.boot.actuate.autoconfigure.scheduling.ScheduledTasksObservabilityAutoConfiguration]
+2026-04-19T19:43:35.069+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.b.f.s.DefaultListableBeanFactory     : Obtaining singleton bean 'management.endpoints.web.cors-org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties' in thread "RMI TCP Connection(2)-127.0.0.1" while other thread holds singleton lock for other beans [sslMeterBinder]
+2026-04-19T19:43:35.085+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-19T19:43:35.099+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.b.f.s.DefaultListableBeanFactory     : Obtaining singleton bean 'controllerEndpointHandlerMapping' in thread "RMI TCP Connection(2)-127.0.0.1" while other thread holds singleton lock for other beans [data-jpa.repository-aot-processor#0]
+2026-04-19T19:43:35.126+09:00  INFO 45020 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 58 ms
+2026-04-19T19:43:35.446+09:00  INFO 45020 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-19T19:43:35.468+09:00  INFO 45020 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 9.896 seconds (process running for 10.483)
+2026-04-19T19:43:47.433+09:00  INFO 45020 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ▶️ プリセットの連続再生を開始します
+2026-04-19T19:43:47.453+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎬 [すず] の配信準備を開始します
+2026-04-19T19:43:58.190+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ✅ [すず] ログイン完了、設定画面へ移行
+2026-04-19T19:44:00.205+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
+2026-04-19T19:44:25.211+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎥 [すず] FFmpegによる映像送信を開始しました
+2026-04-19T19:45:39.995+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🏁 [すず] 配信枠を終了しました
+2026-04-19T19:45:39.997+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ❌ [すず] 試行失敗: Operation interrupted
+2026-04-19T19:45:40.001+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏹ [すず] の処理を安全に中断しました
+2026-04-19T19:45:40.010+09:00  INFO 45020 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-19T20:17:44.815+09:00  INFO 38532 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 38532 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-19T20:17:44.819+09:00  INFO 38532 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-19T20:17:46.499+09:00  INFO 38532 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-19T20:17:46.591+09:00  INFO 38532 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 2 JPA repository interfaces.
+2026-04-19T20:17:47.611+09:00  INFO 38532 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-19T20:17:47.636+09:00  INFO 38532 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-19T20:17:47.637+09:00  INFO 38532 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-19T20:17:47.799+09:00  INFO 38532 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-19T20:17:47.800+09:00  INFO 38532 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2906 ms
+2026-04-19T20:17:48.359+09:00  INFO 38532 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-19T20:17:48.476+09:00  INFO 38532 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-19T20:17:48.542+09:00  INFO 38532 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-19T20:17:49.057+09:00  INFO 38532 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-19T20:17:49.127+09:00  INFO 38532 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-19T20:17:49.511+09:00  INFO 38532 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-19T20:17:49.515+09:00  INFO 38532 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-19T20:17:49.566+09:00  WARN 38532 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-19T20:17:49.604+09:00  INFO 38532 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -419,446 +224,24 @@ Call log:
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-17T19:16:02.993+09:00  INFO 20548 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T19:16:03.062+09:00  INFO 20548 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T19:16:03.942+09:00  WARN 20548 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T19:16:03.980+09:00  INFO 20548 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T19:16:05.318+09:00  INFO 20548 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T19:16:05.461+09:00  INFO 20548 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T19:16:05.486+09:00  INFO 20548 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.536 seconds (process running for 8.182)
-2026-04-17T19:16:05.914+09:00  INFO 20548 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T19:16:05.916+09:00  INFO 20548 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T19:16:05.918+09:00  INFO 20548 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-04-17T19:16:25.417+09:00  INFO 20548 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:16:25.427+09:00  INFO 20548 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T19:16:35.700+09:00  INFO 20548 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T19:16:37.735+09:00  INFO 20548 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
-2026-04-17T19:19:36.253+09:00  INFO 20548 --- [fc2-live-automation] [http-nio-8082-exec-7] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:19:36.259+09:00  INFO 20548 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🎬 [すず] の配信準備を開始します
-2026-04-17T19:19:38.082+09:00  INFO 20548 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 有料放送へ切り替え完了 (再生時間: 取得不可)
-2026-04-17T19:19:44.804+09:00  INFO 20548 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ✅ [すず] ログイン完了、設定画面へ移行
-2026-04-17T19:19:46.747+09:00  INFO 20548 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🎥 [すず] FFmpegによる映像送信を開始しました
-2026-04-17T19:20:27.897+09:00  INFO 20548 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🏁 [すず] 配信枠を終了しました
-2026-04-17T19:20:27.901+09:00  INFO 20548 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ❌ [すず] 試行失敗: Operation interrupted
-2026-04-17T19:20:27.908+09:00  INFO 20548 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T19:25:25.691+09:00  INFO 31844 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 31844 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T19:25:25.694+09:00  INFO 31844 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T19:25:27.271+09:00  INFO 31844 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T19:25:27.384+09:00  INFO 31844 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 98 ms. Found 2 JPA repository interfaces.
-2026-04-17T19:25:28.572+09:00  INFO 31844 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T19:25:28.594+09:00  INFO 31844 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T19:25:28.595+09:00  INFO 31844 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T19:25:28.735+09:00  INFO 31844 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T19:25:28.736+09:00  INFO 31844 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2946 ms
-2026-04-17T19:25:29.362+09:00  INFO 31844 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T19:25:29.442+09:00  INFO 31844 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T19:25:29.512+09:00  INFO 31844 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T19:25:29.975+09:00  INFO 31844 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T19:25:30.044+09:00  INFO 31844 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T19:25:30.471+09:00  INFO 31844 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T19:25:30.480+09:00  INFO 31844 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T19:25:30.555+09:00  WARN 31844 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T19:25:30.586+09:00  INFO 31844 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T19:25:31.891+09:00  INFO 31844 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T19:25:32.019+09:00  INFO 31844 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T19:25:33.346+09:00  WARN 31844 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T19:25:33.401+09:00  INFO 31844 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T19:25:34.803+09:00  INFO 31844 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T19:25:34.913+09:00  INFO 31844 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T19:25:34.938+09:00  INFO 31844 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 10.017 seconds (process running for 10.946)
-2026-04-17T19:25:35.372+09:00  INFO 31844 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T19:25:35.374+09:00  INFO 31844 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T19:25:35.439+09:00  INFO 31844 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 31 ms
-2026-04-17T19:26:02.124+09:00  INFO 31844 --- [fc2-live-automation] [http-nio-8082-exec-4] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:26:02.151+09:00  INFO 31844 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T19:26:11.959+09:00  INFO 31844 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T19:26:18.409+09:00  INFO 31844 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
-2026-04-17T19:26:40.720+09:00  INFO 31844 --- [fc2-live-automation] [http-nio-8082-exec-7] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:26:40.725+09:00  INFO 31844 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🎬 [すず] の配信準備を開始します
-2026-04-17T19:26:49.312+09:00  INFO 31844 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ✅ [すず] ログイン完了、設定画面へ移行
-2026-04-17T19:26:57.453+09:00  INFO 31844 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🎥 [すず] FFmpegによる映像送信を開始しました
-2026-04-17T19:27:03.872+09:00  INFO 31844 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🏁 [すず] 配信枠を終了しました
-2026-04-17T19:27:03.880+09:00  INFO 31844 --- [fc2-live-automation] [Thread-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T19:29:18.762+09:00  INFO 31844 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 有料放送へ切り替え完了 (再生時間: 取得不可)
-2026-04-17T19:33:20.751+09:00  INFO 31844 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T19:33:20.755+09:00  INFO 31844 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
-2026-04-17T19:33:20.760+09:00  INFO 31844 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T19:33:58.649+09:00  INFO 31844 --- [fc2-live-automation] [http-nio-8082-exec-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:33:58.654+09:00  INFO 31844 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T19:34:07.029+09:00  INFO 31844 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T19:34:13.470+09:00  INFO 31844 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T19:35:00.121+09:00  INFO 31844 --- [fc2-live-automation] [http-nio-8082-exec-4] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:35:00.127+09:00  INFO 31844 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🎬 [test1] の配信準備を開始します
-2026-04-17T19:35:09.224+09:00  INFO 31844 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ✅ [test1] ログイン完了、設定画面へ移行
-2026-04-17T19:35:15.737+09:00  INFO 31844 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🎥 [test1] FFmpegによる映像送信を開始しました
-2026-04-17T19:36:16.906+09:00  INFO 31844 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T19:37:47.358+09:00  INFO 31844 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T19:37:47.360+09:00  INFO 31844 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [out] 試行失敗: Operation interrupted
-2026-04-17T19:37:47.369+09:00  INFO 31844 --- [fc2-live-automation] [Thread-10] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T19:40:12.924+09:00  INFO 31844 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] 🏁 [test1] 配信枠を終了しました
-2026-04-17T19:40:12.927+09:00  INFO 31844 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ❌ [test1] 試行失敗: Operation interrupted
-2026-04-17T19:40:12.939+09:00  INFO 31844 --- [fc2-live-automation] [Thread-14] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト１] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T19:41:54.478+09:00  INFO 37384 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 37384 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T19:41:54.488+09:00  INFO 37384 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T19:41:56.045+09:00  INFO 37384 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T19:41:56.111+09:00  INFO 37384 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 2 JPA repository interfaces.
-2026-04-17T19:41:56.727+09:00  INFO 37384 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T19:41:56.746+09:00  INFO 37384 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T19:41:56.746+09:00  INFO 37384 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T19:41:56.831+09:00  INFO 37384 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T19:41:56.832+09:00  INFO 37384 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2227 ms
-2026-04-17T19:41:57.273+09:00  INFO 37384 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T19:41:57.421+09:00  INFO 37384 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T19:41:57.497+09:00  INFO 37384 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T19:41:58.037+09:00  INFO 37384 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T19:41:58.098+09:00  INFO 37384 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T19:41:58.484+09:00  INFO 37384 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T19:41:58.488+09:00  INFO 37384 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T19:41:58.529+09:00  WARN 37384 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T19:41:58.563+09:00  INFO 37384 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T19:41:59.461+09:00  INFO 37384 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T19:41:59.534+09:00  INFO 37384 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T19:42:00.371+09:00  WARN 37384 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T19:42:00.419+09:00  INFO 37384 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T19:42:01.437+09:00  INFO 37384 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T19:42:01.551+09:00  INFO 37384 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T19:42:01.576+09:00  INFO 37384 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.649 seconds (process running for 8.571)
-2026-04-17T19:42:02.042+09:00  INFO 37384 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T19:42:02.043+09:00  INFO 37384 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T19:42:02.045+09:00  INFO 37384 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-04-17T19:42:11.274+09:00  INFO 37384 --- [fc2-live-automation] [http-nio-8082-exec-4] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:42:11.301+09:00  INFO 37384 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T19:42:21.447+09:00  INFO 37384 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T19:42:27.862+09:00  INFO 37384 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T19:44:32.129+09:00  INFO 37384 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:01)
-2026-04-17T19:49:54.387+09:00  INFO 37384 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T19:49:54.388+09:00  INFO 37384 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [out] の処理を安全に中断しました
-2026-04-17T19:49:54.394+09:00  INFO 37384 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T19:50:55.232+09:00  INFO 3496 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 3496 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T19:50:55.238+09:00  INFO 3496 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T19:50:56.970+09:00  INFO 3496 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T19:50:57.049+09:00  INFO 3496 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 2 JPA repository interfaces.
-2026-04-17T19:50:57.698+09:00  INFO 3496 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T19:50:57.722+09:00  INFO 3496 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T19:50:57.723+09:00  INFO 3496 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T19:50:57.812+09:00  INFO 3496 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T19:50:57.813+09:00  INFO 3496 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2516 ms
-2026-04-17T19:50:58.164+09:00  INFO 3496 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T19:50:58.232+09:00  INFO 3496 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T19:50:58.293+09:00  INFO 3496 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T19:50:58.584+09:00  INFO 3496 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T19:50:58.626+09:00  INFO 3496 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T19:50:58.963+09:00  INFO 3496 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T19:50:58.965+09:00  INFO 3496 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T19:50:59.063+09:00  WARN 3496 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T19:50:59.128+09:00  INFO 3496 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T19:51:00.010+09:00  INFO 3496 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T19:51:00.081+09:00  INFO 3496 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T19:51:00.884+09:00  WARN 3496 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T19:51:00.930+09:00  INFO 3496 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T19:51:01.963+09:00  INFO 3496 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T19:51:02.099+09:00  INFO 3496 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T19:51:02.126+09:00  INFO 3496 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.373 seconds (process running for 8.326)
-2026-04-17T19:51:02.533+09:00  INFO 3496 --- [fc2-live-automation] [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T19:51:02.537+09:00  INFO 3496 --- [fc2-live-automation] [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T19:51:02.542+09:00  INFO 3496 --- [fc2-live-automation] [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-04-17T19:51:42.958+09:00  INFO 3496 --- [fc2-live-automation] [http-nio-8082-exec-4] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T19:51:42.981+09:00  INFO 3496 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T19:51:52.709+09:00  INFO 3496 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T19:54:06.061+09:00  INFO 3496 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ 確認モーダルを突破しました: 有料切替確認
-2026-04-17T19:54:06.065+09:00  INFO 3496 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T20:00:02.317+09:00  INFO 3496 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T20:00:02.318+09:00  INFO 3496 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [out] の処理を安全に中断しました
-2026-04-17T20:00:02.324+09:00  INFO 3496 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T20:29:41.720+09:00  INFO 34644 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 34644 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T20:29:41.723+09:00  INFO 34644 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T20:29:43.080+09:00  INFO 34644 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T20:29:43.177+09:00  INFO 34644 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 86 ms. Found 2 JPA repository interfaces.
-2026-04-17T20:29:43.938+09:00  INFO 34644 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T20:29:43.957+09:00  INFO 34644 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T20:29:43.959+09:00  INFO 34644 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T20:29:44.083+09:00  INFO 34644 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T20:29:44.084+09:00  INFO 34644 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2233 ms
-2026-04-17T20:29:44.547+09:00  INFO 34644 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T20:29:44.627+09:00  INFO 34644 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T20:29:44.690+09:00  INFO 34644 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T20:29:45.034+09:00  INFO 34644 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T20:29:45.075+09:00  INFO 34644 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T20:29:45.360+09:00  INFO 34644 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T20:29:45.365+09:00  INFO 34644 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T20:29:45.393+09:00  WARN 34644 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T20:29:45.426+09:00  INFO 34644 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T20:29:46.260+09:00  INFO 34644 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T20:29:46.338+09:00  INFO 34644 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T20:29:47.234+09:00  WARN 34644 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T20:29:47.271+09:00  INFO 34644 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T20:29:48.472+09:00  INFO 34644 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T20:29:48.613+09:00  INFO 34644 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T20:29:48.636+09:00  INFO 34644 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.429 seconds (process running for 8.18)
-2026-04-17T20:29:49.300+09:00  INFO 34644 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T20:29:49.313+09:00  INFO 34644 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T20:29:49.318+09:00  INFO 34644 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-04-17T20:30:03.802+09:00  INFO 34644 --- [fc2-live-automation] [http-nio-8082-exec-6] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T20:30:03.820+09:00  INFO 34644 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T20:30:13.957+09:00  INFO 34644 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T20:30:30.938+09:00  INFO 34644 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T20:32:34.387+09:00  INFO 34644 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T20:35:12.362+09:00  INFO 34644 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T20:35:12.363+09:00  INFO 34644 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [out] の処理を安全に中断しました
-2026-04-17T20:35:12.369+09:00  INFO 34644 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T20:35:24.064+09:00  INFO 34644 --- [fc2-live-automation] [http-nio-8082-exec-7] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T20:35:24.072+09:00  INFO 34644 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T20:35:32.910+09:00  INFO 34644 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T20:35:49.977+09:00  INFO 34644 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T20:37:53.267+09:00  INFO 34644 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T20:46:59.577+09:00  INFO 34644 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T20:46:59.578+09:00  INFO 34644 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [out] の処理を安全に中断しました
-2026-04-17T20:46:59.585+09:00  INFO 34644 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T21:40:14.179+09:00  INFO 33232 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 33232 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T21:40:14.184+09:00  INFO 33232 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T21:40:15.821+09:00  INFO 33232 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T21:40:15.930+09:00  INFO 33232 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 91 ms. Found 2 JPA repository interfaces.
-2026-04-17T21:40:16.881+09:00  INFO 33232 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T21:40:16.911+09:00  INFO 33232 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T21:40:16.913+09:00  INFO 33232 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T21:40:17.018+09:00  INFO 33232 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T21:40:17.019+09:00  INFO 33232 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2772 ms
-2026-04-17T21:40:17.495+09:00  INFO 33232 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T21:40:17.622+09:00  INFO 33232 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T21:40:17.722+09:00  INFO 33232 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T21:40:18.083+09:00  INFO 33232 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T21:40:18.129+09:00  INFO 33232 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T21:40:18.409+09:00  INFO 33232 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T21:40:18.411+09:00  INFO 33232 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T21:40:18.442+09:00  WARN 33232 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T21:40:18.472+09:00  INFO 33232 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T21:40:19.526+09:00  INFO 33232 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T21:40:19.620+09:00  INFO 33232 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T21:40:20.445+09:00  WARN 33232 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T21:40:20.528+09:00  INFO 33232 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T21:40:21.729+09:00  INFO 33232 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T21:40:21.883+09:00  INFO 33232 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T21:40:21.914+09:00  INFO 33232 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 8.346 seconds (process running for 9.064)
-2026-04-17T21:40:22.689+09:00  INFO 33232 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T21:40:22.696+09:00  INFO 33232 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T21:40:22.701+09:00  INFO 33232 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-04-17T21:40:27.817+09:00  INFO 33232 --- [fc2-live-automation] [http-nio-8082-exec-4] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T21:40:27.845+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T21:40:38.961+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T21:40:57.158+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T21:43:01.229+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T21:46:07.265+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T21:46:07.275+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T21:46:16.463+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T21:46:35.011+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
-2026-04-17T21:47:36.543+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T21:47:36.549+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ 次のループまで 3分間休憩します...
-2026-04-17T21:50:36.798+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T21:50:45.083+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T21:51:03.084+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T21:53:07.372+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T21:56:13.268+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T21:56:13.278+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
-2026-04-17T21:56:22.151+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
-2026-04-17T21:56:32.291+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
-2026-04-17T21:56:32.291+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
-2026-04-17T21:56:32.300+09:00  INFO 33232 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T21:57:13.657+09:00  INFO 33232 --- [fc2-live-automation] [http-nio-8082-exec-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T21:57:13.662+09:00  INFO 33232 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T21:57:24.482+09:00  INFO 33232 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T21:57:34.489+09:00  INFO 33232 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T21:57:34.490+09:00  INFO 33232 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [out] の処理を安全に中断しました
-2026-04-17T21:57:34.495+09:00  INFO 33232 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
-2026-04-17T21:57:59.558+09:00  INFO 23788 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 23788 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T21:57:59.562+09:00  INFO 23788 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T21:58:01.409+09:00  INFO 23788 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T21:58:01.470+09:00  INFO 23788 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 2 JPA repository interfaces.
-2026-04-17T21:58:02.392+09:00  INFO 23788 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T21:58:02.415+09:00  INFO 23788 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T21:58:02.416+09:00  INFO 23788 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T21:58:02.512+09:00  INFO 23788 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T21:58:02.513+09:00  INFO 23788 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2854 ms
-2026-04-17T21:58:03.157+09:00  INFO 23788 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T21:58:03.295+09:00  INFO 23788 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T21:58:03.373+09:00  INFO 23788 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T21:58:03.793+09:00  INFO 23788 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T21:58:03.878+09:00  INFO 23788 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T21:58:04.168+09:00  INFO 23788 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T21:58:04.170+09:00  INFO 23788 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T21:58:04.208+09:00  WARN 23788 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T21:58:04.235+09:00  INFO 23788 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T21:58:05.211+09:00  INFO 23788 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T21:58:05.291+09:00  INFO 23788 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T21:58:06.377+09:00  WARN 23788 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T21:58:06.426+09:00  INFO 23788 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T21:58:07.528+09:00  INFO 23788 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T21:58:07.658+09:00  INFO 23788 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T21:58:07.677+09:00  INFO 23788 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 8.67 seconds (process running for 9.533)
-2026-04-17T21:58:08.446+09:00  INFO 23788 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T21:58:08.495+09:00  INFO 23788 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T21:58:08.526+09:00  INFO 23788 --- [fc2-live-automation] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
-2026-04-17T21:58:15.555+09:00  INFO 23788 --- [fc2-live-automation] [http-nio-8082-exec-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T21:58:15.582+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T21:58:25.527+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T21:58:42.495+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T22:00:46.504+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [out] 有料放送へ切り替え完了 (再生時間: 00:02:00)
-2026-04-17T22:03:52.611+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [out] 配信枠を終了しました
-2026-04-17T22:03:52.623+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [test1] の配信準備を開始します
-2026-04-17T22:04:01.583+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [test1] ログイン完了、設定画面へ移行
-2026-04-17T22:04:18.480+09:00  INFO 23788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [test1] FFmpegによる映像送信を開始しました
-2026-04-17T22:21:10.328+09:00  INFO 16308 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 16308 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T22:21:10.412+09:00  INFO 16308 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T22:21:15.503+09:00  INFO 16308 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T22:21:15.678+09:00  INFO 16308 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 128 ms. Found 2 JPA repository interfaces.
-2026-04-17T22:21:17.630+09:00  INFO 16308 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T22:21:17.650+09:00  INFO 16308 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T22:21:17.651+09:00  INFO 16308 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T22:21:17.896+09:00  INFO 16308 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T22:21:17.898+09:00  INFO 16308 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7232 ms
-2026-04-17T22:21:18.789+09:00  INFO 16308 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T22:21:18.989+09:00  INFO 16308 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T22:21:19.090+09:00  INFO 16308 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T22:21:19.639+09:00  INFO 16308 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T22:21:19.819+09:00  INFO 16308 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T22:21:20.597+09:00  INFO 16308 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T22:21:20.600+09:00  INFO 16308 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T22:21:20.639+09:00  WARN 16308 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T22:21:20.746+09:00  INFO 16308 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T22:21:22.467+09:00  INFO 16308 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T22:21:22.529+09:00  INFO 16308 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T22:21:24.169+09:00  WARN 16308 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T22:21:24.213+09:00  INFO 16308 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T22:21:25.296+09:00  INFO 16308 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T22:21:25.420+09:00  INFO 16308 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T22:21:25.445+09:00  INFO 16308 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 16.749 seconds (process running for 18.298)
-2026-04-17T22:21:25.978+09:00  INFO 16308 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T22:21:25.980+09:00  INFO 16308 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T22:21:25.983+09:00  INFO 16308 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-04-17T22:30:09.743+09:00  INFO 15148 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 15148 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T22:30:09.751+09:00  INFO 15148 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T22:30:11.397+09:00  INFO 15148 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T22:30:11.474+09:00  INFO 15148 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 2 JPA repository interfaces.
-2026-04-17T22:30:12.155+09:00  INFO 15148 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T22:30:12.176+09:00  INFO 15148 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T22:30:12.177+09:00  INFO 15148 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T22:30:12.301+09:00  INFO 15148 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T22:30:12.303+09:00  INFO 15148 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2467 ms
-2026-04-17T22:30:12.833+09:00  INFO 15148 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T22:30:12.934+09:00  INFO 15148 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T22:30:13.028+09:00  INFO 15148 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T22:30:13.401+09:00  INFO 15148 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T22:30:13.444+09:00  INFO 15148 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T22:30:13.719+09:00  INFO 15148 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T22:30:13.722+09:00  INFO 15148 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T22:30:13.756+09:00  WARN 15148 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T22:30:13.789+09:00  INFO 15148 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T22:30:14.671+09:00  INFO 15148 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T22:30:14.754+09:00  INFO 15148 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T22:30:15.787+09:00  INFO 15148 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
-2026-04-17T22:30:16.159+09:00  INFO 15148 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 1 件、アカウント 1 件を停止状態に戻しました
-2026-04-17T22:30:16.226+09:00  WARN 15148 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T22:30:16.265+09:00  INFO 15148 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T22:30:17.174+09:00  INFO 15148 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T22:30:17.258+09:00  INFO 15148 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T22:30:17.279+09:00  INFO 15148 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 8.17 seconds (process running for 8.81)
-2026-04-17T22:30:17.737+09:00  INFO 15148 --- [fc2-live-automation] [http-nio-8082-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T22:30:17.738+09:00  INFO 15148 --- [fc2-live-automation] [http-nio-8082-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T22:30:17.741+09:00  INFO 15148 --- [fc2-live-automation] [http-nio-8082-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-04-17T22:30:25.601+09:00  INFO 15148 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
-2026-04-17T22:30:25.612+09:00  INFO 15148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [out] の配信準備を開始します
-2026-04-17T22:30:37.142+09:00  INFO 15148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [out] ログイン完了、設定画面へ移行
-2026-04-17T22:30:39.153+09:00  INFO 15148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
-2026-04-17T22:30:59.248+09:00  INFO 15148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [out] FFmpegによる映像送信を開始しました
-2026-04-17T22:31:24.373+09:00  INFO 29084 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 29084 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
-2026-04-17T22:31:24.381+09:00  INFO 29084 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-04-17T22:31:26.836+09:00  INFO 29084 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-17T22:31:26.946+09:00  INFO 29084 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 2 JPA repository interfaces.
-2026-04-17T22:31:28.100+09:00  INFO 29084 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2026-04-17T22:31:28.125+09:00  INFO 29084 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-04-17T22:31:28.128+09:00  INFO 29084 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
-2026-04-17T22:31:28.273+09:00  INFO 29084 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-04-17T22:31:28.274+09:00  INFO 29084 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3673 ms
-2026-04-17T22:31:28.927+09:00  INFO 29084 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-17T22:31:29.056+09:00  INFO 29084 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
-2026-04-17T22:31:29.144+09:00  INFO 29084 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-17T22:31:29.922+09:00  INFO 29084 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-17T22:31:30.004+09:00  INFO 29084 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-17T22:31:30.327+09:00  INFO 29084 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
-2026-04-17T22:31:30.330+09:00  INFO 29084 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-17T22:31:30.371+09:00  WARN 29084 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-17T22:31:30.400+09:00  INFO 29084 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-17T22:31:31.355+09:00  INFO 29084 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-17T22:31:31.430+09:00  INFO 29084 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-17T22:31:32.510+09:00  INFO 29084 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
-2026-04-17T22:31:32.715+09:00  INFO 29084 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 1 件、アカウント 1 件を停止状態に戻しました
-2026-04-17T22:31:32.776+09:00  WARN 29084 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-17T22:31:32.816+09:00  INFO 29084 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-17T22:31:33.928+09:00  INFO 29084 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-04-17T22:31:34.062+09:00  INFO 29084 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
-2026-04-17T22:31:34.090+09:00  INFO 29084 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 10.3 seconds (process running for 11.047)
-2026-04-17T22:31:34.583+09:00  INFO 29084 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-17T22:31:34.584+09:00  INFO 29084 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-04-17T22:31:34.587+09:00  INFO 29084 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-19T20:17:50.562+09:00  INFO 38532 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-19T20:17:50.635+09:00  INFO 38532 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-19T20:17:51.915+09:00  INFO 38532 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-19T20:17:52.246+09:00  INFO 38532 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-19T20:17:52.316+09:00  WARN 38532 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-19T20:17:52.358+09:00  INFO 38532 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-19T20:17:53.629+09:00  INFO 38532 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-19T20:17:53.795+09:00  INFO 38532 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-19T20:17:53.824+09:00  INFO 38532 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 9.507 seconds (process running for 10.274)
+2026-04-19T20:17:54.372+09:00  INFO 38532 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-19T20:17:54.374+09:00  INFO 38532 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-19T20:17:54.377+09:00  INFO 38532 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-19T20:18:07.955+09:00  INFO 38532 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ▶️ プリセットの連続再生を開始します
+2026-04-19T20:18:07.978+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎬 [すず] の配信準備を開始します
+2026-04-19T20:18:19.354+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ✅ [すず] ログイン完了、設定画面へ移行
+2026-04-19T20:18:21.360+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
+2026-04-19T20:18:37.565+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎥 [すず] FFmpegによる映像送信を開始しました
+2026-04-19T20:18:52.972+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🏁 [すず] 配信枠を終了しました
+2026-04-19T20:18:52.976+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ❌ [すず] 試行失敗: Operation interrupted
+2026-04-19T20:18:52.977+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏹ [すず] の処理を安全に中断しました
+2026-04-19T20:18:53.000+09:00  INFO 38532 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏹ プリセットの再生がすべて終了・停止しました

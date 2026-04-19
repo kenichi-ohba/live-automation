@@ -164,6 +164,23 @@ public class Fc2AutomationWorker {
         } catch (Exception e) { return 0; }
     }
 
+    private int parseDurationString(String durStr) {
+        if (durStr == null || durStr.isBlank() || durStr.contains("失敗") || durStr.contains("エラー")) return 0;
+        int total = 0;
+        try {
+            String clean = durStr.replaceAll("⚠️音声なし", "").trim();
+            Matcher hM = Pattern.compile("(\\d+)時間").matcher(clean);
+            if (hM.find()) total += Integer.parseInt(hM.group(1)) * 3600;
+            
+            Matcher mM = Pattern.compile("(\\d+)分").matcher(clean);
+            if (mM.find()) total += Integer.parseInt(mM.group(1)) * 60;
+            
+            Matcher sM = Pattern.compile("(\\d+)秒").matcher(clean);
+            if (sM.find()) total += Integer.parseInt(sM.group(1));
+        } catch (Exception e) {}
+        return total;
+    }
+
     private void runStreamingLogic(Fc2Account account, boolean isPresetMode, String presetName) {
         var id = account.getId();
         stopSignals.put(id, false);
@@ -263,6 +280,7 @@ public class Fc2AutomationWorker {
                     .setPermissions(List.of("camera", "microphone", "notifications"))); 
             
             var page = context.newPage();
+            page.onDialog(dialog -> dialog.accept());
             
             checkStop(id, presetName);
             page.navigate("https://live.fc2.com/");
@@ -271,6 +289,9 @@ public class Fc2AutomationWorker {
             checkStop(id, presetName);
             page.locator("input[name='email']").fill(account.getEmail());
             page.locator("input[name='pass']").fill(account.getPass());
+            if (page.locator("input[name='keep_login']").isVisible()) {
+                page.locator("input[name='keep_login']").check();
+            }
             page.locator("input[name='image']").click();
             
             page.waitForTimeout(3000);
@@ -282,24 +303,16 @@ public class Fc2AutomationWorker {
 
             checkStop(id, presetName);
             
-            // ==============================================================
-            // 🌟 修正ポイント：キャンペーンページ等への遷移を検知しオプトアウト処理を実行
-            // ==============================================================
             page.waitForTimeout(2000); 
             if (!page.url().contains("live_start")) {
                 if (!presetName.isBlank()) addPresetLog(presetName, "⚠️ キャンペーンページを検知。オプトアウト処理を行います。");
                 try {
-                    // ゾロ目キャンペーン等の「次回から表示しない」チェックボックスがあればチェックする
-                    var jsCheckbox = "() => { let cb = document.querySelector('#noDisplayCampaign'); if(cb) cb.click(); }";
-                    page.evaluate(jsCheckbox);
+                    page.evaluate("() => { let cb = document.querySelector('#noDisplayCampaign'); if(cb) cb.click(); }");
                     page.waitForTimeout(1000);
-                    
-                    // 「サービスへログインする」等のスキップリンクを強制クリック
-                    forceClickByText(page, "サービスへログイン");
+                    page.evaluate("Array.from(document.querySelectorAll('a, button, span, div, label')).filter(el => el.textContent.includes('サービスへログイン')).forEach(btn => { if (btn.offsetParent !== null) btn.click(); });");
                     page.waitForTimeout(2000);
                 } catch (Exception e) {}
                 
-                // それでも遷移しない場合は強制的にURL移動
                 if (!page.url().contains("live_start")) {
                     page.navigate("https://live.fc2.com/live_start/");
                     page.waitForLoadState(LoadState.DOMCONTENTLOADED);
@@ -310,11 +323,17 @@ public class Fc2AutomationWorker {
             try {
                 page.locator("#title").waitFor(new Locator.WaitForOptions().setTimeout(10000));
             } catch (Exception e) {
-                throw new Exception("配信画面の読み込みに失敗しました（リダイレクト・タイムアウト）");
+                throw new Exception("配信画面の読み込みに失敗しました");
             }
 
             checkStop(id, presetName);
-            page.locator("#title").fill(account.getTitle() != null && !account.getTitle().isBlank() ? account.getTitle() : "自動配信");
+            
+            // 配信タイトルがブランクの場合はアカウント名をセットする
+            String streamTitle = (account.getTitle() != null && !account.getTitle().isBlank()) 
+                                 ? account.getTitle() 
+                                 : account.getAccountName();
+            page.locator("#title").fill(streamTitle);
+            
             page.locator("#info").fill(account.getInfo() != null ? account.getInfo() : "");
             
             var categoryValue = (account.getCategory() == null || account.getCategory() == 0) ? "5" : String.valueOf(account.getCategory());
@@ -329,26 +348,49 @@ public class Fc2AutomationWorker {
                 page.locator("#feesetting1").check();
                 page.locator("#feeinterval").fill(String.valueOf(account.getFeeinterval()));
                 page.locator("#feeamount").fill(String.valueOf(account.getFeeamount()));
+            } else {
+                page.locator("#feesetting0").check();
             }
 
             checkStop(id, presetName);
             
             page.locator("#submit").click();
-            page.waitForLoadState(LoadState.NETWORKIDLE);
-            page.waitForTimeout(3000); 
+            page.waitForTimeout(2000);
+            
+            try {
+                if (page.locator("text='利用規約に同意して配信する'").count() > 0) {
+                    page.locator("text='利用規約に同意して配信する'").first().evaluate("node => node.click()");
+                    page.waitForTimeout(1000);
+                }
+            } catch(Exception e) {}
 
-            pollAndClick(page, "#age_ok_btn", 5000);
-            pollAndClick(page, ".js-agreeBtn", 5000);
-            forceClickByText(page, "利用規約に同意して配信する");
-
+            page.waitForLoadState(LoadState.DOMCONTENTLOADED);
             var broadcastUrl = page.url();
             var latest = repository.findById(id).orElse(account);
             latest.setBroadcastUrl(broadcastUrl);
             repository.save(latest);
 
+            page.waitForTimeout(3000);
+            checkStop(id, presetName);
+
+            try {
+                if (page.locator("#age_ok_btn").count() > 0 && page.locator("#age_ok_btn").isVisible()) {
+                    page.locator("#age_ok_btn").evaluate("node => node.click()");
+                    page.waitForTimeout(2000);
+                }
+            } catch(Exception e) {}
+
+            try {
+                if (page.locator(".js-yesBtn").count() > 0) {
+                    page.locator(".js-yesBtn").first().evaluate("node => node.click()");
+                    page.waitForTimeout(1000);
+                }
+            } catch(Exception e) {}
+
+            checkStop(id, presetName);
+
             streamReadyFlags.put(id, false);
             startFfmpegProcess(account);
-
             if (!presetName.isBlank()) addPresetLog(presetName, "🎥 [" + accName + "] FFmpegによる映像送信を開始しました");
 
             int waited = 0;
@@ -358,30 +400,63 @@ public class Fc2AutomationWorker {
                 waited++;
             }
 
-            pollAndClick(page, ".js-toolStartBtn", 5000);
-            page.waitForTimeout(1000); 
-            pollAndClick(page, ".js-popupWindow .js-yesBtn", 5000);
+            try {
+                if (page.locator(".js-toolStartBtn").count() > 0) {
+                    page.locator(".js-toolStartBtn").evaluate("node => node.click()");
+                    page.waitForTimeout(3000);
+                }
+            } catch(Exception e) {}
 
             int targetSeconds = ((account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() : 0) * 60) + 
                                (account.getPaidSwitchSecond() != null ? account.getPaidSwitchSecond() : 0);
             boolean switched = (targetSeconds <= 0);
 
+            int videoDurationSec = parseDurationString(account.getVideoDuration());
+            int timeoutSec = (videoDurationSec > 0) ? videoDurationSec + 300 : 7200; 
+            long processStartTime = System.currentTimeMillis();
+
             Process ffmpegProcess = activeProcesses.get(id);
             
             while (!isStopRequested(id, presetName) && ffmpegProcess != null && ffmpegProcess.isAlive()) {
+                
+                long elapsedSec = (System.currentTimeMillis() - processStartTime) / 1000;
+                if (elapsedSec > timeoutSec) {
+                    if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 通信エラー等によるフリーズを検知。強制終了して次へ進みます。");
+                    killProcessTree(ffmpegProcess);
+                    break;
+                }
+
                 if (!switched && targetSeconds > 0) {
                     var vTimeStr = latestVideoTimes.getOrDefault(id, "00:00:00");
                     int currentSeconds = parseTimeToSeconds(vTimeStr);
                     
                     if (currentSeconds >= targetSeconds) {
                         try {
-                            page.evaluate("() => { let btn = document.querySelector('.js-switchFeeBtn'); if(btn) btn.click(); }");
-                            Thread.sleep(1000);
-                            pollAndClick(page, ".js-popupWindow .js-yesBtn", 5000);
+                            boolean isButtonVisible = (boolean) page.evaluate("() => { let btn = document.querySelector('.js-switchFeeBtn'); return btn && btn.offsetParent !== null; }");
                             
-                            if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 有料放送へ切り替え完了 (再生時間: " + vTimeStr + ")");
+                            if (isButtonVisible) {
+                                page.evaluate("() => { let btn = document.querySelector('.js-switchFeeBtn'); if(btn) btn.click(); }");
+                                Thread.sleep(1000);
+                                
+                                try {
+                                    if (page.locator(".js-popupWindow .js-yesBtn").count() > 0) {
+                                        page.locator(".js-popupWindow .js-yesBtn").first().evaluate("node => node.click()");
+                                    }
+                                } catch(Exception e) {}
+                                
+                                Thread.sleep(2000);
+                                boolean stillVisible = (boolean) page.evaluate("() => { let btn = document.querySelector('.js-switchFeeBtn'); return btn && btn.offsetParent !== null; }");
+                                
+                                if (!stillVisible) {
+                                    switched = true;
+                                    if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 有料放送へ切り替え完了 (再生時間: " + vTimeStr + ")");
+                                } else {
+                                    if (!presetName.isBlank()) addPresetLog(presetName, "⚠️ [" + accName + "] 切替失敗を検知。次回の通信でリトライします。");
+                                }
+                            } else {
+                                switched = true;
+                            }
                         } catch (Exception e) {}
-                        switched = true;
                     }
                 }
                 Thread.sleep(1000);

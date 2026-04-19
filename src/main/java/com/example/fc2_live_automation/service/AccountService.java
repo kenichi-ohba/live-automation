@@ -29,7 +29,7 @@ public class AccountService {
 
     public void saveAccount(Fc2Account account) {
         
-        // 🌟 追加：編集時にパスワードやストリームキーが空欄なら、元のDBデータを維持して上書きを防ぐ
+        // 編集時にパスワードやストリームキーが空欄なら、元のDBデータを維持して上書きを防ぐ
         if (account.getId() != null) {
             Fc2Account existing = repository.findById(account.getId()).orElse(null);
             if (existing != null) {
@@ -51,11 +51,18 @@ public class AccountService {
         if (account.getCurrentLoop() == null) {
             account.setCurrentLoop(0);
         }
-        if (account.getAccountName() == null || account.getAccountName().trim().isEmpty()) {
-            account.setAccountName(account.getTitle() != null ? account.getTitle() : "無題のアカウント");
+
+        // タイトルとアカウント名の自動設定ロジック
+        if (account.getTitle() != null && !account.getTitle().trim().isEmpty()) {
+            // 配信タイトルが入力されている場合は、アカウント名もそれに合わせる
+            account.setAccountName(account.getTitle());
+        } else if (account.getAccountName() == null || account.getAccountName().trim().isEmpty()) {
+            // 両方空欄の場合は、登録されているアカウント数を数えて連番で命名する（重複防止）
+            long currentCount = repository.count();
+            account.setAccountName("アカウント" + (currentCount + 1));
         }
 
-        // 動画の解析のみ実行
+        // 動画の解析を実行
         account.setVideoDuration(analyzeVideo(account.getVideoPath()));
         repository.save(account);
     }
@@ -74,9 +81,6 @@ public class AccountService {
         worker.stopStreamingProcess(id);
     }
 
-    // ==========================================
-    // ffprobe 動画解析
-    // ==========================================
     private String analyzeVideo(String videoPath) {
         if (videoPath == null || videoPath.trim().isEmpty()) return "未設定";
         try {
