@@ -103,7 +103,7 @@
                                 <ul id="selectedList" class="space-y-2 overflow-y-auto flex-grow pr-1">
                                     <th:block th:each="acc : ${playlist}">
                                         <li class="bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center" 
-                                            th:data-id="${acc.id}" th:data-name="${acc.accountName}" th:data-preset="${acc.presetName}">
+                                            th:data-id="${acc.id}" th:data-name="${acc.accountName}" th:data-preset="${acc.presetName != null ? acc.presetName : ''}">
                                             <div class="flex items-center w-full">
                                                 <span class="mr-2 text-gray-400 cursor-move">↕</span>
                                                 <div class="flex flex-col w-full pr-2">
@@ -134,7 +134,6 @@
     </div>
 
     <script th:inline="javascript">
-        // 🌟 追加: ドラッグ＆ドロップを有効化
         document.addEventListener('DOMContentLoaded', () => {
             Sortable.create(document.getElementById('selectedList'), {
                 animation: 150,
@@ -142,20 +141,29 @@
                 ghostClass: 'bg-indigo-100'
             });
             updateCount();
+            filterCandidates(); // 🌟 画面を開いた瞬間にフィルタリングを適用
         });
 
-        /* 🌟 検索・ソート・登録状況フィルタリング機能 */
+        /* 🌟 検索・ソート・登録状況フィルタリング機能の完全修正版 */
         function filterCandidates() {
             const query = document.getElementById('candidateSearch').value.toLowerCase();
             const filterType = document.getElementById('presetFilter').value;
+            const currentPreset = document.getElementById('presetName').value; // 現在編集中のプリセット名を取得
 
             document.querySelectorAll('#availableList .candidate-item').forEach(li => {
                 const name = li.getAttribute('data-name').toLowerCase();
-                const preset = li.getAttribute('data-preset');
-                
+                let preset = li.getAttribute('data-preset') || '';
+                if (preset === 'null') preset = ''; // 万が一のnull文字列対策
+
                 const matchSearch = name.includes(query);
-                const matchPreset = filterType === 'ALL' || (filterType === 'UNASSIGNED' && preset === '');
                 
+                // 🌟 未登録の正しい判断基準
+                // 1. 元々どこにも属していない (presetが空)
+                // 2. 現在編集中のプリセットに属していたが、今リストから外された (presetがcurrentPresetと同じ)
+                const isUnassigned = (preset.trim() === '' || preset === currentPreset);
+
+                const matchPreset = filterType === 'ALL' || (filterType === 'UNASSIGNED' && isUnassigned);
+
                 li.style.display = (matchSearch && matchPreset) ? '' : 'none';
             });
         }
@@ -172,13 +180,12 @@
             items.forEach(li => ul.appendChild(li));
         }
 
-        /* 🌟 リスト移動ロジック */
         function addToList(item) {
             const selectedList = document.getElementById('selectedList');
             if (selectedList.children.length >= 10) { alert('最大10個までです。'); return; }
             item.parentElement.removeChild(item);
             
-            const presetName = item.getAttribute('data-preset');
+            const presetName = item.getAttribute('data-preset') || '';
             const id = item.getAttribute('data-id');
             const name = item.getAttribute('data-name');
             
@@ -209,7 +216,10 @@
         function removeFromList(item) {
             item.parentElement.removeChild(item);
             const availableList = document.getElementById('availableList');
-            const presetName = item.getAttribute('data-preset');
+            
+            let presetName = item.getAttribute('data-preset') || '';
+            if (presetName === 'null') presetName = '';
+            const currentPreset = document.getElementById('presetName').value;
             
             const li = document.createElement('li');
             li.className = "candidate-item bg-white p-2 rounded shadow-sm border border-gray-200 flex justify-between items-center cursor-pointer hover:bg-blue-50 transition";
@@ -217,7 +227,9 @@
             li.setAttribute('data-name', item.getAttribute('data-name'));
             li.setAttribute('data-preset', presetName);
             
-            const presetHtml = presetName ? `<div class="text-[10px] text-gray-500 mt-0.5 truncate">📁 ${presetName}</div>` : '';
+            // 🌟 修正：現在のプリセットと同じなら、リストから外した時点で「未登録」扱いにするため📁マークを消す
+            const isCurrentlyUnassigned = (presetName.trim() === '' || presetName === currentPreset);
+            const presetHtml = !isCurrentlyUnassigned ? `<div class="text-[10px] text-gray-500 mt-0.5 truncate">📁 ${presetName}</div>` : '';
             
             li.innerHTML = `
                 <div class="flex flex-col w-full pr-2">
@@ -228,7 +240,7 @@
             `;
             availableList.appendChild(li); 
             updateCount(); 
-            filterCandidates(); 
+            filterCandidates(); // 🌟 削除直後にも正しい基準でフィルタリングを走らせる
         }
 
         function moveUp(item) { const prev = item.previousElementSibling; if (prev) item.parentElement.insertBefore(item, prev); }
