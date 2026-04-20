@@ -11,8 +11,11 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -268,7 +271,6 @@ public class Fc2AutomationWorker {
             
             page.waitForTimeout(2000); 
             if (!page.url().contains("live_start")) {
-                if (!presetName.isBlank()) addPresetLog(presetName, "⚠️ キャンペーンページを検知。オプトアウト処理を行います。");
                 try {
                     page.evaluate("() => { let cb = document.querySelector('#noDisplayCampaign'); if(cb) cb.click(); }");
                     page.waitForTimeout(1000);
@@ -315,9 +317,6 @@ public class Fc2AutomationWorker {
 
             checkStop(id, presetName);
             
-            // =================================================================================
-            // 🌟 処理順の固定：設定保存と事前モーダルの突破（評価式での強制クリック）
-            // =================================================================================
             page.locator("#submit").click();
             page.waitForTimeout(2000);
             
@@ -355,9 +354,6 @@ public class Fc2AutomationWorker {
 
             checkStop(id, presetName);
 
-            // =================================================================================
-            // 🌟 映像送信の開始
-            // =================================================================================
             streamReadyFlags.put(id, false);
             startFfmpegProcess(account);
             if (!presetName.isBlank()) addPresetLog(presetName, "🎥 [" + accName + "] FFmpegによる映像送信を開始しました");
@@ -369,9 +365,6 @@ public class Fc2AutomationWorker {
                 waited++;
             }
 
-            // =================================================================================
-            // 🌟 意図的な「タメ」：低スペックPCでも動画が読み込まれるよう15秒待つ
-            // =================================================================================
             if (!presetName.isBlank()) {
                 addPresetLog(presetName, "☕ [" + accName + "] 映像のバッファリングのため15秒待機します...");
             }
@@ -380,9 +373,6 @@ public class Fc2AutomationWorker {
                 Thread.sleep(1000);
             }
 
-            // =================================================================================
-            // 🌟 配信開始ボタンのクリックと事後モーダルの突破
-            // =================================================================================
             int startBtnWaitMs = 30000;
             if (attempt == 2) startBtnWaitMs = 45000;
             else if (attempt >= 3) startBtnWaitMs = 60000;
@@ -428,8 +418,78 @@ public class Fc2AutomationWorker {
             }
 
             // =================================================================================
-            // 🌟 原点回帰：有料切替ロジック（初期コードの一本道・ストレート処理）
+            // 🌟🌟🌟 新規追加：次回配信時のNGワード自動登録予約の実行（実際の配信画面で行う）
             // =================================================================================
+            File ngCsvFile = java.nio.file.Paths.get(System.getProperty("user.dir"), "ng_csvs", "account_" + id + ".csv").toFile();
+            if (ngCsvFile.exists()) {
+                addLog(id, "🛡️ [" + accName + "] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...");
+                if (!presetName.isBlank()) addPresetLog(presetName, "🛡️ [" + accName + "] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...");
+                
+                try {
+                    List<String> ngWords = new ArrayList<>();
+                    List<String> lines = Files.readAllLines(ngCsvFile.toPath(), StandardCharsets.UTF_8);
+                    for (String line : lines) {
+                        for (String word : line.split(",")) {
+                            if (!word.trim().isEmpty()) ngWords.add(word.trim());
+                        }
+                    }
+                    
+                    if (!ngWords.isEmpty()) {
+                        // ブロック設定のタブを開く
+                        page.evaluate("() => { let icon = document.querySelector('use[*|href=\"#icon-tabBlock\"]'); if(icon) { let btn = icon.closest('li'); if(btn) btn.click(); } }");
+                        page.waitForTimeout(1000);
+                        
+                        if (page.locator("#js-blockList-ngComment-tab").count() > 0) {
+                            page.locator("#js-blockList-ngComment-tab").click();
+                            page.waitForTimeout(1000);
+                        }
+
+                        // 💡 人間と同じ「確実なキーボード入力」を再現（安定性強化版）
+                        if (page.locator(".js-addNgCommentText").count() > 0 && page.locator(".js-addCommentBtn").count() > 0) {
+                            int count = 0;
+                            for (String word : ngWords) {
+                                try {
+                                    // 毎回最新の要素を取得して確実に入力（DOMの更新ズレ対策）
+                                    page.locator(".js-addNgCommentText").first().fill(word); 
+                                    page.locator(".js-addCommentBtn").first().click();
+                                    
+                                    // 🌟 修正：FC2サーバーが確実に保存処理を終えるのを待つため、0.5秒待機
+                                    page.waitForTimeout(500); 
+                                    
+                                    count++;
+                                    // 🌟 修正：50件処理するごとに、サーバーを休ませるため2秒待機（より安全に）
+                                    if (count % 50 == 0) {
+                                        addLog(id, "⏳ [" + accName + "] サーバー負荷軽減のため一時待機中... (" + count + "件完了)");
+                                        page.waitForTimeout(2000);
+                                    }
+                                } catch (Exception innerE) {
+                                    // 万が一1文字失敗しても、プログラム全体を止めずに次の文字へ進む
+                                    logger.warn("⚠️ [" + accName + "] '" + word + "' の登録をスキップしました: " + innerE.getMessage());
+                                }
+                            }
+                        } else {
+                            addLog(id, "⚠️ [" + accName + "] NGワードの入力欄が見つかりませんでした。");
+                        }
+                        
+                        page.waitForTimeout(1000); // 念のためFC2側の処理完了を待つ
+                        
+                        // 登録が終わったら設定ウィンドウを閉じておく
+                        try {
+                            page.evaluate("() => { let closeBtn = document.querySelector('.setting_close a'); if(closeBtn) closeBtn.click(); }");
+                        } catch(Exception e) {}
+                    }
+                    
+                    addLog(id, "✅ [" + accName + "] NGワードの一括登録完了。予約ファイル（CSV）を削除します。");
+                    if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] NGワードの一括登録完了。予約ファイル（CSV）を削除します。");
+                    ngCsvFile.delete(); // 次回は実行されないようにファイルを削除
+                    
+                } catch (Exception e) {
+                    addLog(id, "❌ [" + accName + "] NG登録エラー: " + e.getMessage());
+                    if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] NG登録エラー: " + e.getMessage());
+                }
+            }
+            // =================================================================================
+
             int targetMinute = account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() : 0;
             int targetSecond = account.getPaidSwitchSecond() != null ? account.getPaidSwitchSecond() : 0;
             int totalSeconds = (targetMinute * 60) + targetSecond;
@@ -463,7 +523,6 @@ public class Fc2AutomationWorker {
                     break;
                 }
 
-                // 🌟 初期の大成功コード：時間が来たら「1回だけ」確実に3ステップで切り替える（無限ループの排除）
                 if (!hasSwitchedToPaid && switchTargetTime > 0) {
                     long now = System.currentTimeMillis();
                     if (now >= switchTargetTime) {
@@ -491,7 +550,7 @@ public class Fc2AutomationWorker {
                             if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 切替処理中にエラー: " + e.getMessage());
                         }
                         
-                        hasSwitchedToPaid = true; // 🌟 確実にフラグを立てて二度と実行しない
+                        hasSwitchedToPaid = true;
                     }
                 }
                 Thread.sleep(1000);
@@ -528,7 +587,6 @@ public class Fc2AutomationWorker {
             command.add("-i"); command.add("anullsrc"); 
         }
         
-        // 🌟 超軽量化：低スペックPCでもバッファリングが間に合うように -preset ultrafast に変更
         command.addAll(List.of("-c:v", "libx264", "-preset", "ultrafast", "-b:v", "2000k", 
                                "-maxrate", "2000k", "-bufsize", "4000k", "-pix_fmt", "yuv420p", "-g", "60", 
                                "-c:a", "aac", "-b:a", "128k", "-ar", "44100"));

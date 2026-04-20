@@ -22,6 +22,33 @@
     </nav>
 
     <div class="container mx-auto px-4 py-8">
+        
+        <div th:if="${message}" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-sm flex items-center" role="alert">
+            <span class="font-bold" th:text="${message}"></span>
+        </div>
+        <div th:if="${error}" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded shadow-sm flex items-center" role="alert">
+            <span class="font-bold" th:text="${error}"></span>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-blue-500">
+            <h2 class="text-xl font-bold text-gray-700 mb-4 flex items-center">
+                <span class="mr-2">📦</span> アカウントの一括管理 (CSV)
+            </h2>
+            <div class="flex flex-col md:flex-row gap-4 items-start md:items-center">
+                <a th:href="@{/accounts/export}" class="border-2 border-blue-500 text-blue-600 hover:bg-blue-50 font-bold py-2 px-5 rounded transition whitespace-nowrap flex items-center">
+                    ⬇️ 現在のアカウントをCSVでダウンロード
+                </a>
+                
+                <form th:action="@{/accounts/import}" method="post" enctype="multipart/form-data" class="flex flex-col sm:flex-row gap-2 w-full md:w-auto mt-2 md:mt-0">
+                    <input type="file" name="csvFile" class="border border-gray-300 rounded px-3 py-2 bg-gray-50 text-sm w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" accept=".csv" required>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded shadow transition whitespace-nowrap flex items-center justify-center">
+                        ⬆️ CSVを読み込む
+                    </button>
+                </form>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 font-bold">※インポート時、メール・動画・アカウント名が一致するものは上書き更新され、新しいものは追加されます。</p>
+        </div>
+
         <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-6 space-y-4 md:space-y-0">
             <h2 class="text-2xl font-bold text-gray-700 flex items-center">
                 <span class="mr-2">🎞️</span> 登録済みアカウント（素材）一覧

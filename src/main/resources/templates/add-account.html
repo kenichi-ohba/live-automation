@@ -117,12 +117,30 @@
                 </div>
             </div>
 
-            <div class="flex justify-center pt-4 pb-8">
+            <div class="flex justify-center pt-4 pb-4">
                 <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-12 rounded-full shadow-lg text-lg transition duration-200">
                     アカウント素材を保存する
                 </button>
             </div>
         </form>
+
+        <div th:if="${account.id != null}" class="bg-red-50 shadow-md rounded-lg p-6 border-l-4 border-red-500 mt-4">
+            <h2 class="text-xl font-bold mb-2 border-b border-red-200 pb-2 text-red-800">5. NGワード自動登録（オプション）</h2>
+            <p class="text-sm text-red-600 font-bold mb-4">※次回配信時に1回だけ、指定したCSVのNGワードを全自動で登録します。</p>
+            
+            <form th:action="@{/accounts/{id}/ng-words(id=${account.id})}" method="post" enctype="multipart/form-data" class="flex flex-col md:flex-row gap-4 items-center bg-white p-4 rounded shadow-sm">
+                <div class="flex-grow w-full">
+                    <label class="block text-sm font-bold mb-1 text-gray-700">NGワードリスト (CSVファイル)</label>
+                    <input type="file" name="ngCsvFile" class="form-control w-full border rounded px-3 py-2 bg-gray-50" accept=".csv" required title="NGワードのCSVを選択してください">
+                </div>
+                <div class="mt-4 md:mt-6">
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded shadow transition duration-200 text-nowrap">
+                        🛡️ 次回配信で登録予約
+                    </button>
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <script>

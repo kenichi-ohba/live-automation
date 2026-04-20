@@ -5,6 +5,8 @@ import com.example.fc2_live_automation.model.Fc2Preset;
 import com.example.fc2_live_automation.service.AccountService;
 import com.example.fc2_live_automation.repository.Fc2PresetRepository;
 import com.example.fc2_live_automation.repository.Fc2AccountRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -156,5 +158,64 @@ public class AccountController {
     public String stopStreaming(@PathVariable Long id) {
         accountService.stopStreaming(id);
         return "redirect:/";
+    }
+
+    // ⬇️ 必要なサービスを呼び出せるように宣言を追加（すでに宣言されている場合は不要です）
+    @Autowired
+    private com.example.fc2_live_automation.service.AccountCsvService accountCsvService;
+    
+    @Autowired
+    private com.example.fc2_live_automation.service.Fc2AutomationWorker fc2AutomationWorker;
+
+    // ====================================================================
+    // 🌟 新機能：アカウントCSVインポート（画面からのアップロード受付）
+    // ====================================================================
+    @PostMapping("/accounts/import")
+    public String importAccounts(@org.springframework.web.bind.annotation.RequestParam("csvFile") org.springframework.web.multipart.MultipartFile file, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+        try {
+            accountCsvService.importAccountsFromCsv(file);
+            redirectAttributes.addFlashAttribute("message", "✅ CSVのインポートが完了しました！");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "❌ インポートに失敗しました: " + e.getMessage());
+        }
+        return "redirect:/accounts"; // 一覧画面にリダイレクト
+    }
+
+    // ====================================================================
+    // 🌟 新機能：アカウントCSVエクスポート（画面からのダウンロード受付）
+    // ====================================================================
+    @GetMapping("/accounts/export")
+    public void exportAccounts(jakarta.servlet.http.HttpServletResponse response) throws java.io.IOException {
+        response.setContentType("text/csv; charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment; filename=\"accounts_export.csv\"");
+        try (java.io.PrintWriter writer = response.getWriter()) {
+            accountCsvService.exportAccountsToCsv(writer);
+        }
+    }
+
+    // ====================================================================
+    // 🌟 新機能：NGワードの自動登録（画面からの実行受付）
+    // ====================================================================
+    @PostMapping("/accounts/{id}/ng-words")
+    public String registerNgWords(@org.springframework.web.bind.annotation.PathVariable Long id, @org.springframework.web.bind.annotation.RequestParam("ngCsvFile") org.springframework.web.multipart.MultipartFile ngCsvFile, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+        try {
+            com.example.fc2_live_automation.model.Fc2Account account = accountRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("無効なアカウントIDです: " + id));
+            
+            // 🌟 修正：Tomcatの一時フォルダの迷子を防ぐため、プロジェクトルートを基準に「絶対パス」を指定
+            java.nio.file.Path dirPath = java.nio.file.Paths.get(System.getProperty("user.dir"), "ng_csvs");
+            if (!java.nio.file.Files.exists(dirPath)) {
+                java.nio.file.Files.createDirectories(dirPath);
+            }
+            java.nio.file.Path savePath = dirPath.resolve("account_" + id + ".csv");
+            
+            // 🌟 修正：transferToの代わりに、より安全な標準コピー機能を使用（上書き保存）
+            java.nio.file.Files.copy(ngCsvFile.getInputStream(), savePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            
+            redirectAttributes.addFlashAttribute("message", "✅ [" + account.getAccountName() + "] のNGワード予約が完了しました！次回の実際の配信開始時に、1回だけ自動で全登録されます。");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "❌ NGワードの予約に失敗しました: " + e.getMessage());
+        }
+        return "redirect:/accounts";
     }
 }
