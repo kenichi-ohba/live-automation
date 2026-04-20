@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
@@ -124,17 +123,6 @@ public class Fc2AutomationWorker {
 
     private void checkStop(Long id, String presetName) throws InterruptedException {
         if (isStopRequested(id, presetName)) throw new InterruptedException("STOPPED");
-    }
-
-    private int parseTimeToSeconds(String timeStr) {
-        if (timeStr == null || timeStr.isBlank() || timeStr.equals("取得不可")) return 0;
-        try {
-            var parts = timeStr.split(":");
-            int h = Integer.parseInt(parts[0]);
-            int m = Integer.parseInt(parts[1]);
-            int s = Integer.parseInt(parts[2]);
-            return h * 3600 + m * 60 + s;
-        } catch (Exception e) { return 0; }
     }
 
     private int parseDurationString(String durStr) {
@@ -328,7 +316,7 @@ public class Fc2AutomationWorker {
             checkStop(id, presetName);
             
             // =================================================================================
-            // 🌟 原点回帰：配信設定の保存 ＆ 事前モーダル（利用規約・マイニング）の確実な突破
+            // 🌟 処理順の固定：設定保存と事前モーダルの突破（評価式での強制クリック）
             // =================================================================================
             page.locator("#submit").click();
             page.waitForTimeout(2000);
@@ -337,7 +325,6 @@ public class Fc2AutomationWorker {
                 if (page.locator("text='利用規約に同意して配信する'").count() > 0) {
                     page.locator("text='利用規約に同意して配信する'").first().evaluate("node => node.click()");
                 } else if (page.locator(".js-agreeBtn").count() > 0) {
-                    // 視聴・マイニング系の同意ボタン（FC2の文言揺れに対応）
                     page.locator(".js-agreeBtn").first().evaluate("node => node.click()");
                 }
                 page.waitForTimeout(1500);
@@ -360,7 +347,6 @@ public class Fc2AutomationWorker {
             } catch(Exception e) {}
 
             try {
-                // スナップショット等のはい・いいえモーダル
                 if (page.locator(".js-yesBtn").count() > 0) {
                     page.locator(".js-yesBtn").first().evaluate("node => node.click()");
                     page.waitForTimeout(1500);
@@ -370,7 +356,7 @@ public class Fc2AutomationWorker {
             checkStop(id, presetName);
 
             // =================================================================================
-            // 🌟 FFmpegの映像送信開始
+            // 🌟 映像送信の開始
             // =================================================================================
             streamReadyFlags.put(id, false);
             startFfmpegProcess(account);
@@ -383,12 +369,26 @@ public class Fc2AutomationWorker {
                 waited++;
             }
 
+            // =================================================================================
+            // 🌟 意図的な「タメ」：低スペックPCでも動画が読み込まれるよう15秒待つ
+            // =================================================================================
+            if (!presetName.isBlank()) {
+                addPresetLog(presetName, "☕ [" + accName + "] 映像のバッファリングのため15秒待機します...");
+            }
+            for (int j = 0; j < 15; j++) {
+                checkStop(id, presetName);
+                Thread.sleep(1000);
+            }
+
+            // =================================================================================
+            // 🌟 配信開始ボタンのクリックと事後モーダルの突破
+            // =================================================================================
             int startBtnWaitMs = 30000;
             if (attempt == 2) startBtnWaitMs = 45000;
             else if (attempt >= 3) startBtnWaitMs = 60000;
 
             if (!presetName.isBlank()) {
-                addPresetLog(presetName, "⏳ 映像の反映を待機します（最大 " + (startBtnWaitMs / 1000) + "秒 / 試行 " + attempt + "回目）...");
+                addPresetLog(presetName, "⏳ 配信開始ボタンを待機します（最大 " + (startBtnWaitMs / 1000) + "秒 / 試行 " + attempt + "回目）...");
             }
 
             long btnWaitEnd = System.currentTimeMillis() + startBtnWaitMs;
@@ -401,9 +401,8 @@ public class Fc2AutomationWorker {
                     if (Boolean.TRUE.equals(isBtnVisible)) {
                         page.evaluate("() => { document.querySelector('.js-toolStartBtn').click(); }");
                         isToolStartBtnClicked = true;
-                        page.waitForTimeout(3000); // クリック後にモーダルが出るまでの猶予
+                        page.waitForTimeout(3000); 
                         
-                        // 🌟 原点回帰：配信開始後の遅延モーダルもここで確実につぶす
                         try {
                             if (page.locator("#age_ok_btn").count() > 0 && page.locator("#age_ok_btn").isVisible()) {
                                 page.locator("#age_ok_btn").evaluate("node => node.click()");
@@ -429,13 +428,12 @@ public class Fc2AutomationWorker {
             }
 
             // =================================================================================
-            // 🌟 原点回帰：有料切替ロジック（初期の大成功していたシンプルなタイマー式に完全復元）
+            // 🌟 原点回帰：有料切替ロジック（初期コードの一本道・ストレート処理）
             // =================================================================================
             int targetMinute = account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() : 0;
             int targetSecond = account.getPaidSwitchSecond() != null ? account.getPaidSwitchSecond() : 0;
             int totalSeconds = (targetMinute * 60) + targetSecond;
             
-            // 操作ラグの相殺（デフォルト5秒前）
             int lagOffset = account.getSwitchLagSeconds() != null ? account.getSwitchLagSeconds() : 5;
             int triggerSeconds = totalSeconds - lagOffset;
             if (triggerSeconds < 0) { triggerSeconds = 0; }
@@ -444,7 +442,6 @@ public class Fc2AutomationWorker {
             boolean hasSwitchedToPaid = false;
             
             if (totalSeconds > 0) {
-                // 配信ボタンを押した現在時刻を基準に、発動時間をセットする
                 switchTargetTime = System.currentTimeMillis() + (triggerSeconds * 1000L);
                 if (!presetName.isBlank()) addPresetLog(presetName, "⏳ 有料切替タイマーセット: " + totalSeconds + "秒 (ラグ相殺のため " + triggerSeconds + "秒後に自動実行)");
             } else {
@@ -466,7 +463,7 @@ public class Fc2AutomationWorker {
                     break;
                 }
 
-                // 🌟 初期の大成功コード：時間が来たら「1回だけ」確実に3ステップで切り替える（無限ループ防止）
+                // 🌟 初期の大成功コード：時間が来たら「1回だけ」確実に3ステップで切り替える（無限ループの排除）
                 if (!hasSwitchedToPaid && switchTargetTime > 0) {
                     long now = System.currentTimeMillis();
                     if (now >= switchTargetTime) {
@@ -474,17 +471,14 @@ public class Fc2AutomationWorker {
                             if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 時間が来ました。有料切替操作を開始します...");
                             
                             if (page.locator(".js-switchFeeBtn").count() > 0) {
-                                // 1. 切替ボタンをクリック
                                 page.locator(".js-switchFeeBtn").first().evaluate("node => node.click()");
                                 Thread.sleep(1500);
                                 
-                                // 2. 「はい（切り替えますか？）」をクリック
                                 if (page.locator(".js-popupWindow .js-yesBtn").count() > 0) {
                                     page.locator(".js-popupWindow .js-yesBtn").first().evaluate("node => node.click()");
                                 }
                                 Thread.sleep(1500);
                                 
-                                // 3. 「OK（切り替えました）」をクリック
                                 if (page.locator(".js-popupWindow .js-yesBtn").count() > 0) {
                                     page.locator(".js-popupWindow .js-yesBtn").first().evaluate("node => node.click()");
                                 }
@@ -497,8 +491,7 @@ public class Fc2AutomationWorker {
                             if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 切替処理中にエラー: " + e.getMessage());
                         }
                         
-                        // 🌟 確実にフラグを立てて、このループ（切替処理）には二度と入らないようにする（無限ループの完全防止）
-                        hasSwitchedToPaid = true;
+                        hasSwitchedToPaid = true; // 🌟 確実にフラグを立てて二度と実行しない
                     }
                 }
                 Thread.sleep(1000);
@@ -535,7 +528,8 @@ public class Fc2AutomationWorker {
             command.add("-i"); command.add("anullsrc"); 
         }
         
-        command.addAll(List.of("-c:v", "libx264", "-preset", "veryfast", "-b:v", "2000k", 
+        // 🌟 超軽量化：低スペックPCでもバッファリングが間に合うように -preset ultrafast に変更
+        command.addAll(List.of("-c:v", "libx264", "-preset", "ultrafast", "-b:v", "2000k", 
                                "-maxrate", "2000k", "-bufsize", "4000k", "-pix_fmt", "yuv420p", "-g", "60", 
                                "-c:a", "aac", "-b:a", "128k", "-ar", "44100"));
         
