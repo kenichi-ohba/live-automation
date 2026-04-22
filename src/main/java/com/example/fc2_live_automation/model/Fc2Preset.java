@@ -1,9 +1,8 @@
 package com.example.fc2_live_automation.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Fc2Preset {
@@ -12,34 +11,51 @@ public class Fc2Preset {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String presetName;          // プリセット名（例：深夜用プレイリスト）
-    private String accountIds;          // 再生するアカウントのIDリスト（例："1,4,2"）
+    private String presetName;
+    private int loopCount;
+    private boolean shuffleMode;
+    private int loopWaitMinutes;
+    private String status;
+    private String scheduledStartTime;
     
-    private int loopCount = 0;          // 全体のループ回数（0=無限）
-    private Integer currentLoop = 0;    // 現在のループ回数
-    private Integer loopWaitMinutes = 0;// 1周終わったあとの休憩時間（分）
-    private String scheduledStartTime;  // 予約日時
-    
-    private boolean shuffleMode = false;// 🌟 提案2: シャッフル再生モード
-    private String status = "IDLE";     // 稼働ステータス
+    // 🌟 追加：現在のループ実行回数を保持するフィールド
+    private int currentLoop;
 
-    // Getter & Setter
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "preset_accounts",
+        joinColumns = @JoinColumn(name = "preset_id"),
+        inverseJoinColumns = @JoinColumn(name = "account_id")
+    )
+    private List<Fc2Account> accounts = new ArrayList<>();
+
+    // --- Getters and Setters ---
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public String getPresetName() { return presetName; }
     public void setPresetName(String presetName) { this.presetName = presetName; }
-    public String getAccountIds() { return accountIds; }
-    public void setAccountIds(String accountIds) { this.accountIds = accountIds; }
+
     public int getLoopCount() { return loopCount; }
     public void setLoopCount(int loopCount) { this.loopCount = loopCount; }
-    public Integer getCurrentLoop() { return currentLoop; }
-    public void setCurrentLoop(Integer currentLoop) { this.currentLoop = currentLoop; }
-    public Integer getLoopWaitMinutes() { return loopWaitMinutes; }
-    public void setLoopWaitMinutes(Integer loopWaitMinutes) { this.loopWaitMinutes = loopWaitMinutes; }
-    public String getScheduledStartTime() { return scheduledStartTime; }
-    public void setScheduledStartTime(String scheduledStartTime) { this.scheduledStartTime = scheduledStartTime; }
+
     public boolean isShuffleMode() { return shuffleMode; }
     public void setShuffleMode(boolean shuffleMode) { this.shuffleMode = shuffleMode; }
+
+    public int getLoopWaitMinutes() { return loopWaitMinutes; }
+    public void setLoopWaitMinutes(int loopWaitMinutes) { this.loopWaitMinutes = loopWaitMinutes; }
+
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public String getScheduledStartTime() { return scheduledStartTime; }
+    public void setScheduledStartTime(String scheduledStartTime) { this.scheduledStartTime = scheduledStartTime; }
+
+    // 🌟 追加：currentLoopのGetter/Setter
+    public int getCurrentLoop() { return currentLoop; }
+    public void setCurrentLoop(int currentLoop) { this.currentLoop = currentLoop; }
+
+    public List<Fc2Account> getAccounts() { return accounts; }
+    public void setAccounts(List<Fc2Account> accounts) { this.accounts = accounts; }
 }

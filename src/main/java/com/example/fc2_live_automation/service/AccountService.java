@@ -52,14 +52,14 @@ public class AccountService {
             account.setCurrentLoop(0);
         }
 
-        // タイトルとアカウント名の自動設定ロジック
-        if (account.getTitle() != null && !account.getTitle().trim().isEmpty()) {
-            // 配信タイトルが入力されている場合は、アカウント名もそれに合わせる
-            account.setAccountName(account.getTitle());
-        } else if (account.getAccountName() == null || account.getAccountName().trim().isEmpty()) {
-            // 両方空欄の場合は、登録されているアカウント数を数えて連番で命名する（重複防止）
-            long currentCount = repository.count();
-            account.setAccountName("アカウント" + (currentCount + 1));
+        // 🌟 修正：アカウント名が「空欄だった場合」のみ、自動設定を行う（上書きバグ解消）
+        if (account.getAccountName() == null || account.getAccountName().trim().isEmpty()) {
+            if (account.getTitle() != null && !account.getTitle().trim().isEmpty()) {
+                account.setAccountName(account.getTitle());
+            } else {
+                long currentCount = repository.count();
+                account.setAccountName("アカウント" + (currentCount + 1));
+            }
         }
 
         // 動画の解析を実行
@@ -79,6 +79,11 @@ public class AccountService {
 
     public void stopStreaming(Long id) {
         worker.stopStreamingProcess(id);
+    }
+
+    // 🌟 追加：コントローラーから呼び出される「システム全終了」メソッド
+    public void stopAll() {
+        worker.stopAll();
     }
 
     private String analyzeVideo(String videoPath) {

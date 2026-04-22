@@ -45,6 +45,9 @@ public class Fc2AutomationWorker {
     private final Map<String, Thread> activePresetThreads = new ConcurrentHashMap<>();
     private final Map<Long, Thread> activeAccountThreads = new ConcurrentHashMap<>();
     private final Map<String, List<String>> presetLogs = new ConcurrentHashMap<>();
+    
+    // 🌟 現在実行中のアカウントとプリセット名の紐づけをメモリ上で正確に管理するマップ
+    private final Map<Long, String> runningAccountPresets = new ConcurrentHashMap<>();
 
     public Fc2AutomationWorker(Fc2AccountRepository repository) {
         this.repository = repository;
@@ -149,6 +152,7 @@ public class Fc2AutomationWorker {
         var id = account.getId();
         stopSignals.put(id, false);
         activeAccountThreads.put(id, Thread.currentThread());
+        runningAccountPresets.put(id, presetName); // 🌟 正確にプリセットを紐づけ
 
         try {
             if (!isPresetMode) {
@@ -194,7 +198,7 @@ public class Fc2AutomationWorker {
                         throw e;
                     } catch (Exception e) {
                         var msg = e.getMessage();
-                        if (msg != null && (msg.contains("STOPPED") || msg.contains("TargetClosedError"))) {
+                        if (msg != null && (msg.contains("STOPPED") || msg.contains("TargetClosedError") || msg.contains("interrupted"))) {
                             throw new InterruptedException();
                         }
                         if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 試行失敗: " + msg);
@@ -227,6 +231,7 @@ public class Fc2AutomationWorker {
             repository.save(finalState);
             activeAccountThreads.remove(id);
             stopSignals.remove(id);
+            runningAccountPresets.remove(id); // 🌟 解除
         }
     }
 
@@ -253,8 +258,9 @@ public class Fc2AutomationWorker {
             page.locator("a.c-btn.c-btnBs").first().click();
             
             checkStop(id, presetName);
-            page.locator("input[name='email']").fill(account.getEmail());
-            page.locator("input[name='pass']").fill(account.getPass());
+            // 🌟 安定した元々のログイン処理
+            page.locator("input[name='email']").fill(account.getEmail() != null ? account.getEmail() : "");
+            page.locator("input[name='pass']").fill(account.getPass() != null ? account.getPass() : "");
             if (page.locator("input[name='keep_login']").isVisible()) {
                 page.locator("input[name='keep_login']").check();
             }
@@ -401,7 +407,7 @@ public class Fc2AutomationWorker {
                         } catch(Exception e) {}
 
                         try {
-                            if (page.locator(".js-yesBtn").count() > 0) {
+                            if (page.locator(".js-yesBtn").count() > 0 && page.locator(".js-yesBtn").isVisible()) {
                                 page.locator(".js-yesBtn").first().evaluate("node => node.click()");
                                 page.waitForTimeout(1000);
                             }
@@ -418,7 +424,7 @@ public class Fc2AutomationWorker {
             }
 
             // =================================================================================
-            // 🌟🌟🌟 新規追加：次回配信時のNGワード自動登録予約の実行（実際の配信画面で行う）
+            // 🌟🌟🌟 NGワード自動登録（実際の配信が開始された直後）
             // =================================================================================
             File ngCsvFile = java.nio.file.Paths.get(System.getProperty("user.dir"), "ng_csvs", "account_" + id + ".csv").toFile();
             if (ngCsvFile.exists()) {
@@ -435,7 +441,6 @@ public class Fc2AutomationWorker {
                     }
                     
                     if (!ngWords.isEmpty()) {
-                        // ブロック設定のタブを開く
                         page.evaluate("() => { let icon = document.querySelector('use[*|href=\"#icon-tabBlock\"]'); if(icon) { let btn = icon.closest('li'); if(btn) btn.click(); } }");
                         page.waitForTimeout(1000);
                         
@@ -444,26 +449,19 @@ public class Fc2AutomationWorker {
                             page.waitForTimeout(1000);
                         }
 
-                        // 💡 人間と同じ「確実なキーボード入力」を再現（安定性強化版）
                         if (page.locator(".js-addNgCommentText").count() > 0 && page.locator(".js-addCommentBtn").count() > 0) {
                             int count = 0;
                             for (String word : ngWords) {
                                 try {
-                                    // 毎回最新の要素を取得して確実に入力（DOMの更新ズレ対策）
                                     page.locator(".js-addNgCommentText").first().fill(word); 
                                     page.locator(".js-addCommentBtn").first().click();
-                                    
-                                    // 🌟 修正：FC2サーバーが確実に保存処理を終えるのを待つため、0.5秒待機
                                     page.waitForTimeout(500); 
-                                    
                                     count++;
-                                    // 🌟 修正：50件処理するごとに、サーバーを休ませるため2秒待機（より安全に）
                                     if (count % 50 == 0) {
                                         addLog(id, "⏳ [" + accName + "] サーバー負荷軽減のため一時待機中... (" + count + "件完了)");
                                         page.waitForTimeout(2000);
                                     }
                                 } catch (Exception innerE) {
-                                    // 万が一1文字失敗しても、プログラム全体を止めずに次の文字へ進む
                                     logger.warn("⚠️ [" + accName + "] '" + word + "' の登録をスキップしました: " + innerE.getMessage());
                                 }
                             }
@@ -471,9 +469,7 @@ public class Fc2AutomationWorker {
                             addLog(id, "⚠️ [" + accName + "] NGワードの入力欄が見つかりませんでした。");
                         }
                         
-                        page.waitForTimeout(1000); // 念のためFC2側の処理完了を待つ
-                        
-                        // 登録が終わったら設定ウィンドウを閉じておく
+                        page.waitForTimeout(1000); 
                         try {
                             page.evaluate("() => { let closeBtn = document.querySelector('.setting_close a'); if(closeBtn) closeBtn.click(); }");
                         } catch(Exception e) {}
@@ -481,7 +477,7 @@ public class Fc2AutomationWorker {
                     
                     addLog(id, "✅ [" + accName + "] NGワードの一括登録完了。予約ファイル（CSV）を削除します。");
                     if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] NGワードの一括登録完了。予約ファイル（CSV）を削除します。");
-                    ngCsvFile.delete(); // 次回は実行されないようにファイルを削除
+                    ngCsvFile.delete(); 
                     
                 } catch (Exception e) {
                     addLog(id, "❌ [" + accName + "] NG登録エラー: " + e.getMessage());
@@ -529,17 +525,20 @@ public class Fc2AutomationWorker {
                         try {
                             if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 時間が来ました。有料切替操作を開始します...");
                             
-                            if (page.locator(".js-switchFeeBtn").count() > 0) {
-                                page.locator(".js-switchFeeBtn").first().evaluate("node => node.click()");
+                            Locator switchBtn = page.locator(".js-switchFeeBtn").first();
+                            if (switchBtn.count() > 0 && switchBtn.isVisible()) {
+                                switchBtn.evaluate("node => node.click()");
                                 Thread.sleep(1500);
                                 
-                                if (page.locator(".js-popupWindow .js-yesBtn").count() > 0) {
-                                    page.locator(".js-popupWindow .js-yesBtn").first().evaluate("node => node.click()");
+                                // 🌟 確実に見えているポップアップのみをクリックする（誤爆防止）
+                                Locator yesBtn = page.locator(".js-popupWindow .js-yesBtn").first();
+                                if (yesBtn.count() > 0 && yesBtn.isVisible()) {
+                                    yesBtn.evaluate("node => node.click()");
                                 }
                                 Thread.sleep(1500);
                                 
-                                if (page.locator(".js-popupWindow .js-yesBtn").count() > 0) {
-                                    page.locator(".js-popupWindow .js-yesBtn").first().evaluate("node => node.click()");
+                                if (yesBtn.count() > 0 && yesBtn.isVisible()) {
+                                    yesBtn.evaluate("node => node.click()");
                                 }
                                 
                                 if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] 有料放送へ切り替え操作が完了しました");
@@ -683,11 +682,47 @@ public class Fc2AutomationWorker {
 
     public void stopPresetProcess(String presetName) {
         presetStopSignals.put(presetName, true);
-        for (var accountId : activeAccountThreads.keySet()) {
-            var acc = repository.findById(accountId).orElse(null);
-            if (acc != null && presetName.equals(acc.getPresetName())) stopStreamingProcess(accountId);
+        // メモリ上で正確に紐づけられたアカウントに対してのみ停止命令を出す
+        for (var entry : runningAccountPresets.entrySet()) {
+            if (presetName.equals(entry.getValue())) {
+                stopStreamingProcess(entry.getKey());
+            }
         }
         var thread = activePresetThreads.get(presetName);
         if (thread != null) thread.interrupt();
+    }
+
+    // 🌟 すべての配信プロセスを停止し、アプリ自体を完全に終了させる（緊急停止用）
+    public void stopAll() {
+        logger.warn("🛑 システム終了リクエストを受信しました。すべてのプロセスを破棄してアプリを終了します...");
+        
+        try {
+            activePresetThreads.keySet().forEach(this::stopPresetProcess);
+            activeAccountThreads.keySet().forEach(this::stopStreamingProcess);
+            
+            runningAccountPresets.clear();
+            stopSignals.clear();
+            presetStopSignals.clear();
+            
+            activeBrowsers.values().forEach(b -> { try { b.close(); } catch(Exception ignore) {} });
+            activeProcesses.values().forEach(this::killProcessTree);
+            
+            activeBrowsers.clear();
+            activeProcesses.clear();
+
+            logger.info("✅ クリーンアップ完了。3秒後にアプリのプロセスを終了します。");
+
+            Thread.startVirtualThread(() -> {
+                try {
+                    Thread.sleep(3000);
+                    logger.warn("👋 アプリケーションを終了します。お疲れ様でした。");
+                    System.exit(0);
+                } catch (Exception ignore) {}
+            });
+
+        } catch (Exception e) {
+            logger.error("❌ 終了処理中にエラーが発生しました: " + e.getMessage());
+            System.exit(1); 
+        }
     }
 }

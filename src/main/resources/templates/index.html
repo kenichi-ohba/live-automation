@@ -2,299 +2,125 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ダッシュボード - FC2 Live Automation</title>
+    <title>UpaLive - FC2配信自動化ダッシュボード</title>
     <link rel="icon" th:href="@{/UpaLive_Icon.ico}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
-        #logContent::-webkit-scrollbar { width: 8px; }
-        #logContent::-webkit-scrollbar-track { background: #1f2937; }
-        #logContent::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
-        #logContent::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .log-container { height: 300px; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 relative">
-
-    <nav class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-40">
+<body class="bg-gray-100 text-gray-800">
+    
+    <nav class="bg-blue-600 text-white p-4 shadow-md sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <a th:href="@{/}" class="text-xl font-bold tracking-wider flex items-center">
                 <img th:src="@{/UpaLive_Logo.png}" alt="Logo" class="h-8 w-8 mr-2 rounded bg-white p-0.5">
                 UpaLive
             </a>
-            <div class="flex items-center space-x-6">
-                <button onclick="forceReload()" class="bg-blue-800 hover:bg-blue-900 text-white text-xs font-bold py-2 px-3 rounded shadow transition flex items-center border border-blue-400">
-                    <span class="mr-1">🔄</span> 最新に更新
-                </button>
-                <div class="space-x-6 text-sm font-bold hidden sm:block">
-                    <a th:href="@{/}" class="border-b-2 border-white pb-1">ダッシュボード</a>
-                    <a th:href="@{/accounts}" class="text-blue-200 hover:text-white transition">アカウント(素材)管理</a>
-                </div>
+            <div class="space-x-6 text-sm font-bold">
+                <a th:href="@{/}" class="border-b-2 border-white pb-1">ダッシュボード</a>
+                <a th:href="@{/accounts}" class="text-blue-200 hover:text-white transition">アカウント(素材)管理</a>
             </div>
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-8 space-y-4 md:space-y-0">
+    <div class="container mx-auto px-4 py-6">
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-8 border-l-8 border-red-600 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <h2 class="text-xl font-bold text-red-700 flex items-center">
+                    <span class="text-2xl mr-2">⚠️</span> システムの完全終了
+                </h2>
+                <p class="text-sm text-gray-600 font-bold mt-1">配信を停止し、ブラウザを閉じ、このアプリ自体を終了します。</p>
+            </div>
+            <button onclick="confirmAppExit()" class="bg-red-600 hover:bg-red-700 text-white font-black py-4 px-10 rounded-full shadow-2xl transition-all transform hover:scale-105 active:scale-95 text-lg flex items-center border-4 border-red-200">
+                <span class="mr-3 text-2xl">🛑</span> アプリを完全に閉じる
+            </button>
+        </div>
+        
+        <div th:if="${message}" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-sm font-bold" th:text="${message}"></div>
+
+        <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-700 flex items-center">
-                <span class="mr-2">📊</span> 番組編成ダッシュボード
+                <span class="mr-2">📂</span> プリセット管理
             </h2>
-            <div class="flex space-x-3">
-                <a th:href="@{/presets/add}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded-full shadow transition whitespace-nowrap text-sm">＋ 新規プリセット作成</a>
-                <a th:href="@{/add}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-5 rounded-full shadow transition whitespace-nowrap text-sm">＋ 新規アカウント追加</a>
-            </div>
+            <a th:href="@{/presets/add}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded-full shadow transition text-sm">＋ 新規プリセット作成</a>
         </div>
 
-        <div th:if="${not #lists.isEmpty(accounts)}">
-            <div th:each="presetGroup : ${groupedAccounts}" th:if="${presetGroup.key != '未設定 (個別アカウント)'}" class="bg-white rounded-lg shadow-md mb-6 overflow-hidden border border-gray-200">
-                
-                <div class="bg-indigo-50 p-5 border-b border-indigo-100 flex flex-col md:flex-row justify-between items-start md:items-center" th:with="presetObj=${presetMap.get(presetGroup.key)}">
-                    <div>
-                        <div class="flex items-center space-x-3 flex-wrap gap-y-2">
-                            <h3 class="text-2xl font-bold text-indigo-900" th:text="${presetGroup.key}">プリセット名</h3>
-                            <span class="bg-indigo-200 text-indigo-800 text-xs font-bold px-2 py-1 rounded-full">素材数: [[${#lists.size(presetGroup.value)}]]</span>
-                            
-                            <th:block th:with="runningAccs=${presetGroup.value.?[status == 'RUNNING']}">
-                                <span th:if="${not #lists.isEmpty(runningAccs)}" class="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full border border-blue-300 shadow-sm flex items-center">
-                                    <span class="mr-1 animate-[spin_3s_linear_infinite]">🔄</span>
-                                    <span th:text="${runningAccs[0].currentLoop}"></span> / 
-                                    <span th:text="${presetObj != null && presetObj.loopCount > 0 ? presetObj.loopCount : '∞'}"></span> 周目
-                                </span>
-                            </th:block>
-
-                            <a th:href="@{/presets/editByName(name=${presetGroup.key})}" class="bg-white text-indigo-600 border border-indigo-300 text-xs font-bold py-1 px-3 rounded shadow-sm hover:bg-indigo-100 transition">✏️ 編集</a>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4 md:mt-0 flex space-x-2 items-center">
-                        <div th:each="account : ${presetGroup.value}" th:if="${account.status == 'RUNNING' && not #strings.isEmpty(account.broadcastUrl)}">
-                            <a th:href="${account.broadcastUrl}" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold py-2 px-4 rounded shadow-md transition animate-pulse flex items-center border border-pink-700">
-                                <span class="mr-1">📺</span> 配信画面
-                            </a>
-                        </div>
-
-                        <button type="button" th:data-name="${presetGroup.key}" onclick="openLogWindow(this.getAttribute('data-name'))" class="bg-gray-600 hover:bg-gray-700 text-white text-sm font-bold py-2 px-4 rounded shadow transition">📝 ログ</button>
-                        
-                        <th:block th:if="${presetObj != null}">
-                            <th:block th:if="${not #strings.isEmpty(presetObj.scheduledStartTime)}">
-                                <form th:action="@{/schedule/cancel}" method="post" class="inline">
-                                    <input type="hidden" name="presetName" th:value="${presetGroup.key}" />
-                                    <button type="submit" class="bg-yellow-100 border border-yellow-500 text-yellow-800 text-sm font-bold py-1 px-3 rounded shadow-sm flex flex-col items-center justify-center hover:bg-yellow-200 transition js-countdown" th:data-time="${presetObj.scheduledStartTime}" title="クリックで予約取り消し">
-                                        <div>🕒 予約待機中</div>
-                                        <div class="text-xs time-display">計算中...</div>
-                                    </button>
-                                </form>
-                            </th:block>
-
-                            <th:block th:unless="${not #strings.isEmpty(presetObj.scheduledStartTime)}">
-                                <button type="button" th:data-name="${presetGroup.key}" onclick="openScheduleModal(this.getAttribute('data-name'))" class="bg-green-500 hover:bg-green-600 text-white text-sm font-bold py-2 px-4 rounded shadow transition">⏰ 予約設定</button>
-                                <a th:href="@{/presets/start(name=${presetGroup.key})}" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2 px-4 rounded shadow transition">▶ 再生開始</a>
-                            </th:block>
-                        </th:block>
-
-                        <a th:href="@{/presets/stop(name=${presetGroup.key})}" class="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-2 px-4 rounded shadow transition" onclick="return confirm('このプリセットの連続再生を終了しますか？');">⏹ ループ停止</a>
-                    </div>
-                </div>
-
-                <details class="group" open>
-                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-4 bg-gray-50 hover:bg-gray-100 transition border-b border-gray-100">
-                        <span class="text-gray-700 font-bold">▽ このプリセットの登録アカウント一覧を見る</span>
-                        <span class="transition group-open:rotate-180 text-gray-500">
-                            <svg fill="none" height="24" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    
-                    <div class="p-4 bg-white">
-                        <div class="space-y-3">
-                            <div th:each="account : ${presetGroup.value}" 
-                                 class="flex flex-col md:flex-row justify-between items-center p-4 rounded-lg border transition-all"
-                                 th:classappend="${account.status == 'RUNNING' ? 'border-green-400 bg-green-50 shadow-sm' : 'border-gray-200 bg-white hover:bg-gray-50'}">
-                                
-                                <div class="flex items-center w-full md:w-auto mb-3 md:mb-0">
-                                    <div class="w-28 flex-shrink-0">
-                                        <span th:if="${account.status == 'RUNNING'}" class="bg-green-500 text-white px-2 py-1 rounded text-xs font-bold animate-pulse">● 配信中</span>
-                                        <span th:unless="${account.status == 'RUNNING'}" class="bg-gray-400 text-white px-2 py-1 rounded text-xs font-bold">⚪ 停止中</span>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold text-lg" th:classappend="${account.status == 'RUNNING' ? 'text-green-800' : 'text-gray-800'}">
-                                            <span th:text="${account.accountName}">アカウント名</span>
-                                        </div>
-                                        <div class="text-xs text-gray-500 truncate w-48" th:text="${account.title}">番組タイトル</div>
-                                    </div>
-                                </div>
-
-                                <div class="hidden md:block w-1/3 px-4">
-                                    <div class="text-xs font-bold text-indigo-600 mb-1">⏱️動画: [[${account.videoDuration != null ? account.videoDuration : '未解析'}]]</div>
-                                    <div class="text-xs font-bold text-yellow-700 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded inline-block mt-1">
-                                        💰 有料切替: [[${account.formattedPaidSwitchTime != null ? account.formattedPaidSwitchTime : '未計算'}]]
-                                    </div>
-                                </div>
-
-                                <div class="w-full md:w-auto flex justify-end mt-2 md:mt-0">
-                                    <a th:href="@{/edit/{id}(id=${account.id})}" class="bg-white hover:bg-gray-100 text-gray-600 border border-gray-300 text-xs font-bold py-1.5 px-3 rounded shadow-sm transition flex items-center">
-                                        ✏️ 編集
-                                    </a>
-                                </div>
-
+        <div class="bg-white rounded-lg shadow mb-10 overflow-hidden">
+            <table class="min-w-full leading-normal">
+                <thead>
+                    <tr class="bg-indigo-50 text-indigo-700 text-sm font-bold border-b border-indigo-100">
+                        <th class="py-3 px-6 text-left">プリセット名</th>
+                        <th class="py-3 px-6 text-center">アカウント数</th>
+                        <th class="py-3 px-6 text-center">設定</th>
+                        <th class="py-3 px-6 text-center">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm">
+                    <tr th:each="preset : ${presets}" class="border-b border-gray-100 hover:bg-gray-50">
+                        <td class="py-4 px-6"><div class="font-bold text-gray-800" th:text="${preset.presetName}"></div></td>
+                        <td class="py-4 px-6 text-center"><span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-bold" th:text="${#lists.size(preset.accounts)} + ' 件'"></span></td>
+                        <td class="py-4 px-6 text-center">
+                            <div class="text-xs" th:text="${preset.loopCount == 0 ? '♾ 無限' : preset.loopCount + '回'}"></div>
+                            <span th:if="${preset.shuffleMode}" class="text-[10px] text-yellow-600 font-bold">🔀 シャッフル</span>
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                            <div class="flex justify-center space-x-2">
+                                <a th:href="@{/presets/start/{id}(id=${preset.id})}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1.5 px-4 rounded text-xs shadow">▶️ 再生</a>
+                                <a th:href="@{/presets/stop/{id}(id=${preset.id})}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1.5 px-4 rounded text-xs shadow">⏹ 停止</a>
+                                <a th:href="@{/presets/edit/{id}(id=${preset.id})}" class="text-blue-500 hover:text-blue-700 font-bold text-xs flex items-center ml-2">✏️</a>
+                                <a th:href="@{/presets/delete/{id}(id=${preset.id})}" class="text-red-400 hover:text-red-600 font-bold text-xs flex items-center" onclick="return confirm('削除しますか？');">🗑️</a>
                             </div>
-                        </div>
-                    </div>
-                </details>
-            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
 
-    <div id="scheduleModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-96 transform transition-all">
-            <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">⏰ 予約開始の設定</h3>
-            <form th:action="@{/schedule/set}" method="post">
-                <input type="hidden" name="presetName" id="modalPresetName" value="" />
-                <p class="text-sm text-gray-600 mb-4">選択した日時に、このプリセットの再生を自動で開始します。</p>
-                <div class="mb-5">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">予約開始日時</label>
-                    <input type="datetime-local" name="scheduledTime" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" onclick="closeScheduleModal()" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded transition">キャンセル</button>
-                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition">予約を確定</button>
-                </div>
-            </form>
+        <h2 class="text-xl font-bold text-gray-700 flex items-center mb-4">
+            <span class="mr-2">📝</span> リアルタイム稼働状況
+        </h2>
+        <div id="logArea" class="bg-gray-900 text-green-400 p-4 rounded-lg shadow-inner font-mono text-xs log-container overflow-y-auto custom-scrollbar border-4 border-gray-800">
+            <div id="logContent" class="space-y-1"></div>
         </div>
-    </div>
-
-    <div id="logModal" class="hidden fixed bottom-4 right-4 w-[450px] h-[350px] bg-gray-900 text-gray-300 rounded-lg shadow-2xl flex flex-col z-50 border border-gray-700 overflow-hidden">
-        <div class="bg-gray-800 p-3 border-b border-gray-700 flex justify-between items-center cursor-move">
-            <h3 class="font-bold text-sm text-green-400 flex items-center">
-                <span class="mr-2 animate-pulse">▶</span> 
-                <span id="logTargetName">プリセット名</span> - 動作ログ
-            </h3>
-            <button onclick="closeLogWindow()" class="text-gray-400 hover:text-white font-bold text-lg leading-none">&times;</button>
-        </div>
-        <div id="logContent" class="flex-grow p-3 overflow-y-auto text-xs font-mono whitespace-pre-wrap leading-relaxed"></div>
     </div>
 
     <script>
-        function saveStateAndReload() {
-            sessionStorage.setItem('upaScrollY', window.scrollY);
-            const detailsState = Array.from(document.querySelectorAll('details')).map(d => d.open);
-            sessionStorage.setItem('upaDetailsState', JSON.stringify(detailsState));
-            window.location.reload();
-        }
-
-        function forceReload() {
-            saveStateAndReload();
-        }
-
-        setInterval(() => {
-            const scheduleModal = document.getElementById('scheduleModal');
-            const logModal = document.getElementById('logModal');
-            if ((scheduleModal && !scheduleModal.classList.contains('hidden')) ||
-                (logModal && !logModal.classList.contains('hidden'))) {
-                return;
+        function confirmAppExit() {
+            const confirmed = confirm(
+                "【確認】UpaLiveを完全に終了しますか？\n\n" +
+                "・配信中のすべての動画が止まります。\n" +
+                "・このアプリ自体も閉じられます。\n\n" +
+                "再度使用するには、デスクトップのアイコンから再起動が必要です。"
+            );
+            if (confirmed) {
+                // 終了メッセージを表示してから遷移
+                document.body.innerHTML = `
+                    <div class="flex h-screen items-center justify-center bg-gray-900 text-white text-center">
+                        <div>
+                            <h1 class="text-4xl font-bold mb-4">🛑 システム終了中</h1>
+                            <p class="text-xl text-gray-400">すべての配信を停止し、アプリを閉じています...<br>この画面を閉じて、しばらくお待ちください。</p>
+                        </div>
+                    </div>
+                `;
+                window.location.href = "/stop-all";
             }
-            saveStateAndReload();
-        }, 10000);
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedDetails = JSON.parse(sessionStorage.getItem('upaDetailsState'));
-            if (savedDetails) {
-                document.querySelectorAll('details').forEach((d, i) => {
-                    if (savedDetails[i] !== undefined) d.open = savedDetails[i];
-                });
-            }
-            const savedScrollY = sessionStorage.getItem('upaScrollY');
-            if (savedScrollY) {
-                window.scrollTo(0, parseInt(savedScrollY));
-            }
-        });
-
-        function openScheduleModal(presetName) {
-            document.getElementById('modalPresetName').value = presetName;
-            document.getElementById('scheduleModal').classList.remove('hidden');
-        }
-        function closeScheduleModal() {
-            document.getElementById('scheduleModal').classList.add('hidden');
-        }
-
-        function updateCountdowns() {
-            const elements = document.querySelectorAll('.js-countdown');
-            const now = new Date();
-            
-            elements.forEach(el => {
-                const timeStr = el.getAttribute('data-time');
-                if (!timeStr) return;
-                
-                const targetTime = new Date(timeStr);
-                const diffMs = targetTime - now;
-                const display = el.querySelector('.time-display');
-                
-                if (diffMs <= 0) {
-                    display.innerText = "🚀 起動待機中...";
-                    el.classList.add('bg-yellow-300', 'animate-pulse');
-                } else {
-                    const hours = Math.floor(diffMs / (1000 * 60 * 60));
-                    const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-                    const secs = Math.floor((diffMs % (1000 * 60)) / 1000);
-                    
-                    let text = "あと ";
-                    if (hours > 0) text += hours + "時間 ";
-                    if (mins > 0 || hours > 0) text += mins + "分 ";
-                    text += secs + "秒";
-                    display.innerText = text;
-                }
-            });
-        }
-        setInterval(updateCountdowns, 1000);
-        updateCountdowns();
-
-        let logInterval = null;
-        let currentPresetName = null;
-
-        function openLogWindow(presetName) {
-            currentPresetName = presetName;
-            document.getElementById('logTargetName').innerText = presetName;
-            document.getElementById('logModal').classList.remove('hidden');
-            
-            fetchLogs();
-            if (logInterval) clearInterval(logInterval);
-            logInterval = setInterval(fetchLogs, 2000);
-        }
-
-        function closeLogWindow() {
-            document.getElementById('logModal').classList.add('hidden');
-            if (logInterval) {
-                clearInterval(logInterval);
-                logInterval = null;
-            }
-            currentPresetName = null;
         }
 
         function fetchLogs() {
-            if (!currentPresetName) return;
-            
-            fetch('/api/logs/preset/' + encodeURIComponent(currentPresetName))
-                .then(response => response.json())
-                .then(data => {
-                    const contentBox = document.getElementById('logContent');
-                    
-                    if (data.length === 0) {
-                        contentBox.innerHTML = '<span class="text-gray-500">システム待機中...</span>';
-                    } else {
-                        let html = '';
-                        data.forEach(line => {
-                            if (line.includes('❌')) html += `<div class="text-red-400">${line}</div>`;
-                            else if (line.includes('✅') || line.includes('🏁')) html += `<div class="text-green-400 font-bold">${line}</div>`;
-                            else if (line.includes('💰')) html += `<div class="text-yellow-400 font-bold">${line}</div>`;
-                            else html += `<div class="text-gray-200">${line}</div>`;
-                        });
-                        
-                        const isScrolledToBottom = contentBox.scrollHeight - contentBox.clientHeight <= contentBox.scrollTop + 50;
-                        contentBox.innerHTML = html;
-                        if (isScrolledToBottom) contentBox.scrollTop = contentBox.scrollHeight;
-                    }
-                })
-                .catch(err => console.error("ログ取得エラー:", err));
+            fetch('/api/logs').then(r => r.json()).then(data => {
+                const logContent = document.getElementById('logContent');
+                const logArea = document.getElementById('logArea');
+                logContent.innerHTML = data.map(log => `<div class="${log.includes('❌')?'text-red-400':log.includes('✅')?'text-blue-400':log.includes('🛑')?'text-red-500 font-bold':''}">${log}</div>`).join('');
+                logArea.scrollTop = logArea.scrollHeight;
+            });
         }
+        setInterval(fetchLogs, 3000);
+        fetchLogs();
     </script>
 </body>
 </html>
