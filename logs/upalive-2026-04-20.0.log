@@ -1,0 +1,1729 @@
+2026-04-20T14:45:32.290+09:00  INFO 15788 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 15788 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T14:45:32.298+09:00  INFO 15788 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T14:45:33.895+09:00  INFO 15788 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T14:45:34.002+09:00  INFO 15788 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 90 ms. Found 2 JPA repository interfaces.
+2026-04-20T14:45:34.671+09:00  INFO 15788 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T14:45:34.694+09:00  INFO 15788 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T14:45:34.695+09:00  INFO 15788 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T14:45:34.802+09:00  INFO 15788 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T14:45:34.803+09:00  INFO 15788 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2439 ms
+2026-04-20T14:45:35.246+09:00  INFO 15788 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T14:45:35.336+09:00  INFO 15788 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T14:45:35.400+09:00  INFO 15788 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T14:45:35.835+09:00  INFO 15788 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T14:45:35.883+09:00  INFO 15788 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T14:45:36.196+09:00  INFO 15788 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T14:45:36.199+09:00  INFO 15788 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T14:45:36.238+09:00  WARN 15788 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T14:45:36.263+09:00  INFO 15788 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T14:45:37.114+09:00  INFO 15788 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T14:45:37.181+09:00  INFO 15788 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T14:45:37.746+09:00  INFO 15788 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T14:45:37.900+09:00  INFO 15788 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T14:45:37.940+09:00  WARN 15788 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T14:45:37.973+09:00  INFO 15788 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T14:45:38.734+09:00  INFO 15788 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T14:45:38.845+09:00  INFO 15788 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T14:45:38.865+09:00  INFO 15788 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.177 seconds (process running for 7.835)
+2026-04-20T14:45:39.336+09:00  INFO 15788 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T14:45:39.338+09:00  INFO 15788 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T14:45:39.343+09:00  INFO 15788 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-20T14:47:53.744+09:00  INFO 15788 --- [fc2-live-automation] [http-nio-8082-exec-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T14:47:53.768+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T14:48:03.966+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T14:48:05.973+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
+2026-04-20T14:48:22.997+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T14:48:26.012+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T14:48:41.122+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T14:48:44.167+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T14:49:39.201+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T14:49:42.336+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T14:51:18.113+09:00  INFO 15788 --- [fc2-live-automation] [http-nio-8082-exec-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ▶️ プリセットの連続再生を開始します
+2026-04-20T14:51:18.185+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎬 [すず] の配信準備を開始します
+2026-04-20T14:51:28.568+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ✅ [すず] ログイン完了、設定画面へ移行
+2026-04-20T14:51:30.829+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
+2026-04-20T14:51:49.729+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🎥 [すず] FFmpegによる映像送信を開始しました
+2026-04-20T14:51:52.745+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ☕ [すず] 映像のバッファリングのため15秒待機します...
+2026-04-20T14:52:07.909+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T14:52:10.985+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏳ 有料切替タイマーセット: 5668秒 (ラグ相殺のため 5663秒後に自動実行)
+2026-04-20T14:52:19.164+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T14:52:19.165+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Operation interrupted
+2026-04-20T14:52:19.166+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T14:52:19.172+09:00  INFO 15788 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T14:52:33.616+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] 🏁 [すず] 配信枠を終了しました
+2026-04-20T14:52:33.617+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏹ [すず] の処理を安全に中断しました
+2026-04-20T14:52:33.623+09:00  INFO 15788 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストA] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T15:42:37.530+09:00  INFO 15788 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T15:42:37.538+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T15:42:46.286+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T15:42:48.298+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
+2026-04-20T15:43:05.014+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T15:43:08.049+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T15:43:23.153+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T15:43:26.224+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T15:44:21.685+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T15:44:24.817+09:00  INFO 15788 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T16:19:33.514+09:00  INFO 27332 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 27332 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T16:19:33.517+09:00  INFO 27332 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T16:19:35.074+09:00  INFO 27332 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T16:19:35.143+09:00  INFO 27332 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57 ms. Found 2 JPA repository interfaces.
+2026-04-20T16:19:35.815+09:00  INFO 27332 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T16:19:35.846+09:00  INFO 27332 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T16:19:35.847+09:00  INFO 27332 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T16:19:35.945+09:00  INFO 27332 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T16:19:35.947+09:00  INFO 27332 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2361 ms
+2026-04-20T16:19:36.449+09:00  INFO 27332 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T16:19:36.543+09:00  INFO 27332 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T16:19:36.640+09:00  INFO 27332 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T16:19:36.973+09:00  INFO 27332 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T16:19:37.023+09:00  INFO 27332 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T16:19:37.292+09:00  INFO 27332 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T16:19:37.294+09:00  INFO 27332 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T16:19:37.329+09:00  WARN 27332 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T16:19:37.373+09:00  INFO 27332 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T16:19:38.437+09:00  INFO 27332 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T16:19:38.585+09:00  INFO 27332 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T16:19:39.473+09:00  INFO 27332 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T16:19:39.666+09:00  INFO 27332 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 1 件、アカウント 1 件を停止状態に戻しました
+2026-04-20T16:19:39.735+09:00  WARN 27332 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T16:19:39.763+09:00  INFO 27332 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T16:19:40.743+09:00  INFO 27332 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T16:19:40.872+09:00  INFO 27332 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T16:19:40.896+09:00  INFO 27332 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 8.065 seconds (process running for 8.974)
+2026-04-20T16:19:41.359+09:00  INFO 27332 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T16:19:41.361+09:00  INFO 27332 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T16:19:41.366+09:00  INFO 27332 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-20T17:11:11.266+09:00  INFO 21976 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 21976 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T17:11:11.269+09:00  INFO 21976 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T17:11:12.550+09:00  INFO 21976 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T17:11:12.635+09:00  INFO 21976 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 2 JPA repository interfaces.
+2026-04-20T17:11:13.252+09:00  INFO 21976 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T17:11:13.275+09:00  INFO 21976 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T17:11:13.276+09:00  INFO 21976 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T17:11:13.377+09:00  INFO 21976 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T17:11:13.378+09:00  INFO 21976 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2052 ms
+2026-04-20T17:11:13.715+09:00  INFO 21976 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T17:11:13.809+09:00  INFO 21976 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T17:11:13.895+09:00  INFO 21976 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T17:11:14.269+09:00  INFO 21976 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T17:11:14.314+09:00  INFO 21976 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T17:11:14.614+09:00  INFO 21976 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T17:11:14.617+09:00  INFO 21976 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T17:11:14.651+09:00  WARN 21976 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T17:11:14.696+09:00  INFO 21976 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T17:11:15.749+09:00  INFO 21976 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T17:11:15.814+09:00  INFO 21976 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T17:11:16.444+09:00  INFO 21976 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T17:11:16.597+09:00  INFO 21976 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T17:11:16.639+09:00  WARN 21976 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T17:11:16.670+09:00  INFO 21976 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T17:11:17.431+09:00  INFO 21976 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T17:11:17.518+09:00  INFO 21976 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T17:11:17.536+09:00  INFO 21976 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 6.777 seconds (process running for 7.498)
+2026-04-20T17:11:17.874+09:00  INFO 21976 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T17:11:17.874+09:00  INFO 21976 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T17:11:17.876+09:00  INFO 21976 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-20T17:11:34.147+09:00  INFO 21976 --- [fc2-live-automation] [http-nio-8082-exec-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T17:11:34.165+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T17:11:44.313+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T17:11:46.321+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⚠️ キャンペーンページを検知。オプトアウト処理を行います。
+2026-04-20T17:12:02.840+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T17:12:05.842+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T17:12:20.860+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T17:12:23.931+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T17:13:18.965+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T17:13:22.100+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T17:31:03.579+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T17:31:03.688+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Operation interrupted
+2026-04-20T17:31:03.692+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T17:31:03.727+09:00  INFO 21976 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T17:45:14.218+09:00  INFO 26664 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 26664 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T17:45:14.222+09:00  INFO 26664 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T17:45:15.691+09:00  INFO 26664 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T17:45:15.755+09:00  INFO 26664 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54 ms. Found 2 JPA repository interfaces.
+2026-04-20T17:45:16.417+09:00  INFO 26664 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T17:45:16.436+09:00  INFO 26664 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T17:45:16.436+09:00  INFO 26664 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T17:45:16.524+09:00  INFO 26664 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T17:45:16.524+09:00  INFO 26664 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2210 ms
+2026-04-20T17:45:16.854+09:00  INFO 26664 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T17:45:16.929+09:00  INFO 26664 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T17:45:16.986+09:00  INFO 26664 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T17:45:17.322+09:00  INFO 26664 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T17:45:17.369+09:00  INFO 26664 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T17:45:17.687+09:00  INFO 26664 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T17:45:17.690+09:00  INFO 26664 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T17:45:17.721+09:00  WARN 26664 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T17:45:17.748+09:00  INFO 26664 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T17:45:18.613+09:00  INFO 26664 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T17:45:18.685+09:00  INFO 26664 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T17:45:19.442+09:00  INFO 26664 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T17:45:19.634+09:00  INFO 26664 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T17:45:19.700+09:00  WARN 26664 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T17:45:19.739+09:00  INFO 26664 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T17:45:20.787+09:00  INFO 26664 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T17:45:20.902+09:00  INFO 26664 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T17:45:20.919+09:00  INFO 26664 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.321 seconds (process running for 7.965)
+2026-04-20T17:45:21.363+09:00  INFO 26664 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T17:45:21.363+09:00  INFO 26664 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T17:45:21.365+09:00  INFO 26664 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-04-20T17:46:32.974+09:00  INFO 26664 --- [fc2-live-automation] [task-1] c.e.f.service.Fc2AutomationWorker        : 🛡️ [テスト] NGコメントの自動登録を開始します...
+2026-04-20T17:46:50.116+09:00  INFO 26664 --- [fc2-live-automation] [task-1] c.e.f.service.Fc2AutomationWorker        : ⚙️ [テスト] 配信画面に到達。NGコメントの流し込みを開始します... (対象: 514ワード)
+2026-04-20T17:46:51.135+09:00  WARN 26664 --- [fc2-live-automation] [task-1] c.e.f.service.Fc2AutomationWorker        : ⚠️ 入力欄が見つかりません。画面構造を確認してください。
+2026-04-20T17:46:51.136+09:00  INFO 26664 --- [fc2-live-automation] [task-1] c.e.f.service.Fc2AutomationWorker        : ✅ [テスト] 514件のNGワード登録が完了しました！
+2026-04-20T17:49:42.999+09:00  INFO 17016 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 17016 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T17:49:43.002+09:00  INFO 17016 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T17:49:44.776+09:00  INFO 17016 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T17:49:44.877+09:00  INFO 17016 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 2 JPA repository interfaces.
+2026-04-20T17:49:45.594+09:00  INFO 17016 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T17:49:45.614+09:00  INFO 17016 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T17:49:45.615+09:00  INFO 17016 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T17:49:45.704+09:00  INFO 17016 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T17:49:45.705+09:00  INFO 17016 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2638 ms
+2026-04-20T17:49:46.077+09:00  INFO 17016 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T17:49:46.144+09:00  INFO 17016 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T17:49:46.199+09:00  INFO 17016 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T17:49:46.490+09:00  INFO 17016 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T17:49:46.522+09:00  INFO 17016 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T17:49:46.773+09:00  INFO 17016 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T17:49:46.775+09:00  INFO 17016 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T17:49:46.803+09:00  WARN 17016 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T17:49:46.827+09:00  INFO 17016 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T17:49:47.536+09:00  INFO 17016 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T17:49:47.604+09:00  INFO 17016 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T17:49:48.287+09:00  INFO 17016 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T17:49:48.477+09:00  INFO 17016 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T17:49:48.536+09:00  WARN 17016 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T17:49:48.591+09:00  INFO 17016 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T17:49:49.477+09:00  INFO 17016 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T17:49:49.591+09:00  INFO 17016 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T17:49:49.613+09:00  INFO 17016 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.121 seconds (process running for 7.914)
+2026-04-20T17:49:50.057+09:00  INFO 17016 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T17:49:50.059+09:00  INFO 17016 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T17:49:50.061+09:00  INFO 17016 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-20T17:51:02.332+09:00  INFO 17016 --- [fc2-live-automation] [task-1] c.e.f.service.Fc2AutomationWorker        : 🛡️ [テスト] NGコメントの自動登録を開始します...
+2026-04-20T17:51:19.131+09:00  INFO 17016 --- [fc2-live-automation] [task-1] c.e.f.service.Fc2AutomationWorker        : ⚙️ [テスト] 配信画面に到達。NGコメントの流し込みを開始します... (対象: 514ワード)
+2026-04-20T17:51:50.169+09:00 ERROR 17016 --- [fc2-live-automation] [task-1] c.e.f.service.Fc2AutomationWorker        : ❌ NG登録中にエラー: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at ProgressController.run (C:\Users\aikus\AppData\Local\Temp\playwright-java-17464927744746934252\package\lib\server\progress.js:78:26)
+    at Frame.click (C:\Users\aikus\AppData\Local\Temp\playwright-java-17464927744746934252\package\lib\server\frames.js:996:23)
+    at FrameDispatcher.click (C:\Users\aikus\AppData\Local\Temp\playwright-java-17464927744746934252\package\lib\server\dispatchers\frameDispatcher.js:158:30)
+    at FrameDispatcher._handleCommand (C:\Users\aikus\AppData\Local\Temp\playwright-java-17464927744746934252\package\lib\server\dispatchers\dispatcher.js:94:40)
+    at DispatcherConnection.dispatch (C:\Users\aikus\AppData\Local\Temp\playwright-java-17464927744746934252\package\lib\server\dispatchers\dispatcher.js:365:39)
+}
+Call log:
+- waiting for locator("#js-blockList-ngComment-tab")
+-   locator resolved to <li class="is-active" id="js-blockList-ngComment-tab">NGコメント</li>
+- attempting click action
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #1
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #2
+-   waiting 20ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #3
+-   waiting 100ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #4
+-   waiting 100ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #5
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #6
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #7
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #8
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #9
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #10
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #11
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #12
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #13
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #14
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #15
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #16
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #17
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #18
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #19
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #20
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #21
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #22
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #23
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #24
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #25
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #26
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #27
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #28
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #29
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #30
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #31
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #32
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #33
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #34
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #35
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #36
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #37
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #38
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #39
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #40
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #41
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #42
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #43
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #44
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #45
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #46
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #47
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #48
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #49
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #50
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #51
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #52
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #53
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #54
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #55
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #56
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #57
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #58
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #59
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #60
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #61
+-   waiting 500ms
+
+2026-04-20T18:08:40.716+09:00  INFO 17016 --- [fc2-live-automation] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-20T18:08:40.729+09:00  INFO 17016 --- [fc2-live-automation] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-04-20T18:08:40.742+09:00  INFO 17016 --- [fc2-live-automation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T18:08:40.766+09:00  INFO 17016 --- [fc2-live-automation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-20T18:08:40.774+09:00  INFO 17016 --- [fc2-live-automation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-20T18:09:39.405+09:00  INFO 30808 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 30808 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T18:09:39.410+09:00  INFO 30808 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T18:09:40.763+09:00  INFO 30808 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T18:09:40.870+09:00  INFO 30808 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93 ms. Found 2 JPA repository interfaces.
+2026-04-20T18:09:41.553+09:00  INFO 30808 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T18:09:41.573+09:00  INFO 30808 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T18:09:41.574+09:00  INFO 30808 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T18:09:41.684+09:00  INFO 30808 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T18:09:41.685+09:00  INFO 30808 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2208 ms
+2026-04-20T18:09:42.168+09:00  INFO 30808 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T18:09:42.249+09:00  INFO 30808 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T18:09:42.338+09:00  INFO 30808 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T18:09:42.690+09:00  INFO 30808 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T18:09:42.729+09:00  INFO 30808 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T18:09:42.958+09:00  INFO 30808 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T18:09:42.960+09:00  INFO 30808 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T18:09:42.990+09:00  WARN 30808 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T18:09:43.010+09:00  INFO 30808 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T18:09:43.699+09:00  INFO 30808 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T18:09:43.758+09:00  INFO 30808 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T18:09:44.383+09:00  INFO 30808 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T18:09:44.516+09:00  INFO 30808 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T18:09:44.565+09:00  WARN 30808 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T18:09:44.595+09:00  INFO 30808 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T18:09:45.430+09:00  INFO 30808 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T18:09:45.544+09:00  INFO 30808 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T18:09:45.559+09:00  INFO 30808 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 6.669 seconds (process running for 7.542)
+2026-04-20T18:09:46.032+09:00  INFO 30808 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T18:09:46.032+09:00  INFO 30808 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T18:09:46.034+09:00  INFO 30808 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-04-20T18:14:53.058+09:00  INFO 2700 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 2700 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T18:14:53.063+09:00  INFO 2700 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T18:14:54.626+09:00  INFO 2700 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T18:14:54.720+09:00  INFO 2700 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 2 JPA repository interfaces.
+2026-04-20T18:14:55.323+09:00  INFO 2700 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T18:14:55.341+09:00  INFO 2700 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T18:14:55.344+09:00  INFO 2700 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T18:14:55.439+09:00  INFO 2700 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T18:14:55.439+09:00  INFO 2700 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2300 ms
+2026-04-20T18:14:55.864+09:00  INFO 2700 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T18:14:55.967+09:00  INFO 2700 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T18:14:56.030+09:00  INFO 2700 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T18:14:56.368+09:00  INFO 2700 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T18:14:56.418+09:00  INFO 2700 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T18:14:56.671+09:00  INFO 2700 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T18:14:56.673+09:00  INFO 2700 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T18:14:56.695+09:00  WARN 2700 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T18:14:56.719+09:00  INFO 2700 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T18:14:57.416+09:00  INFO 2700 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T18:14:57.484+09:00  INFO 2700 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T18:14:58.284+09:00  INFO 2700 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T18:14:58.446+09:00  INFO 2700 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T18:14:58.493+09:00  WARN 2700 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T18:14:58.522+09:00  INFO 2700 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T18:14:59.391+09:00  INFO 2700 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T18:14:59.524+09:00  INFO 2700 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T18:14:59.544+09:00  INFO 2700 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 7.056 seconds (process running for 7.83)
+2026-04-20T18:15:00.017+09:00  INFO 2700 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T18:15:00.019+09:00  INFO 2700 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T18:15:00.027+09:00  INFO 2700 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2026-04-20T18:15:32.771+09:00  INFO 2700 --- [fc2-live-automation] [http-nio-8082-exec-7] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T18:15:32.783+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T18:15:42.987+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T18:15:59.941+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Account 65] 🛡️ [テスト] 予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:15:59.942+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🛡️ [テスト] 予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:17:01.015+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Account 65] ❌ [テスト] NG登録エラー: Error {
+  message='Timeout 60000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 60000ms exceeded.
+    at ProgressController.run (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\progress.js:78:26)
+    at Frame.click (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\frames.js:996:23)
+    at FrameDispatcher.click (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\dispatchers\frameDispatcher.js:158:30)
+    at FrameDispatcher._handleCommand (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\dispatchers\dispatcher.js:94:40)
+    at DispatcherConnection.dispatch (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\dispatchers\dispatcher.js:365:39)
+}
+Call log:
+- waiting for locator("#js-blockList-ngComment-tab")
+-   locator resolved to <li class="is-active" id="js-blockList-ngComment-tab">NGコメント</li>
+- attempting click action
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #1
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #2
+-   waiting 20ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #3
+-   waiting 100ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #4
+-   waiting 100ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #5
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #6
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #7
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #8
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #9
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #10
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #11
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #12
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #13
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #14
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #15
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #16
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #17
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #18
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #19
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #20
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #21
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #22
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #23
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #24
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #25
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #26
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #27
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #28
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #29
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #30
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #31
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #32
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #33
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #34
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #35
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #36
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #37
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #38
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #39
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #40
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #41
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #42
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #43
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #44
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #45
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #46
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #47
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #48
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #49
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #50
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #51
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #52
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #53
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #54
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #55
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #56
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #57
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #58
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #59
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #60
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #61
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #62
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #63
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #64
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #65
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #66
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #67
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #68
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #69
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #70
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #71
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #72
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #73
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #74
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #75
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #76
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #77
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #78
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #79
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #80
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #81
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #82
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #83
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #84
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #85
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #86
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #87
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #88
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #89
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #90
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #91
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #92
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #93
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #94
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #95
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #96
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #97
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #98
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #99
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #100
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #101
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #102
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #103
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #104
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #105
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #106
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #107
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #108
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #109
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #110
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #111
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #112
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #113
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #114
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #115
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #116
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #117
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #118
+-   waiting 500ms
+
+2026-04-20T18:17:01.017+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] NG登録エラー: Error {
+  message='Timeout 60000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 60000ms exceeded.
+    at ProgressController.run (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\progress.js:78:26)
+    at Frame.click (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\frames.js:996:23)
+    at FrameDispatcher.click (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\dispatchers\frameDispatcher.js:158:30)
+    at FrameDispatcher._handleCommand (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\dispatchers\dispatcher.js:94:40)
+    at DispatcherConnection.dispatch (C:\Users\aikus\AppData\Local\Temp\playwright-java-17361628424316391868\package\lib\server\dispatchers\dispatcher.js:365:39)
+}
+Call log:
+- waiting for locator("#js-blockList-ngComment-tab")
+-   locator resolved to <li class="is-active" id="js-blockList-ngComment-tab">NGコメント</li>
+- attempting click action
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #1
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #2
+-   waiting 20ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #3
+-   waiting 100ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #4
+-   waiting 100ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #5
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #6
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #7
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #8
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #9
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #10
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #11
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #12
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #13
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #14
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #15
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #16
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #17
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #18
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #19
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #20
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #21
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #22
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #23
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #24
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #25
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #26
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #27
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #28
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #29
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #30
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #31
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #32
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #33
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #34
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #35
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #36
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #37
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #38
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #39
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #40
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #41
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #42
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #43
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #44
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #45
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #46
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #47
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #48
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #49
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #50
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #51
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #52
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #53
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #54
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #55
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #56
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #57
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #58
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #59
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #60
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #61
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #62
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #63
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #64
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #65
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #66
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #67
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #68
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #69
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #70
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #71
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #72
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #73
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #74
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #75
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #76
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #77
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #78
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #79
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #80
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #81
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #82
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #83
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #84
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #85
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #86
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #87
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #88
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #89
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #90
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #91
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #92
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #93
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #94
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #95
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #96
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #97
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #98
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #99
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #100
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #101
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #102
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #103
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #104
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #105
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #106
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #107
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #108
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #109
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #110
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #111
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #112
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #113
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #114
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #115
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #116
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #117
+-   waiting 500ms
+-   waiting for element to be visible, enabled and stable
+-   element is not visible
+- retrying click action, attempt #118
+-   waiting 500ms
+
+2026-04-20T18:17:02.749+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T18:17:05.752+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T18:17:20.762+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T18:17:23.809+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T18:18:18.857+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T18:18:21.993+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T18:19:31.861+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T18:19:31.863+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T18:19:31.871+09:00  INFO 2700 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T18:20:19.214+09:00  INFO 21784 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 21784 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T18:20:19.218+09:00  INFO 21784 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T18:20:20.541+09:00  INFO 21784 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T18:20:20.629+09:00  INFO 21784 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 2 JPA repository interfaces.
+2026-04-20T18:20:21.302+09:00  INFO 21784 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T18:20:21.316+09:00  INFO 21784 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T18:20:21.317+09:00  INFO 21784 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T18:20:21.403+09:00  INFO 21784 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T18:20:21.404+09:00  INFO 21784 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2135 ms
+2026-04-20T18:20:21.732+09:00  INFO 21784 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T18:20:21.785+09:00  INFO 21784 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T18:20:21.830+09:00  INFO 21784 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T18:20:22.117+09:00  INFO 21784 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T18:20:22.148+09:00  INFO 21784 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T18:20:22.436+09:00  INFO 21784 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T18:20:22.440+09:00  INFO 21784 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T18:20:22.480+09:00  WARN 21784 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T18:20:22.507+09:00  INFO 21784 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T18:20:23.289+09:00  INFO 21784 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T18:20:23.376+09:00  INFO 21784 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T18:20:24.111+09:00  INFO 21784 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T18:20:24.272+09:00  INFO 21784 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T18:20:24.320+09:00  WARN 21784 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T18:20:24.349+09:00  INFO 21784 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T18:20:25.013+09:00  INFO 21784 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T18:20:25.103+09:00  INFO 21784 --- [fc2-live-automation] [RMI TCP Connection(3)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T18:20:25.104+09:00  INFO 21784 --- [fc2-live-automation] [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T18:20:25.106+09:00  INFO 21784 --- [fc2-live-automation] [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-20T18:20:25.132+09:00  INFO 21784 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T18:20:25.140+09:00  INFO 21784 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 6.403 seconds (process running for 7.002)
+2026-04-20T18:20:49.268+09:00  INFO 21784 --- [fc2-live-automation] [http-nio-8082-exec-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T18:20:49.279+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T18:20:59.464+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T18:21:18.156+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T18:21:21.159+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T18:21:36.178+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T18:21:39.222+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Account 65] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:21:39.223+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:22:08.212+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Account 65] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:22:08.213+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:22:08.214+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T18:23:03.264+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T18:23:06.366+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T18:23:15.381+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T18:23:15.382+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Operation interrupted
+2026-04-20T18:23:15.387+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T18:23:15.451+09:00  INFO 21784 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T18:23:23.739+09:00  INFO 21784 --- [fc2-live-automation] [http-nio-8082-exec-3] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T18:23:23.744+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T18:23:32.139+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T18:23:50.628+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T18:23:53.630+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T18:24:08.645+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T18:24:11.696+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T18:25:06.735+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T18:25:09.876+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T18:25:26.649+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T18:25:26.650+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T18:25:26.655+09:00  INFO 21784 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T18:25:28.078+09:00  INFO 21784 --- [fc2-live-automation] [http-nio-8082-exec-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T18:25:28.081+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T18:25:36.334+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T18:25:54.740+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T18:25:57.743+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T18:26:12.761+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T18:26:15.814+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Account 65] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:26:15.814+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:26:44.714+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Account 65] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:26:44.715+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:26:44.715+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T18:27:07.761+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T18:27:07.770+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Operation interrupted
+2026-04-20T18:27:07.771+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T18:27:07.778+09:00  INFO 21784 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T18:34:43.234+09:00  INFO 26072 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 26072 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-20T18:34:43.238+09:00  INFO 26072 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-20T18:34:44.542+09:00  INFO 26072 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T18:34:44.617+09:00  INFO 26072 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 2 JPA repository interfaces.
+2026-04-20T18:34:45.220+09:00  INFO 26072 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-20T18:34:45.239+09:00  INFO 26072 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T18:34:45.240+09:00  INFO 26072 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-20T18:34:45.344+09:00  INFO 26072 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T18:34:45.345+09:00  INFO 26072 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2051 ms
+2026-04-20T18:34:45.721+09:00  INFO 26072 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T18:34:45.784+09:00  INFO 26072 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-20T18:34:45.826+09:00  INFO 26072 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T18:34:46.133+09:00  INFO 26072 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T18:34:46.182+09:00  INFO 26072 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T18:34:46.530+09:00  INFO 26072 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-20T18:34:46.534+09:00  INFO 26072 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T18:34:46.567+09:00  WARN 26072 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T18:34:46.599+09:00  INFO 26072 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T18:34:47.471+09:00  INFO 26072 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T18:34:47.567+09:00  INFO 26072 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T18:34:48.367+09:00  INFO 26072 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : 🧹 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-20T18:34:48.496+09:00  INFO 26072 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-20T18:34:48.532+09:00  WARN 26072 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T18:34:48.565+09:00  INFO 26072 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-20T18:34:49.272+09:00  INFO 26072 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-20T18:34:49.360+09:00  INFO 26072 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-20T18:34:49.382+09:00  INFO 26072 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 6.846 seconds (process running for 7.605)
+2026-04-20T18:34:49.427+09:00  INFO 26072 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20T18:34:49.429+09:00  INFO 26072 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-20T18:34:49.432+09:00  INFO 26072 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-20T18:35:30.302+09:00  INFO 26072 --- [fc2-live-automation] [http-nio-8082-exec-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T18:35:30.314+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T18:35:40.386+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T18:35:59.084+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T18:36:02.090+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T18:36:17.102+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T18:36:20.162+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Account 65] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:36:20.164+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:40:17.132+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Account 65] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:40:17.133+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:40:17.134+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T18:41:12.166+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T18:41:15.264+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T18:46:36.363+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T18:46:36.364+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Operation interrupted
+2026-04-20T18:46:36.365+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T18:46:36.370+09:00  INFO 26072 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T18:47:49.548+09:00  INFO 26072 --- [fc2-live-automation] [http-nio-8082-exec-7] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T18:47:49.558+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T18:47:57.919+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T18:48:16.460+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T18:48:19.462+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T18:48:34.480+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T18:48:37.529+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Account 65] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:48:37.529+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:54:17.188+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Account 65] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:54:17.189+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T18:54:17.190+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T18:54:35.255+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T18:54:35.259+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ❌ [テスト] 試行失敗: Operation interrupted
+2026-04-20T18:54:35.279+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T18:54:35.336+09:00  INFO 26072 --- [fc2-live-automation] [Thread-5] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-20T18:57:02.634+09:00  INFO 26072 --- [fc2-live-automation] [http-nio-8082-exec-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-20T18:57:02.639+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト] の配信準備を開始します
+2026-04-20T18:57:11.128+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] ログイン完了、設定画面へ移行
+2026-04-20T18:57:29.734+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト] FFmpegによる映像送信を開始しました
+2026-04-20T18:57:32.762+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト] 映像のバッファリングのため15秒待機します...
+2026-04-20T18:57:47.911+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-20T18:57:51.016+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Account 65] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T18:57:51.018+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🛡️ [テスト] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...
+2026-04-20T19:01:47.039+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Account 65] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T19:01:47.040+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] NGワードの一括登録完了。予約ファイル（CSV）を削除します。
+2026-04-20T19:01:47.041+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-20T19:02:42.521+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト] 時間が来ました。有料切替操作を開始します...
+2026-04-20T19:02:45.643+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト] 有料放送へ切り替え操作が完了しました
+2026-04-20T19:06:04.119+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト] 配信枠を終了しました
+2026-04-20T19:06:04.119+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ [テスト] の処理を安全に中断しました
+2026-04-20T19:06:04.124+09:00  INFO 26072 --- [fc2-live-automation] [Thread-8] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏹ プリセットの再生がすべて終了・停止しました
