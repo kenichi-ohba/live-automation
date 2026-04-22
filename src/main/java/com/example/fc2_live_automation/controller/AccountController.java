@@ -42,8 +42,29 @@ public class AccountController {
 
     @GetMapping("/")
     public String index(Model model) {
-        List<Fc2Account> accounts = accountRepository.findAllByOrderByDisplayOrderAsc();
+        List<Fc2Preset> presets = presetRepository.findAll();
+        // 現在データベースに本当に存在しているプリセット名のリスト
+        List<String> validPresetNames = presets.stream().map(Fc2Preset::getPresetName).collect(Collectors.toList());
 
+        List<Fc2Account> accounts = accountRepository.findAllByOrderByDisplayOrderAsc();
+        boolean isHealed = false;
+
+        // 🌟 自動修復ロジック：存在しないプリセット名（幽霊）を持つアカウントを「未設定」に戻す
+        for (Fc2Account acc : accounts) {
+            String pName = acc.getPresetName();
+            if (pName != null && !pName.isEmpty() && !validPresetNames.contains(pName)) {
+                acc.setPresetName("");
+                accountRepository.save(acc);
+                isHealed = true;
+            }
+        }
+
+        // 修復が行われた場合は、データを最新の状態で取り直す
+        if (isHealed) {
+            accounts = accountRepository.findAllByOrderByDisplayOrderAsc();
+        }
+
+        // アカウントをプリセット名ごとにグループ化する処理
         Map<String, List<Fc2Account>> grouped = accounts.stream()
                 .collect(Collectors.groupingBy(
                         acc -> (acc.getPresetName() != null && !acc.getPresetName().isEmpty()) ? acc.getPresetName() : "未設定 (個別アカウント)",
@@ -51,7 +72,6 @@ public class AccountController {
                         Collectors.toList()
                 ));
         
-        List<Fc2Preset> presets = presetRepository.findAll();
         Map<String, Fc2Preset> presetMap = presets.stream().collect(Collectors.toMap(
                 Fc2Preset::getPresetName, 
                 p -> p,
@@ -64,7 +84,6 @@ public class AccountController {
         return "index";
     }
 
-    // 🌟 予約時間設定の修正
     @PostMapping("/schedule/set")
     public String setSchedule(@RequestParam String presetName, @RequestParam String scheduledTime) {
         presetRepository.findAll().stream()
@@ -78,7 +97,6 @@ public class AccountController {
         return "redirect:/";
     }
 
-    // 🌟 予約キャンセル
     @PostMapping("/schedule/cancel")
     public String cancelSchedule(@RequestParam String presetName) {
         presetRepository.findAll().stream()
@@ -91,7 +109,6 @@ public class AccountController {
         return "redirect:/";
     }
 
-    // (以下、以前の正常なメソッドが続くため省略、必要に応じて他も上書きしてください)
     @GetMapping("/accounts")
     public String listAccounts(Model model) {
         model.addAttribute("accounts", accountService.getAllAccounts());

@@ -29,10 +29,11 @@ public class AccountService {
 
     public void saveAccount(Fc2Account account) {
         
-        // 編集時にパスワードやストリームキーが空欄なら、元のDBデータを維持して上書きを防ぐ
+        // 編集時にパスワードや「画面にない内部データ」が空欄で上書きされるのを防ぐ
         if (account.getId() != null) {
             Fc2Account existing = repository.findById(account.getId()).orElse(null);
             if (existing != null) {
+                // パスワード類の引き継ぎ
                 if (account.getPass() == null || account.getPass().isBlank()) {
                     account.setPass(existing.getPass());
                 }
@@ -42,6 +43,11 @@ public class AccountService {
                 if (account.getEmail() == null || account.getEmail().isBlank()) {
                     account.setEmail(existing.getEmail());
                 }
+                
+                // 🌟 今回の修正箇所：アカウントが所属しているプリセット名などの内部データを元データから復元する
+                account.setPresetName(existing.getPresetName());
+                account.setDisplayOrder(existing.getDisplayOrder());
+                account.setScheduledStartTime(existing.getScheduledStartTime());
             }
         }
 
@@ -52,7 +58,7 @@ public class AccountService {
             account.setCurrentLoop(0);
         }
 
-        // 🌟 修正：アカウント名が「空欄だった場合」のみ、自動設定を行う（上書きバグ解消）
+        // アカウント名が「空欄だった場合」のみ、自動設定を行う
         if (account.getAccountName() == null || account.getAccountName().trim().isEmpty()) {
             if (account.getTitle() != null && !account.getTitle().trim().isEmpty()) {
                 account.setAccountName(account.getTitle());
@@ -81,7 +87,6 @@ public class AccountService {
         worker.stopStreamingProcess(id);
     }
 
-    // 🌟 追加：コントローラーから呼び出される「システム全終了」メソッド
     public void stopAll() {
         worker.stopAll();
     }

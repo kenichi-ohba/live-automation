@@ -2,9 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>プリセット設定 - FC2 Live Automation</title>
+    <title>プリセット（番組表）設定 - FC2 Live Automation</title>
     <link rel="icon" th:href="@{/UpaLive_Icon.ico}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
     
@@ -15,102 +22,234 @@
                 UpaLive
             </a>
             <div class="space-x-6 text-sm font-bold">
-                <a th:href="@{/}" class="text-blue-200 hover:text-white transition">ダッシュボード</a>
+                <a th:href="@{/}" class="border-b-2 border-white pb-1">ダッシュボード</a>
                 <a th:href="@{/accounts}" class="text-blue-200 hover:text-white transition">アカウント(素材)管理</a>
             </div>
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="container mx-auto px-4 pb-8 pt-8 max-w-5xl">
         <h2 class="text-2xl font-bold text-gray-700 flex items-center mb-6">
-            <span class="mr-2">📂</span> プリセットの登録・編集
+            <span class="mr-2">📋</span> プリセット（番組表）の作成・編集
         </h2>
         
-        <form th:action="@{/presets/save}" th:object="${preset}" method="post" class="space-y-6">
+        <form th:action="@{/presets/save}" th:object="${preset}" method="post" class="space-y-6" id="presetForm">
             <input type="hidden" th:field="*{id}" />
             <input type="hidden" th:field="*{status}" />
-
-            <div class="bg-white shadow-md rounded-lg p-6 border-l-4 border-indigo-500">
-                <h3 class="text-xl font-bold mb-4 border-b pb-2 text-indigo-800">1. 基本情報</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-bold mb-1 text-indigo-900">プリセット名</label>
-                        <input type="text" th:field="*{presetName}" class="w-full border rounded px-3 py-2 bg-white" placeholder="例: 夜の連続配信リスト" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold mb-1 text-indigo-900">ループ設定 (0で無限)</label>
-                        <div class="flex items-center space-x-2">
-                            <input type="number" th:field="*{loopCount}" class="w-32 border rounded px-3 py-2 text-center" min="0">
-                            <span class="font-bold">回ループ</span>
-                        </div>
-                    </div>
-                    <div class="md:col-span-2 bg-blue-50 p-4 rounded border border-blue-100">
-                        <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" th:field="*{shuffleMode}" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 font-bold text-blue-900">シャッフル再生モード (リストをランダムな順序で再生する)</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white shadow-md rounded-lg p-6 border-l-4 border-blue-500">
-                <div class="flex justify-between items-center mb-4 border-b pb-2">
-                    <h3 class="text-xl font-bold text-gray-700">2. 配信アカウントの選択</h3>
-                    <span class="text-xs text-gray-500 font-bold" th:text="${#lists.size(allAccounts)} + ' 件の登録済みアカウント'"></span>
-                </div>
-                
-                <p class="text-sm text-gray-600 mb-4">配信したい順序でチェックを入れてください。右側の数字が再生順になります。</p>
-
-                <div class="max-h-[500px] overflow-y-auto pr-2 custom-scrollbar border rounded bg-gray-50">
-                    <div class="divide-y divide-gray-200">
-                        <div th:each="account : ${allAccounts}" class="flex items-center p-3 hover:bg-blue-50 transition cursor-pointer">
-                            <label class="flex items-center w-full cursor-pointer">
-                                <input type="checkbox" name="selectedAccountIds" th:value="${account.id}" 
-                                       th:checked="${#lists.contains(selectedAccountIds, account.id)}"
-                                       class="form-checkbox h-6 w-6 text-blue-500 rounded border-gray-300">
-                                <div class="ml-4 flex-grow">
-                                    <div class="font-bold text-gray-800" th:text="${account.accountName}">アカウント名</div>
-                                    <div class="text-[10px] text-gray-500 font-mono truncate w-64 md:w-full" th:text="${account.videoPath}">動画パス</div>
-                                </div>
-                                <div class="ml-2">
-                                    <span class="text-xs px-2 py-1 bg-gray-200 rounded text-gray-600 font-bold" th:text="${account.videoDuration}">30分</span>
-                                </div>
-                            </label>
+            <input type="hidden" th:field="*{currentLoop}" />
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1 space-y-6">
+                    <div class="bg-white shadow-md rounded-lg p-6 border-t-4 border-indigo-500">
+                        <h2 class="text-xl font-bold mb-4 border-b pb-2 text-indigo-800">1. 基本設定</h2>
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-bold mb-1 text-gray-700">プリセット名</label>
+                                <input type="text" th:field="*{presetName}" required class="w-full border rounded px-3 py-2 bg-white" placeholder="例: 深夜アニメ・ループ枠">
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><label class="block text-sm font-bold mb-1 text-gray-700">ループ回数</label><input type="number" th:field="*{loopCount}" min="0" class="w-full border rounded px-3 py-2 bg-white" placeholder="0"><p class="text-[10px] text-gray-500 mt-1">※0で無限</p></div>
+                                <div><label class="block text-sm font-bold mb-1 text-gray-700">待機(休憩)</label><input type="number" th:field="*{loopWaitMinutes}" min="0" class="w-full border rounded px-3 py-2 bg-white" placeholder="分"><p class="text-[10px] text-gray-500 mt-1">※1周終了後</p></div>
+                            </div>
+                            <div class="p-3 bg-purple-50 rounded border border-purple-200">
+                                <label class="inline-flex items-center font-bold text-purple-800">
+                                    <input type="checkbox" th:field="*{shuffleMode}" class="form-checkbox h-5 w-5 text-purple-600">
+                                    <span class="ml-2">シャッフル再生モード</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <p class="text-xs text-red-500 mt-2 font-bold">※何も選択しない場合はプリセットを保存できません。</p>
-            </div>
 
-            <div class="bg-white shadow-md rounded-lg p-6 border-l-4 border-yellow-500">
-                <h3 class="text-xl font-bold mb-4 border-b pb-2 text-gray-700">3. インターバル設定</h3>
-                <div>
-                    <label class="block text-sm font-bold mb-1">配信終了後の待機時間 (分)</label>
-                    <div class="flex items-center space-x-2">
-                        <input type="number" th:field="*{loopWaitMinutes}" class="w-32 border rounded px-3 py-2 text-center" min="0">
-                        <span class="font-bold">分間休憩する</span>
+                <div class="md:col-span-2">
+                    <div class="bg-white shadow-md rounded-lg p-6 border-t-4 border-green-500 h-[650px] flex flex-col">
+                        <div class="flex justify-between items-center mb-4 border-b pb-2 flex-shrink-0">
+                            <h2 class="text-xl font-bold text-green-800">2. アカウント（動画）の編成</h2>
+                            <span class="text-sm font-bold text-gray-500" id="selectedCount">0 / 10 選択中</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 flex-grow overflow-hidden">
+                            <div class="border rounded bg-gray-50 p-2 flex flex-col h-full overflow-hidden">
+                                <div class="mb-2 space-y-2 flex-shrink-0">
+                                    <input type="text" id="candidateSearch" placeholder="🔍 アカウント名で検索..." class="w-full border rounded px-2 py-1 text-sm focus:ring-blue-500" onkeyup="filterCandidates()">
+                                    <div class="flex space-x-2">
+                                        <select id="candidateSort" class="w-1/2 border rounded px-1 py-1 text-xs bg-white" onchange="sortCandidates()">
+                                            <option value="id_asc">登録古い順</option>
+                                            <option value="id_desc">登録新しい順</option>
+                                            <option value="name_asc">名前 (A-Z)</option>
+                                        </select>
+                                        <select id="presetFilter" class="w-1/2 border rounded px-1 py-1 text-xs bg-white font-bold text-indigo-700" onchange="filterCandidates()">
+                                            <option value="ALL">すべて表示</option>
+                                            <option value="UNASSIGNED">未登録のみ表示</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <ul id="availableList" class="space-y-2 overflow-y-auto custom-scrollbar flex-grow pr-1">
+                                    <li th:each="account : ${availableAccounts}" 
+                                        class="candidate-item bg-white p-2 rounded shadow-sm border border-gray-200 flex justify-between items-center cursor-pointer hover:bg-blue-50 transition" 
+                                        th:data-id="${account.id}" 
+                                        th:data-name="${account.accountName}"
+                                        th:data-preset="${account.presetName != null ? account.presetName : ''}">
+                                        
+                                        <div class="flex flex-col w-full pr-2">
+                                            <div class="truncate text-sm font-bold text-blue-700 candidate-name" th:text="${account.accountName}"></div>
+                                            <div th:if="${account.presetName != null && !account.presetName.isEmpty()}" class="text-[10px] text-gray-500 mt-0.5 truncate">
+                                                📁 [[${account.presetName}]]
+                                            </div>
+                                        </div>
+                                        <button type="button" class="text-green-500 font-bold px-2 text-lg flex-shrink-0" onclick="addToList(this.parentElement)">＋</button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="border rounded bg-indigo-50 p-2 flex flex-col h-full overflow-hidden">
+                                <h3 class="font-bold text-sm text-indigo-500 mb-2 text-center flex-shrink-0">再生する順番 (上から)</h3>
+                                <ul id="selectedList" class="space-y-2 overflow-y-auto custom-scrollbar flex-grow pr-1">
+                                    <th:block th:each="acc : ${playlist}">
+                                        <li class="bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center" 
+                                            th:data-id="${acc.id}" th:data-name="${acc.accountName}" th:data-preset="${acc.presetName != null ? acc.presetName : ''}">
+                                            <div class="flex items-center w-full">
+                                                <span class="mr-2 text-gray-400 cursor-move">↕</span>
+                                                <div class="flex flex-col w-full pr-2">
+                                                    <div class="truncate text-sm font-bold text-indigo-900" th:text="${acc.accountName}"></div>
+                                                </div>
+                                                <div class="flex space-x-1 ml-2 flex-shrink-0">
+                                                    <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveUp(this.parentElement.parentElement.parentElement)">▲</button>
+                                                    <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveDown(this.parentElement.parentElement.parentElement)">▼</button>
+                                                    <button type="button" class="text-red-500 font-bold px-2 ml-2" onclick="removeFromList(this.parentElement.parentElement.parentElement)">×</button>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="selectedAccountIds" th:value="${acc.id}">
+                                        </li>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-xs text-gray-500 mt-2">※次のアカウントの配信を開始するまでのインターバルを指定します。</p>
                 </div>
             </div>
 
-            <div class="flex justify-center space-x-4 pt-4 pb-8">
-                <a th:href="@{/}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-full shadow transition duration-200">
-                    キャンセル
-                </a>
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-12 rounded-full shadow-lg text-lg transition duration-200">
-                    プリセットを保存する
+            <div class="flex justify-center pt-8 pb-8">
+                <button type="button" onclick="submitPresetForm()" class="bg-indigo-600 hover:bg-indigo-800 text-white font-bold py-4 px-12 rounded-full shadow-lg text-lg transition duration-200">
+                    この内容でプリセットを保存する
                 </button>
             </div>
         </form>
     </div>
 
-    <style>
-        /* スクロールバーのデザインを少し細く綺麗にする */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    </style>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            Sortable.create(document.getElementById('selectedList'), {
+                animation: 150,
+                handle: '.cursor-move',
+                ghostClass: 'bg-indigo-100'
+            });
+            updateCount();
+            filterCandidates();
+        });
+
+        function filterCandidates() {
+            const query = document.getElementById('candidateSearch').value.toLowerCase();
+            const filterType = document.getElementById('presetFilter').value;
+            const currentPreset = document.getElementById('presetName').value;
+
+            document.querySelectorAll('#availableList .candidate-item').forEach(li => {
+                const name = li.getAttribute('data-name').toLowerCase();
+                let preset = li.getAttribute('data-preset') || '';
+                if (preset === 'null') preset = '';
+
+                const isUnassigned = (preset.trim() === '' || preset === currentPreset);
+                const matchSearch = name.includes(query);
+                const matchPreset = filterType === 'ALL' || (filterType === 'UNASSIGNED' && isUnassigned);
+
+                li.style.display = (matchSearch && matchPreset) ? '' : 'none';
+            });
+        }
+
+        function sortCandidates() {
+            const sortType = document.getElementById('candidateSort').value;
+            const ul = document.getElementById('availableList');
+            const items = Array.from(ul.querySelectorAll('.candidate-item'));
+            items.sort((a, b) => {
+                if (sortType === 'name_asc') return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'), 'ja');
+                if (sortType === 'id_asc') return parseInt(a.getAttribute('data-id')) - parseInt(b.getAttribute('data-id'));
+                if (sortType === 'id_desc') return parseInt(b.getAttribute('data-id')) - parseInt(a.getAttribute('data-id'));
+            });
+            items.forEach(li => ul.appendChild(li));
+        }
+
+        function addToList(item) {
+            const selectedList = document.getElementById('selectedList');
+            if (selectedList.children.length >= 10) { alert('最大10個までです。'); return; }
+            item.parentElement.removeChild(item);
+            
+            const presetName = item.getAttribute('data-preset') || '';
+            const id = item.getAttribute('data-id');
+            const name = item.getAttribute('data-name');
+            
+            const li = document.createElement('li');
+            li.className = "bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center";
+            li.setAttribute('data-id', id); 
+            li.setAttribute('data-name', name);
+            li.setAttribute('data-preset', presetName);
+            
+            // 🌟 修正: 追加時も selectedAccountIds としてフォームに登録されるように変更
+            li.innerHTML = `
+                <div class="flex items-center w-full">
+                    <span class="mr-2 text-gray-400 cursor-move">↕</span>
+                    <div class="flex flex-col w-full pr-2">
+                        <div class="truncate text-sm font-bold text-indigo-900">${name}</div>
+                    </div>
+                    <div class="flex space-x-1 ml-2 flex-shrink-0">
+                        <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveUp(this.parentElement.parentElement.parentElement)">▲</button>
+                        <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveDown(this.parentElement.parentElement.parentElement)">▼</button>
+                        <button type="button" class="text-red-500 font-bold px-2 ml-2" onclick="removeFromList(this.parentElement.parentElement.parentElement)">×</button>
+                    </div>
+                </div>
+                <input type="hidden" name="selectedAccountIds" value="${id}">
+            `;
+            selectedList.appendChild(li); 
+            updateCount();
+        }
+
+        function removeFromList(item) {
+            item.parentElement.removeChild(item);
+            const availableList = document.getElementById('availableList');
+            
+            let presetName = item.getAttribute('data-preset') || '';
+            if (presetName === 'null') presetName = '';
+            const currentPreset = document.getElementById('presetName').value;
+            
+            const li = document.createElement('li');
+            li.className = "candidate-item bg-white p-2 rounded shadow-sm border border-gray-200 flex justify-between items-center cursor-pointer hover:bg-blue-50 transition";
+            li.setAttribute('data-id', item.getAttribute('data-id')); 
+            li.setAttribute('data-name', item.getAttribute('data-name'));
+            li.setAttribute('data-preset', presetName);
+            
+            const isCurrentlyUnassigned = (presetName.trim() === '' || presetName === currentPreset);
+            const presetHtml = !isCurrentlyUnassigned ? `<div class="text-[10px] text-gray-500 mt-0.5 truncate">📁 ${presetName}</div>` : '';
+            
+            li.innerHTML = `
+                <div class="flex flex-col w-full pr-2">
+                    <div class="truncate text-sm font-bold text-blue-700 candidate-name">${item.getAttribute('data-name')}</div>
+                    ${presetHtml}
+                </div>
+                <button type="button" class="text-green-500 font-bold px-2 text-lg flex-shrink-0" onclick="addToList(this.parentElement)">＋</button>
+            `;
+            availableList.appendChild(li); 
+            updateCount(); 
+            filterCandidates(); 
+        }
+
+        function moveUp(item) { const prev = item.previousElementSibling; if (prev) item.parentElement.insertBefore(item, prev); }
+        function moveDown(item) { const next = item.nextElementSibling; if (next) item.parentElement.insertBefore(next, item); }
+        function updateCount() { document.getElementById('selectedCount').innerText = `${document.getElementById('selectedList').children.length} / 10 選択中`; }
+        
+        function submitPresetForm() {
+            const selectedList = document.getElementById('selectedList');
+            if (selectedList.children.length === 0) { alert('アカウントを選択してください。'); return; }
+            document.getElementById('presetForm').submit();
+        }
+    </script>
 </body>
 </html>
