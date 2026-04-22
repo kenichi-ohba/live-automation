@@ -46,7 +46,6 @@ public class Fc2AutomationWorker {
     private final Map<Long, Thread> activeAccountThreads = new ConcurrentHashMap<>();
     private final Map<String, List<String>> presetLogs = new ConcurrentHashMap<>();
     
-    // 🌟 現在実行中のアカウントとプリセット名の紐づけをメモリ上で正確に管理するマップ
     private final Map<Long, String> runningAccountPresets = new ConcurrentHashMap<>();
 
     public Fc2AutomationWorker(Fc2AccountRepository repository) {
@@ -152,7 +151,7 @@ public class Fc2AutomationWorker {
         var id = account.getId();
         stopSignals.put(id, false);
         activeAccountThreads.put(id, Thread.currentThread());
-        runningAccountPresets.put(id, presetName); // 🌟 正確にプリセットを紐づけ
+        runningAccountPresets.put(id, presetName);
 
         try {
             if (!isPresetMode) {
@@ -231,7 +230,7 @@ public class Fc2AutomationWorker {
             repository.save(finalState);
             activeAccountThreads.remove(id);
             stopSignals.remove(id);
-            runningAccountPresets.remove(id); // 🌟 解除
+            runningAccountPresets.remove(id); 
         }
     }
 
@@ -258,7 +257,7 @@ public class Fc2AutomationWorker {
             page.locator("a.c-btn.c-btnBs").first().click();
             
             checkStop(id, presetName);
-            // 🌟 安定した元々のログイン処理
+            
             page.locator("input[name='email']").fill(account.getEmail() != null ? account.getEmail() : "");
             page.locator("input[name='pass']").fill(account.getPass() != null ? account.getPass() : "");
             if (page.locator("input[name='keep_login']").isVisible()) {
@@ -423,9 +422,6 @@ public class Fc2AutomationWorker {
                 throw new Exception("時間内に配信開始ボタンが出現しませんでした（FC2サーバー遅延の可能性）");
             }
 
-            // =================================================================================
-            // 🌟🌟🌟 NGワード自動登録（実際の配信が開始された直後）
-            // =================================================================================
             File ngCsvFile = java.nio.file.Paths.get(System.getProperty("user.dir"), "ng_csvs", "account_" + id + ".csv").toFile();
             if (ngCsvFile.exists()) {
                 addLog(id, "🛡️ [" + accName + "] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...");
@@ -484,7 +480,6 @@ public class Fc2AutomationWorker {
                     if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] NG登録エラー: " + e.getMessage());
                 }
             }
-            // =================================================================================
 
             int targetMinute = account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() : 0;
             int targetSecond = account.getPaidSwitchSecond() != null ? account.getPaidSwitchSecond() : 0;
@@ -530,7 +525,6 @@ public class Fc2AutomationWorker {
                                 switchBtn.evaluate("node => node.click()");
                                 Thread.sleep(1500);
                                 
-                                // 🌟 確実に見えているポップアップのみをクリックする（誤爆防止）
                                 Locator yesBtn = page.locator(".js-popupWindow .js-yesBtn").first();
                                 if (yesBtn.count() > 0 && yesBtn.isVisible()) {
                                     yesBtn.evaluate("node => node.click()");
@@ -647,6 +641,12 @@ public class Fc2AutomationWorker {
 
         var presetThread = new Thread(() -> {
             try {
+                // 🌟 安全装置：もしプレイリストが空っぽの場合は、無限ループさせずに安全に停止する
+                if (playlist == null || playlist.isEmpty()) {
+                    addPresetLog(presetName, "⚠️ 再生する動画（アカウント）が1つも登録されていません。安全のため再生を停止します。");
+                    return; 
+                }
+
                 int maxLoop = preset.getLoopCount();
                 int currentLoop = 1;
                 while ((maxLoop == 0 || currentLoop <= maxLoop) && !Boolean.TRUE.equals(presetStopSignals.get(presetName))) {
@@ -682,7 +682,6 @@ public class Fc2AutomationWorker {
 
     public void stopPresetProcess(String presetName) {
         presetStopSignals.put(presetName, true);
-        // メモリ上で正確に紐づけられたアカウントに対してのみ停止命令を出す
         for (var entry : runningAccountPresets.entrySet()) {
             if (presetName.equals(entry.getValue())) {
                 stopStreamingProcess(entry.getKey());
@@ -692,7 +691,6 @@ public class Fc2AutomationWorker {
         if (thread != null) thread.interrupt();
     }
 
-    // 🌟 すべての配信プロセスを停止し、アプリ自体を完全に終了させる（緊急停止用）
     public void stopAll() {
         logger.warn("🛑 システム終了リクエストを受信しました。すべてのプロセスを破棄してアプリを終了します...");
         
