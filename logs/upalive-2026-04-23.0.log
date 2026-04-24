@@ -1,0 +1,190 @@
+2026-04-23T01:23:36.438+09:00  INFO 20992 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 20992 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-23T01:23:36.447+09:00  INFO 20992 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-23T01:23:38.453+09:00  INFO 20992 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23T01:23:38.590+09:00  INFO 20992 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 113 ms. Found 2 JPA repository interfaces.
+2026-04-23T01:23:39.758+09:00  INFO 20992 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-23T01:23:39.806+09:00  INFO 20992 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-23T01:23:39.807+09:00  INFO 20992 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-23T01:23:39.942+09:00  INFO 20992 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-23T01:23:39.944+09:00  INFO 20992 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3409 ms
+2026-04-23T01:23:40.506+09:00  INFO 20992 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-23T01:23:40.603+09:00  INFO 20992 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-23T01:23:40.695+09:00  INFO 20992 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-23T01:23:41.377+09:00  INFO 20992 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23T01:23:41.460+09:00  INFO 20992 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-23T01:23:41.865+09:00  INFO 20992 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-23T01:23:41.870+09:00  INFO 20992 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-23T01:23:41.940+09:00  WARN 20992 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-23T01:23:42.011+09:00  INFO 20992 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23T01:23:43.086+09:00  INFO 20992 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23T01:23:43.151+09:00  INFO 20992 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T01:23:44.050+09:00  INFO 20992 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ⚙️ 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-23T01:23:44.383+09:00  INFO 20992 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-23T01:23:44.443+09:00  WARN 20992 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23T01:23:44.488+09:00  INFO 20992 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-23T01:23:45.996+09:00  INFO 20992 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-23T01:23:46.143+09:00  WARN 20992 --- [fc2-live-automation] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-23T01:23:46.153+09:00  INFO 20992 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T01:23:46.158+09:00  INFO 20992 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-23T01:23:46.170+09:00  INFO 20992 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-23T01:23:46.198+09:00  INFO 20992 --- [fc2-live-automation] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-23T01:23:46.227+09:00 ERROR 20992 --- [fc2-live-automation] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8082 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8082 or configure this application to listen on another port.
+
+2026-04-23T01:24:15.817+09:00  INFO 32148 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Starting Fc2LiveAutomationApplication using Java 25.0.2 with PID 32148 (C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation\target\classes started by aikus in C:\Users\aikus\OneDrive\デスクトップ\作業\fc2-live-automation)
+2026-04-23T01:24:15.821+09:00  INFO 32148 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-04-23T01:24:17.208+09:00  INFO 32148 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23T01:24:17.281+09:00  INFO 32148 --- [fc2-live-automation] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57 ms. Found 2 JPA repository interfaces.
+2026-04-23T01:24:18.020+09:00  INFO 32148 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-04-23T01:24:18.036+09:00  INFO 32148 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-23T01:24:18.037+09:00  INFO 32148 --- [fc2-live-automation] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-04-23T01:24:18.187+09:00  INFO 32148 --- [fc2-live-automation] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-23T01:24:18.188+09:00  INFO 32148 --- [fc2-live-automation] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2311 ms
+2026-04-23T01:24:18.743+09:00  INFO 32148 --- [fc2-live-automation] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-23T01:24:18.857+09:00  INFO 32148 --- [fc2-live-automation] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.44.Final
+2026-04-23T01:24:18.970+09:00  INFO 32148 --- [fc2-live-automation] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-23T01:24:19.404+09:00  INFO 32148 --- [fc2-live-automation] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23T01:24:19.460+09:00  INFO 32148 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-23T01:24:19.854+09:00  INFO 32148 --- [fc2-live-automation] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/fc2_automation_v2 user=SA
+2026-04-23T01:24:19.856+09:00  INFO 32148 --- [fc2-live-automation] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-23T01:24:19.887+09:00  WARN 32148 --- [fc2-live-automation] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-23T01:24:19.917+09:00  INFO 32148 --- [fc2-live-automation] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23T01:24:21.017+09:00  INFO 32148 --- [fc2-live-automation] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23T01:24:21.098+09:00  INFO 32148 --- [fc2-live-automation] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23T01:24:22.195+09:00  INFO 32148 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ⚙️ 起動時クリーンアップ: データベース上の「配信中(RUNNING)」ステータスをリセットします
+2026-04-23T01:24:22.479+09:00  INFO 32148 --- [fc2-live-automation] [main] c.e.f.service.AutomationScheduler        : ✅ クリーンアップ完了: プリセット 0 件、アカウント 0 件を停止状態に戻しました
+2026-04-23T01:24:22.558+09:00  WARN 32148 --- [fc2-live-automation] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-23T01:24:22.593+09:00  INFO 32148 --- [fc2-live-automation] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-04-23T01:24:23.754+09:00  INFO 32148 --- [fc2-live-automation] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-04-23T01:24:23.866+09:00  INFO 32148 --- [fc2-live-automation] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-04-23T01:24:23.889+09:00  INFO 32148 --- [fc2-live-automation] [main] c.e.f.Fc2LiveAutomationApplication       : Started Fc2LiveAutomationApplication in 8.602 seconds (process running for 9.445)
+2026-04-23T01:24:24.530+09:00  INFO 32148 --- [fc2-live-automation] [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23T01:24:24.534+09:00  INFO 32148 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-23T01:24:24.538+09:00  INFO 32148 --- [fc2-live-automation] [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-23T01:25:23.925+09:00  INFO 32148 --- [fc2-live-automation] [scheduling-1] c.e.f.service.AutomationScheduler        : ⏰ 予約時間到達: プリセット[テストリスト] の自動再生を開始します！
+2026-04-23T01:25:23.941+09:00  INFO 32148 --- [fc2-live-automation] [scheduling-1] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ▶️ プリセットの連続再生を開始します
+2026-04-23T01:25:23.954+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T01:25:35.127+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T01:25:52.377+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T01:25:55.384+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T01:26:10.393+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T01:26:13.448+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T01:27:08.643+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T01:27:11.788+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T03:35:37.139+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T03:35:37.151+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T03:35:45.910+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T03:36:02.917+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T03:36:05.920+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T03:36:20.934+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T03:36:23.992+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T03:37:19.025+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T03:37:22.142+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T05:45:48.679+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T05:45:48.708+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T05:45:57.124+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T05:46:14.134+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T05:46:17.136+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T05:46:32.145+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T05:46:35.193+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T05:47:30.228+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T05:47:33.340+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T07:55:58.900+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T07:55:58.916+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T07:56:07.371+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T07:56:24.354+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T07:56:27.355+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T07:56:42.365+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T07:56:45.414+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T07:57:40.451+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T07:57:43.569+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T10:06:08.925+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T10:06:08.946+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T10:06:17.626+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T10:06:34.723+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T10:06:37.726+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T10:06:52.736+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T10:06:55.792+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T10:07:50.822+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T10:07:53.947+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T12:16:20.258+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T12:16:20.289+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T12:16:28.655+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T12:16:45.649+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T12:16:48.652+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T12:17:03.664+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T12:17:06.724+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T12:18:01.761+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T12:18:04.875+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T14:26:30.302+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T14:26:30.321+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T14:26:38.685+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T14:26:55.838+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T14:26:58.839+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T14:27:13.849+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T14:27:16.908+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T14:28:11.952+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T14:28:15.071+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T16:36:41.264+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T16:36:41.286+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T16:36:49.925+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T16:37:06.951+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T16:37:09.954+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T16:37:24.965+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T16:37:28.022+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T16:38:23.053+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T16:38:26.168+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T18:46:51.389+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T18:46:51.408+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T18:46:59.839+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T18:47:16.876+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T18:47:19.879+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T18:47:34.888+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T18:47:37.936+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T18:48:32.971+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T18:48:36.085+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T20:57:01.539+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T20:57:01.576+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T20:57:09.791+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T20:57:26.831+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T20:57:29.835+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T20:57:44.844+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T20:57:47.900+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T20:58:42.938+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T20:58:46.078+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました
+2026-04-23T23:07:11.395+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🏁 [テスト/heavy_slow_4500] 配信枠を終了しました
+2026-04-23T23:07:11.438+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎬 [テスト/heavy_slow_4500] の配信準備を開始します
+2026-04-23T23:07:19.988+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] ログイン完了、設定画面へ移行
+2026-04-23T23:07:37.002+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 🎥 [テスト/heavy_slow_4500] FFmpegによる映像送信を開始しました
+2026-04-23T23:07:40.011+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ☕ [テスト/heavy_slow_4500] 映像のバッファリングのため15秒待機します...
+2026-04-23T23:07:55.021+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-23T23:07:58.076+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ⏳ 有料切替タイマーセット: 60秒 (ラグ相殺のため 55秒後に自動実行)
+2026-04-23T23:08:53.114+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] 💰 [テスト/heavy_slow_4500] 時間が来ました。有料切替操作を開始します...
+2026-04-23T23:08:56.227+09:00  INFO 32148 --- [fc2-live-automation] [Thread-2] c.e.f.service.Fc2AutomationWorker        : [Preset テストリスト] ✅ [テスト/heavy_slow_4500] 有料放送へ切り替え操作が完了しました

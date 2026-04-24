@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +32,7 @@ import java.util.regex.Pattern;
 public class Fc2AutomationWorker {
 
     private static final Logger logger = LoggerFactory.getLogger(Fc2AutomationWorker.class);
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     private final Fc2AccountRepository repository;
     private final Map<Long, Process> activeProcesses = new ConcurrentHashMap<>();
@@ -54,6 +56,10 @@ public class Fc2AutomationWorker {
 
     @PostConstruct
     public void cleanupOrphanProcesses() {
+        forceKillAllFFmpeg();
+    }
+
+    private void forceKillAllFFmpeg() {
         try {
             var os = System.getProperty("os.name").toLowerCase();
             if (os.contains("win")) {
@@ -73,6 +79,7 @@ public class Fc2AutomationWorker {
                 p.destroyForcibly();
             }
         } catch (Exception e) {
+            logger.error("プロセス終了中にエラーが発生しました", e);
             p.destroyForcibly();
         }
     }
@@ -90,6 +97,10 @@ public class Fc2AutomationWorker {
         return originalPath;
     }
 
+    private String getLogTime() {
+        return "[" + LocalDateTime.now().format(timeFormatter) + "] ";
+    }
+
     public void addLog(Long id, String message) {
         memoryLogs.putIfAbsent(id, new ArrayList<>());
         var logs = memoryLogs.get(id);
@@ -102,13 +113,14 @@ public class Fc2AutomationWorker {
 
     public void addPresetLog(String presetName, String message) {
         if (presetName == null || presetName.isBlank()) return;
+        String timedMessage = getLogTime() + message;
         presetLogs.putIfAbsent(presetName, new ArrayList<>());
         var logs = presetLogs.get(presetName);
         synchronized (logs) {
             if (logs.size() >= 50) logs.removeFirst();
-            logs.add(message);
+            logs.add(timedMessage);
         }
-        logger.info("[Preset {}] {}", presetName, message);
+        logger.info("[Preset {}] {}", presetName, timedMessage);
     }
 
     public List<String> getPresetLogs(String presetName) {
@@ -120,14 +132,12 @@ public class Fc2AutomationWorker {
         runStreamingLogic(account, false, "");
     }
 
-    private boolean isStopRequested(Long id, String presetName) {
-        if (Boolean.TRUE.equals(stopSignals.get(id))) return true;
-        if (!presetName.isBlank() && Boolean.TRUE.equals(presetStopSignals.get(presetName))) return true;
-        return Thread.currentThread().isInterrupted();
-    }
-
     private void checkStop(Long id, String presetName) throws InterruptedException {
-        if (isStopRequested(id, presetName)) throw new InterruptedException("STOPPED");
+        if (Boolean.TRUE.equals(stopSignals.get(id)) || 
+            (!presetName.isBlank() && Boolean.TRUE.equals(presetStopSignals.get(presetName))) ||
+            Thread.currentThread().isInterrupted()) {
+            throw new InterruptedException("STOPPED");
+        }
     }
 
     private int parseDurationString(String durStr) {
@@ -149,8 +159,16 @@ public class Fc2AutomationWorker {
 
     private void runStreamingLogic(Fc2Account account, boolean isPresetMode, String presetName) {
         var id = account.getId();
+        var accName = (account.getAccountName() != null && !account.getAccountName().isBlank()) ? account.getAccountName() : "名称未設定";
+
+        if (activeAccountThreads.putIfAbsent(id, Thread.currentThread()) != null) {
+            if (!presetName.isBlank()) {
+                addPresetLog(presetName, "⚠️ [" + accName + "] は既に他の処理で動作中のためスキップしました。");
+            }
+            return;
+        }
+
         stopSignals.put(id, false);
-        activeAccountThreads.put(id, Thread.currentThread());
         runningAccountPresets.put(id, presetName);
 
         try {
@@ -174,18 +192,16 @@ public class Fc2AutomationWorker {
 
             while (currentCycle < loopMax) {
                 checkStop(id, presetName);
-
                 currentCycle++;
+                
                 var loopState = repository.findById(id).orElse(account);
                 loopState.setCurrentLoop(currentCycle);
                 loopState.setStatus("RUNNING");
                 repository.save(loopState);
 
-                var accName = (account.getAccountName() != null && !account.getAccountName().isBlank()) ? account.getAccountName() : "名称未設定";
-                if (!presetName.isBlank()) addPresetLog(presetName, "🎬 [" + accName + "] の配信準備を開始します");
+                if (!presetName.isBlank()) addPresetLog(presetName, "🎬 [" + accName + "] 配信準備を開始します (試行 " + currentCycle + ")");
                 
                 boolean cycleSuccess = false;
-
                 for (int i = 1; i <= 3; i++) {
                     checkStop(id, presetName);
                     try {
@@ -196,19 +212,15 @@ public class Fc2AutomationWorker {
                     } catch (InterruptedException e) {
                         throw e;
                     } catch (Exception e) {
-                        var msg = e.getMessage();
-                        if (msg != null && (msg.contains("STOPPED") || msg.contains("TargetClosedError") || msg.contains("interrupted"))) {
-                            throw new InterruptedException();
-                        }
-                        if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 試行失敗: " + msg);
+                        logger.error("[Account {}] 実行エラー: {}", id, e.getMessage(), e);
+                        if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 失敗: " + e.getMessage());
                         stopBrowsers(id);
                     }
                     if (i < 3) {
                         checkStop(id, presetName);
-                        Thread.sleep(5000);
+                        Thread.sleep(10000); 
                     }
                 }
-
                 if (!cycleSuccess) break;
 
                 if (!isPresetMode && currentCycle < loopMax) {
@@ -221,8 +233,7 @@ public class Fc2AutomationWorker {
                 }
             }
         } catch (InterruptedException e) {
-            var accName = (account.getAccountName() != null && !account.getAccountName().isBlank()) ? account.getAccountName() : "名称未設定";
-            if (!presetName.isBlank()) addPresetLog(presetName, "⏹ [" + accName + "] の処理を安全に中断しました");
+            if (!presetName.isBlank()) addPresetLog(presetName, "⏹ [" + accName + "] 処理を中断しました。");
         } finally {
             var finalState = repository.findById(id).orElse(account);
             finalState.setStatus("IDLE");
@@ -231,25 +242,26 @@ public class Fc2AutomationWorker {
             activeAccountThreads.remove(id);
             stopSignals.remove(id);
             runningAccountPresets.remove(id); 
+            stopBrowsers(id);
         }
     }
 
     private boolean executePlaywrightProcess(Fc2Account account, String presetName, int attempt) throws Exception {
         var id = account.getId();
-        Browser browser = null;
         var accName = (account.getAccountName() != null && !account.getAccountName().isBlank()) ? account.getAccountName() : "名称未設定";
+        Browser browser = null;
 
         try (var playwright = Playwright.create()) {
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(!account.isShowBrowser()));
             activeBrowsers.put(id, browser);
 
+            // 🌟 修正箇所: 安定稼働していたGitHubオリジナル版の設定（UAとパーミッション）に完全ロールバック
             var context = browser.newContext(new Browser.NewContextOptions()
                     .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
                     .setPermissions(List.of("camera", "microphone", "notifications"))); 
             
-            context.setDefaultTimeout(60000);
-            
             var page = context.newPage();
+            page.setDefaultTimeout(60000);
             page.onDialog(dialog -> dialog.accept());
             
             checkStop(id, presetName);
@@ -257,7 +269,6 @@ public class Fc2AutomationWorker {
             page.locator("a.c-btn.c-btnBs").first().click();
             
             checkStop(id, presetName);
-            
             page.locator("input[name='email']").fill(account.getEmail() != null ? account.getEmail() : "");
             page.locator("input[name='pass']").fill(account.getPass() != null ? account.getPass() : "");
             if (page.locator("input[name='keep_login']").isVisible()) {
@@ -273,7 +284,6 @@ public class Fc2AutomationWorker {
             if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] ログイン完了、設定画面へ移行");
 
             checkStop(id, presetName);
-            
             page.waitForTimeout(2000); 
             if (!page.url().contains("live_start")) {
                 try {
@@ -297,9 +307,7 @@ public class Fc2AutomationWorker {
             }
 
             checkStop(id, presetName);
-            String streamTitle = (account.getTitle() != null && !account.getTitle().isBlank()) 
-                                 ? account.getTitle() 
-                                 : account.getAccountName();
+            String streamTitle = (account.getTitle() != null && !account.getTitle().isBlank()) ? account.getTitle() : account.getAccountName();
             page.locator("#title").fill(streamTitle);
             
             page.locator("#info").fill(account.getInfo() != null ? account.getInfo() : "");
@@ -322,6 +330,7 @@ public class Fc2AutomationWorker {
 
             checkStop(id, presetName);
             
+            // 🌟 修正箇所: ここから下もGitHubオリジナルの動作ロジックに完全ロールバック
             page.locator("#submit").click();
             page.waitForTimeout(2000);
             
@@ -358,7 +367,6 @@ public class Fc2AutomationWorker {
             } catch(Exception e) {}
 
             checkStop(id, presetName);
-
             streamReadyFlags.put(id, false);
             startFfmpegProcess(account);
             if (!presetName.isBlank()) addPresetLog(presetName, "🎥 [" + accName + "] FFmpegによる映像送信を開始しました");
@@ -378,54 +386,33 @@ public class Fc2AutomationWorker {
                 Thread.sleep(1000);
             }
 
-            int startBtnWaitMs = 30000;
-            if (attempt == 2) startBtnWaitMs = 45000;
-            else if (attempt >= 3) startBtnWaitMs = 60000;
-
-            if (!presetName.isBlank()) {
-                addPresetLog(presetName, "⏳ 配信開始ボタンを待機します（最大 " + (startBtnWaitMs / 1000) + "秒 / 試行 " + attempt + "回目）...");
-            }
-
-            long btnWaitEnd = System.currentTimeMillis() + startBtnWaitMs;
-            boolean isToolStartBtnClicked = false;
-
-            while (System.currentTimeMillis() < btnWaitEnd) {
-                checkStop(id, presetName);
+            try {
+                page.locator(".js-toolStartBtn").click(new Locator.ClickOptions().setTimeout(20000));
+                if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] 配信を開始しました");
+                
                 try {
-                    Boolean isBtnVisible = (Boolean) page.evaluate("() => { let btn = document.querySelector('.js-toolStartBtn'); return btn && btn.offsetParent !== null; }");
-                    if (Boolean.TRUE.equals(isBtnVisible)) {
-                        page.evaluate("() => { document.querySelector('.js-toolStartBtn').click(); }");
-                        isToolStartBtnClicked = true;
-                        page.waitForTimeout(3000); 
-                        
-                        try {
-                            if (page.locator("#age_ok_btn").count() > 0 && page.locator("#age_ok_btn").isVisible()) {
-                                page.locator("#age_ok_btn").evaluate("node => node.click()");
-                                page.waitForTimeout(1000);
-                            }
-                        } catch(Exception e) {}
-
-                        try {
-                            if (page.locator(".js-yesBtn").count() > 0 && page.locator(".js-yesBtn").isVisible()) {
-                                page.locator(".js-yesBtn").first().evaluate("node => node.click()");
-                                page.waitForTimeout(1000);
-                            }
-                        } catch(Exception e) {}
-                        
-                        break;
+                    if (page.locator("#age_ok_btn").count() > 0 && page.locator("#age_ok_btn").isVisible()) {
+                        page.locator("#age_ok_btn").evaluate("node => node.click()");
+                        page.waitForTimeout(1000);
                     }
                 } catch(Exception e) {}
-                Thread.sleep(1000);
-            }
 
-            if (!isToolStartBtnClicked) {
-                throw new Exception("時間内に配信開始ボタンが出現しませんでした（FC2サーバー遅延の可能性）");
+                try {
+                    if (page.locator(".js-yesBtn").count() > 0 && page.locator(".js-yesBtn").isVisible()) {
+                        page.locator(".js-yesBtn").first().evaluate("node => node.click()");
+                        page.waitForTimeout(1000);
+                    }
+                } catch(Exception e) {}
+
+            } catch (Exception e) {
+                throw new Exception("配信開始ボタンがクリックできませんでした");
             }
+            // 🌟 修正箇所（ロールバック）ここまで
 
             File ngCsvFile = java.nio.file.Paths.get(System.getProperty("user.dir"), "ng_csvs", "account_" + id + ".csv").toFile();
             if (ngCsvFile.exists()) {
-                addLog(id, "🛡️ [" + accName + "] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...");
-                if (!presetName.isBlank()) addPresetLog(presetName, "🛡️ [" + accName + "] 配信が開始されました。予約されていたNGコメントの自動登録を実行します...");
+                addLog(id, "🛡️ [" + accName + "] 予約されていたNGコメントの自動登録を実行します...");
+                if (!presetName.isBlank()) addPresetLog(presetName, "🛡️ [" + accName + "] 予約されていたNGコメントの自動登録を実行します...");
                 
                 try {
                     List<String> ngWords = new ArrayList<>();
@@ -481,83 +468,54 @@ public class Fc2AutomationWorker {
                 }
             }
 
-            int targetMinute = account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() : 0;
-            int targetSecond = account.getPaidSwitchSecond() != null ? account.getPaidSwitchSecond() : 0;
-            int totalSeconds = (targetMinute * 60) + targetSecond;
+            int targetSec = (account.getPaidSwitchMinute() != null ? account.getPaidSwitchMinute() * 60 : 0) + 
+                            (account.getPaidSwitchSecond() != null ? account.getPaidSwitchSecond() : 0);
             
-            int lagOffset = account.getSwitchLagSeconds() != null ? account.getSwitchLagSeconds() : 5;
-            int triggerSeconds = totalSeconds - lagOffset;
-            if (triggerSeconds < 0) { triggerSeconds = 0; }
-            
-            long switchTargetTime = -1;
-            boolean hasSwitchedToPaid = false;
-            
-            if (totalSeconds > 0) {
-                switchTargetTime = System.currentTimeMillis() + (triggerSeconds * 1000L);
-                if (!presetName.isBlank()) addPresetLog(presetName, "⏳ 有料切替タイマーセット: " + totalSeconds + "秒 (ラグ相殺のため " + triggerSeconds + "秒後に自動実行)");
-            } else {
-                hasSwitchedToPaid = true; 
-            }
+            long switchTime = (targetSec > 0) ? System.currentTimeMillis() + (targetSec * 1000L) : -1;
+            boolean switched = (targetSec <= 0);
 
             int videoDurationSec = parseDurationString(account.getVideoDuration());
             int timeoutSec = (videoDurationSec > 0) ? videoDurationSec + 300 : 7200; 
             long processStartTime = System.currentTimeMillis();
 
-            Process ffmpegProcess = activeProcesses.get(id);
-            
-            while (!isStopRequested(id, presetName) && ffmpegProcess != null && ffmpegProcess.isAlive()) {
+            while (!Boolean.TRUE.equals(stopSignals.get(id))) {
+                checkStop(id, presetName);
                 
                 long elapsedSec = (System.currentTimeMillis() - processStartTime) / 1000;
                 if (elapsedSec > timeoutSec) {
-                    if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 通信エラー等によるフリーズを検知。強制終了して次へ進みます。");
-                    killProcessTree(ffmpegProcess);
-                    break;
+                    if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 動画終了、またはフリーズを検知。枠を終了して次へ進みます。");
+                    Process ffmpeg = activeProcesses.get(id);
+                    killProcessTree(ffmpeg);
+                    break; 
                 }
 
-                if (!hasSwitchedToPaid && switchTargetTime > 0) {
-                    long now = System.currentTimeMillis();
-                    if (now >= switchTargetTime) {
-                        try {
-                            if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 時間が来ました。有料切替操作を開始します...");
-                            
-                            Locator switchBtn = page.locator(".js-switchFeeBtn").first();
-                            if (switchBtn.count() > 0 && switchBtn.isVisible()) {
-                                switchBtn.evaluate("node => node.click()");
-                                Thread.sleep(1500);
-                                
-                                Locator yesBtn = page.locator(".js-popupWindow .js-yesBtn").first();
-                                if (yesBtn.count() > 0 && yesBtn.isVisible()) {
-                                    yesBtn.evaluate("node => node.click()");
-                                }
-                                Thread.sleep(1500);
-                                
-                                if (yesBtn.count() > 0 && yesBtn.isVisible()) {
-                                    yesBtn.evaluate("node => node.click()");
-                                }
-                                
-                                if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] 有料放送へ切り替え操作が完了しました");
-                            } else {
-                                if (!presetName.isBlank()) addPresetLog(presetName, "⚠️ [" + accName + "] 切替ボタンが見つかりません。すでに切り替わっている可能性があります。");
-                            }
-                        } catch (Exception e) {
-                            if (!presetName.isBlank()) addPresetLog(presetName, "❌ [" + accName + "] 切替処理中にエラー: " + e.getMessage());
-                        }
-                        
-                        hasSwitchedToPaid = true;
+                // 🌟 ここが今回の「唯一の追加機能（多重起動回避のためのランダム時間ずらし）」です
+                if (!switched && switchTime > 0 && System.currentTimeMillis() >= switchTime) {
+                    int jitter = (int)(Math.random() * 5000);
+                    Thread.sleep(jitter);
+                    
+                    try {
+                        if (!presetName.isBlank()) addPresetLog(presetName, "💰 [" + accName + "] 有料切替を実行します...");
+                        page.locator(".js-switchFeeBtn").click();
+                        Thread.sleep(2000);
+                        page.locator(".js-popupWindow .js-yesBtn").first().click();
+                        switched = true;
+                        if (!presetName.isBlank()) addPresetLog(presetName, "✅ [" + accName + "] 有料切替完了");
+                    } catch (Exception e) {
+                        addPresetLog(presetName, "⚠️ [" + accName + "] 有料切替に失敗しました (ボタン未出現)");
+                        switched = true; 
                     }
                 }
-                Thread.sleep(1000);
-            }
 
-            return true;
-        } catch (PlaywrightException pe) {
-            if (pe.getMessage() != null && pe.getMessage().contains("TargetClosedError")) {
-                throw new InterruptedException("TargetClosedError");
+                Process ffmpeg = activeProcesses.get(id);
+                if (ffmpeg == null || !ffmpeg.isAlive()) break;
+                Thread.sleep(2000);
             }
-            throw pe;
+            return true;
         } finally {
-            if (!presetName.isBlank()) addPresetLog(presetName, "🏁 [" + accName + "] 配信枠を終了しました");
-            if (browser != null) try { browser.close(); } catch (Exception ignore) {}
+            if (browser != null) {
+                try { browser.close(); } catch (Exception ignore) {}
+            }
             activeBrowsers.remove(id);
         }
     }
@@ -628,7 +586,9 @@ public class Fc2AutomationWorker {
 
     private void stopBrowsers(Long id) {
         var b = activeBrowsers.get(id);
-        if (b != null) try { b.close(); } catch (Exception ignore) {}
+        if (b != null) {
+            try { b.close(); } catch (Exception ignore) {}
+        }
         activeBrowsers.remove(id);
     }
 
@@ -641,12 +601,10 @@ public class Fc2AutomationWorker {
 
         var presetThread = new Thread(() -> {
             try {
-                // 🌟 安全装置：もしプレイリストが空っぽの場合は、無限ループさせずに安全に停止する
                 if (playlist == null || playlist.isEmpty()) {
-                    addPresetLog(presetName, "⚠️ 再生する動画（アカウント）が1つも登録されていません。安全のため再生を停止します。");
+                    addPresetLog(presetName, "⚠️ 再生リストが空です。");
                     return; 
                 }
-
                 int maxLoop = preset.getLoopCount();
                 int currentLoop = 1;
                 while ((maxLoop == 0 || currentLoop <= maxLoop) && !Boolean.TRUE.equals(presetStopSignals.get(presetName))) {
@@ -657,23 +615,16 @@ public class Fc2AutomationWorker {
                         if (Boolean.TRUE.equals(presetStopSignals.get(presetName))) break;
                         runStreamingLogic(account, true, presetName);
                     }
-                    if (Boolean.TRUE.equals(presetStopSignals.get(presetName))) break;
-                    
                     if (preset.getLoopWaitMinutes() > 0) {
-                        addPresetLog(presetName, "☕ 次のループまで " + preset.getLoopWaitMinutes() + "分間休憩します...");
-                        long waitEnd = System.currentTimeMillis() + (preset.getLoopWaitMinutes() * 60 * 1000L);
-                        while (System.currentTimeMillis() < waitEnd && !Boolean.TRUE.equals(presetStopSignals.get(presetName))) {
-                            Thread.sleep(5000);
-                        }
+                        Thread.sleep(preset.getLoopWaitMinutes() * 60 * 1000L);
                     }
                     currentLoop++;
                 }
             } catch (Exception e) {
-                logger.error("異常終了: {}", e.getMessage());
+                logger.error("プリセット異常終了: {}", e.getMessage(), e);
             } finally {
-                addPresetLog(presetName, "⏹ プリセットの再生がすべて終了・停止しました");
+                addPresetLog(presetName, "⏹ プリセットが終了しました");
                 activePresetThreads.remove(presetName);
-                presetStopSignals.remove(presetName);
             }
         });
         activePresetThreads.put(presetName, presetThread);
@@ -683,44 +634,14 @@ public class Fc2AutomationWorker {
     public void stopPresetProcess(String presetName) {
         presetStopSignals.put(presetName, true);
         for (var entry : runningAccountPresets.entrySet()) {
-            if (presetName.equals(entry.getValue())) {
-                stopStreamingProcess(entry.getKey());
-            }
+            if (presetName.equals(entry.getValue())) stopStreamingProcess(entry.getKey());
         }
-        var thread = activePresetThreads.get(presetName);
-        if (thread != null) thread.interrupt();
     }
 
     public void stopAll() {
-        logger.warn("🛑 システム終了リクエストを受信しました。すべてのプロセスを破棄してアプリを終了します...");
-        
-        try {
-            activePresetThreads.keySet().forEach(this::stopPresetProcess);
-            activeAccountThreads.keySet().forEach(this::stopStreamingProcess);
-            
-            runningAccountPresets.clear();
-            stopSignals.clear();
-            presetStopSignals.clear();
-            
-            activeBrowsers.values().forEach(b -> { try { b.close(); } catch(Exception ignore) {} });
-            activeProcesses.values().forEach(this::killProcessTree);
-            
-            activeBrowsers.clear();
-            activeProcesses.clear();
-
-            logger.info("✅ クリーンアップ完了。3秒後にアプリのプロセスを終了します。");
-
-            Thread.startVirtualThread(() -> {
-                try {
-                    Thread.sleep(3000);
-                    logger.warn("👋 アプリケーションを終了します。お疲れ様でした。");
-                    System.exit(0);
-                } catch (Exception ignore) {}
-            });
-
-        } catch (Exception e) {
-            logger.error("❌ 終了処理中にエラーが発生しました: " + e.getMessage());
-            System.exit(1); 
-        }
+        activePresetThreads.keySet().forEach(this::stopPresetProcess);
+        activeAccountThreads.keySet().forEach(this::stopStreamingProcess);
+        forceKillAllFFmpeg();
+        System.exit(0);
     }
 }

@@ -38,18 +38,29 @@ public class AccountCsvService {
                 String pass = getSafeData(data, 1);
                 String accountName = getSafeData(data, 2);
                 String title = getSafeData(data, 3);
-                String videoPath = getSafeData(data, 4);
-                String serverUrl = getSafeData(data, 5);
-                String streamKey = getSafeData(data, 6);
-                String customLiveUrl = getSafeData(data, 7);
+                
+                // 🌟 修正2: 動画パスやURLでスプレッドシート等によって増殖した不要な「"」を完全に除去する
+                String videoPath = getSafeData(data, 4).replace("\"", ""); 
+                String serverUrl = getSafeData(data, 5).replace("\"", "");
+                String streamKey = getSafeData(data, 6).replace("\"", "");
+                String customLiveUrl = getSafeData(data, 7).replace("\"", "");
+                
                 String info = getSafeData(data, 8);
                 String adultFlgStr = getSafeData(data, 9);
                 String categoryStr = getSafeData(data, 10);
                 String paidMinStr = getSafeData(data, 11);
                 String paidSecStr = getSafeData(data, 12);
+                
+                // 🌟 修正1: プリセット名の読み込み（14列目）
+                String presetName = getSafeData(data, 13);
 
                 Fc2Account account = repository.findByEmailAndVideoPathAndAccountName(email, videoPath, accountName)
-                        .orElse(new Fc2Account());
+                        .orElseGet(() -> {
+                            Fc2Account newAcc = new Fc2Account();
+                            // 🌟 修正3: CSVからの「新規登録時」はブラウザ設定をデフォルトでONにする
+                            newAcc.setShowBrowser(true);
+                            return newAcc;
+                        });
 
                 account.setEmail(email);
                 account.setPass(pass);
@@ -66,6 +77,9 @@ public class AccountCsvService {
                 account.setPaidSwitchMinute(parseIntSafe(paidMinStr, 0));
                 account.setPaidSwitchSecond(parseIntSafe(paidSecStr, 0));
                 
+                // 🌟 修正1: プリセット名をアカウント情報に保存
+                account.setPresetName(presetName);
+                
                 repository.save(account);
             }
         }
@@ -73,10 +87,12 @@ public class AccountCsvService {
 
     public void exportAccountsToCsv(PrintWriter writer) {
         List<Fc2Account> accounts = repository.findAllByOrderByDisplayOrderAsc();
-        writer.println("ログインメールアドレス,パスワード,アカウント管理名,番組タイトル,配信動画のパス,サーバーURL(RTMP),ストリームキー,視聴用配信URL,番組情報(説明文),配信場所(一般/アダルト),カテゴリー,有料切替(分),有料切替(秒)");
+        
+        // 🌟 修正1: ヘッダーの末尾に「プリセット名」を追加
+        writer.println("ログインメールアドレス,パスワード,アカウント管理名,番組タイトル,配信動画のパス,サーバーURL(RTMP),ストリームキー,視聴用配信URL,番組情報(説明文),配信場所(一般/アダルト),カテゴリー,有料切替(分),有料切替(秒),プリセット名");
         
         for (Fc2Account acc : accounts) {
-            writer.printf("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d\n",
+            writer.printf("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%s\n",
                     safeCsv(acc.getEmail()),
                     safeCsv(acc.getPass()),
                     safeCsv(acc.getAccountName()),
@@ -89,7 +105,8 @@ public class AccountCsvService {
                     getAdultFlgLabel(acc.getAdultflg()), 
                     getCategoryLabel(acc.getCategory()), 
                     acc.getPaidSwitchMinute() != null ? acc.getPaidSwitchMinute() : 0,
-                    acc.getPaidSwitchSecond() != null ? acc.getPaidSwitchSecond() : 0
+                    acc.getPaidSwitchSecond() != null ? acc.getPaidSwitchSecond() : 0,
+                    safeCsv(acc.getPresetName()) // 🌟 修正1: プリセット名を出力
             );
         }
     }
@@ -101,14 +118,18 @@ public class AccountCsvService {
         return "";
     }
 
-    // 🌟 Excel特有の見えない文字（BOMやゼロ幅スペース）を完全に除去してバグを防ぐ
+    // 🌟 修正2: スプレッドシートなどで保存を繰り返して増殖したダブルクォーテーションをループで全て綺麗に剥がす
     private String cleanCsvText(String text) {
         if (text == null) return "";
         text = text.replace("\uFEFF", "").replace("\u200B", "").trim();
-        if (text.startsWith("\"") && text.endsWith("\"")) {
-            text = text.substring(1, text.length() - 1).replace("\"\"", "\"");
+        
+        while (text.startsWith("\"") && text.endsWith("\"") && text.length() > 1) {
+            text = text.substring(1, text.length() - 1);
+            if (text.contains("\"\"")) {
+                text = text.replace("\"\"", "\"");
+            }
         }
-        return text;
+        return text.trim();
     }
 
     private String safeCsv(String text) {

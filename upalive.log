@@ -1,0 +1,170 @@
+2026-04-24T00:06:07.562+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき②45.57.] 配信枠を終了しました
+2026-04-24T00:06:08.030+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき③64.14] の配信準備を開始します
+2026-04-24T00:06:30.019+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき③64.14] ログイン完了、設定画面へ移行
+2026-04-24T00:06:48.878+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき③64.14] 配信枠を終了しました
+2026-04-24T00:06:48.878+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ❌ [ゆりえ\みずき③64.14] 試行失敗: 配信画面の読み込みに失敗しました
+2026-04-24T00:07:05.648+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき③64.14] ログイン完了、設定画面へ移行
+2026-04-24T00:07:24.129+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき③64.14] FFmpegによる映像送信を開始しました
+2026-04-24T00:07:27.132+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき③64.14] 映像のバッファリングのため15秒待機します...
+2026-04-24T00:07:42.146+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 45秒 / 試行 2回目）...
+2026-04-24T00:07:45.205+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 3854秒 (ラグ相殺のため 3849秒後に自動実行)
+2026-04-24T00:20:57.602+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [ゆうちゃん/さたん① 4986-002-54.04] 配信枠を終了しました
+2026-04-24T00:20:57.614+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [にじにゃん/せいな① 2340-2400.] の配信準備を開始します
+2026-04-24T00:21:09.566+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [にじにゃん/せいな① 2340-2400.] ログイン完了、設定画面へ移行
+2026-04-24T00:21:28.035+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [にじにゃん/せいな① 2340-2400.] FFmpegによる映像送信を開始しました
+2026-04-24T00:21:32.040+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [にじにゃん/せいな① 2340-2400.] 映像のバッファリングのため15秒待機します...
+2026-04-24T00:21:47.054+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T00:21:50.155+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 2340秒 (ラグ相殺のため 2335秒後に自動実行)
+2026-04-24T01:00:45.676+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 💰 [にじにゃん/せいな① 2340-2400.] 時間が来ました。有料切替操作を開始します...
+2026-04-24T01:00:49.094+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [にじにゃん/せいな① 2340-2400.] 有料放送へ切り替え操作が完了しました
+2026-04-24T01:11:54.921+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 💰 [ゆりえ\みずき③64.14] 時間が来ました。有料切替操作を開始します...
+2026-04-24T01:11:58.155+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき③64.14] 有料放送へ切り替え操作が完了しました
+2026-04-24T01:41:20.681+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [にじにゃん/せいな① 2340-2400.] 配信枠を終了しました
+2026-04-24T01:41:20.923+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [ゆうちゃん/さたん② 5967-001] の配信準備を開始します
+2026-04-24T01:42:18.440+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん② 5967-001] ログイン完了、設定画面へ移行
+2026-04-24T01:42:36.637+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [ゆうちゃん/さたん② 5967-001] 配信枠を終了しました
+2026-04-24T01:42:36.640+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ❌ [ゆうちゃん/さたん② 5967-001] 試行失敗: 配信画面の読み込みに失敗しました
+2026-04-24T01:42:52.895+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん② 5967-001] ログイン完了、設定画面へ移行
+2026-04-24T01:43:10.739+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [ゆうちゃん/さたん② 5967-001] FFmpegによる映像送信を開始しました
+2026-04-24T01:43:14.744+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [ゆうちゃん/さたん② 5967-001] 映像のバッファリングのため15秒待機します...
+2026-04-24T01:43:29.772+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 45秒 / 試行 2回目）...
+2026-04-24T01:43:32.851+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 3244秒 (ラグ相殺のため 3239秒後に自動実行)
+2026-04-24T01:45:49.992+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき③64.14] 配信枠を終了しました
+2026-04-24T01:45:50.000+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき④ 2220-2820] の配信準備を開始します
+2026-04-24T01:46:01.859+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき④ 2220-2820] ログイン完了、設定画面へ移行
+2026-04-24T01:46:20.192+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき④ 2220-2820] FFmpegによる映像送信を開始しました
+2026-04-24T01:46:23.196+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき④ 2220-2820] 映像のバッファリングのため15秒待機します...
+2026-04-24T01:46:38.205+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T01:46:41.311+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2220秒 (ラグ相殺のため 2215秒後に自動実行)
+2026-04-24T02:18:49.166+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき④ 2220-2820] 配信枠を終了しました
+2026-04-24T02:18:49.180+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき①40.45] の配信準備を開始します
+2026-04-24T02:19:08.432+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき①40.45] ログイン完了、設定画面へ移行
+2026-04-24T02:19:27.251+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき①40.45] FFmpegによる映像送信を開始しました
+2026-04-24T02:19:31.254+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき①40.45] 映像のバッファリングのため15秒待機します...
+2026-04-24T02:19:46.264+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T02:19:49.366+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2445秒 (ラグ相殺のため 2440秒後に自動実行)
+2026-04-24T02:37:32.016+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 💰 [ゆうちゃん/さたん② 5967-001] 時間が来ました。有料切替操作を開始します...
+2026-04-24T02:37:35.306+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん② 5967-001] 有料放送へ切り替え操作が完了しました
+2026-04-24T03:00:17.468+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき①40.45] 配信枠を終了しました
+2026-04-24T03:00:17.509+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき②45.57.] の配信準備を開始します
+2026-04-24T03:00:30.123+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき②45.57.] ログイン完了、設定画面へ移行
+2026-04-24T03:00:48.053+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき②45.57.] FFmpegによる映像送信を開始しました
+2026-04-24T03:00:51.056+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき②45.57.] 映像のバッファリングのため15秒待機します...
+2026-04-24T03:01:06.066+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T03:01:09.147+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2757秒 (ラグ相殺のため 2752秒後に自動実行)
+2026-04-24T03:22:41.587+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [ゆうちゃん/さたん② 5967-001] 配信枠を終了しました
+2026-04-24T03:22:41.606+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [にじにゃん/せいな② 2820-3300] の配信準備を開始します
+2026-04-24T03:22:53.876+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [にじにゃん/せいな② 2820-3300] ログイン完了、設定画面へ移行
+2026-04-24T03:23:12.020+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [にじにゃん/せいな② 2820-3300] FFmpegによる映像送信を開始しました
+2026-04-24T03:23:17.025+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [にじにゃん/せいな② 2820-3300] 映像のバッファリングのため15秒待機します...
+2026-04-24T03:23:32.036+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T03:23:35.134+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 2820秒 (ラグ相殺のため 2815秒後に自動実行)
+2026-04-24T03:23:35.516+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [にじにゃん/せいな② 2820-3300] 配信枠を終了しました
+2026-04-24T03:23:35.530+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [ゆうちゃん/さたん① 4986-002-54.04] の配信準備を開始します
+2026-04-24T03:23:56.805+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん① 4986-002-54.04] ログイン完了、設定画面へ移行
+2026-04-24T03:24:14.465+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [ゆうちゃん/さたん① 4986-002-54.04] FFmpegによる映像送信を開始しました
+2026-04-24T03:24:18.470+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [ゆうちゃん/さたん① 4986-002-54.04] 映像のバッファリングのため15秒待機します...
+2026-04-24T03:24:33.477+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T03:24:36.541+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 2747秒 (ラグ相殺のため 2742秒後に自動実行)
+2026-04-24T03:32:45.492+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき②45.57.] 配信枠を終了しました
+2026-04-24T03:32:45.499+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏹ [ゆりえ\みずき②45.57.] の処理を安全に中断しました
+2026-04-24T03:32:45.517+09:00  INFO 20396 --- [fc2-live-automation] [Thread-11] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-24T04:10:19.235+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 💰 [ゆうちゃん/さたん① 4986-002-54.04] 時間が来ました。有料切替操作を開始します...
+2026-04-24T04:10:22.945+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん① 4986-002-54.04] 有料放送へ切り替え操作が完了しました
+2026-04-24T04:10:27.491+09:00  INFO 20396 --- [fc2-live-automation] [http-nio-8082-exec-2] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ▶️ プリセットの連続再生を開始します
+2026-04-24T04:10:27.505+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき①40.45] の配信準備を開始します
+2026-04-24T04:10:41.880+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき①40.45] ログイン完了、設定画面へ移行
+2026-04-24T04:11:00.522+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき①40.45] FFmpegによる映像送信を開始しました
+2026-04-24T04:11:05.535+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき①40.45] 映像のバッファリングのため15秒待機します...
+2026-04-24T04:11:20.545+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T04:11:23.657+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2445秒 (ラグ相殺のため 2440秒後に自動実行)
+2026-04-24T04:11:32.262+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき①40.45] 配信枠を終了しました
+2026-04-24T04:11:32.267+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏹ [ゆりえ\みずき①40.45] の処理を安全に中断しました
+2026-04-24T04:11:32.271+09:00  INFO 20396 --- [fc2-live-automation] [Thread-130] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏹ プリセットの再生がすべて終了・停止しました
+2026-04-24T04:11:52.402+09:00  INFO 20396 --- [fc2-live-automation] [http-nio-8082-exec-6] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ▶️ プリセットの連続再生を開始します
+2026-04-24T04:11:52.410+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき①40.45] の配信準備を開始します
+2026-04-24T04:12:05.070+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき①40.45] ログイン完了、設定画面へ移行
+2026-04-24T04:12:23.747+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき①40.45] FFmpegによる映像送信を開始しました
+2026-04-24T04:12:26.752+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき①40.45] 映像のバッファリングのため15秒待機します...
+2026-04-24T04:12:41.763+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T04:12:44.863+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2445秒 (ラグ相殺のため 2440秒後に自動実行)
+2026-04-24T04:47:25.475+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [ゆうちゃん/さたん① 4986-002-54.04] 配信枠を終了しました
+2026-04-24T04:47:25.603+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [にじにゃん/せいな① 2340-2400.] の配信準備を開始します
+2026-04-24T04:47:47.481+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [にじにゃん/せいな① 2340-2400.] ログイン完了、設定画面へ移行
+2026-04-24T04:48:05.853+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [にじにゃん/せいな① 2340-2400.] FFmpegによる映像送信を開始しました
+2026-04-24T04:48:08.857+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [にじにゃん/せいな① 2340-2400.] 映像のバッファリングのため15秒待機します...
+2026-04-24T04:48:23.873+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T04:48:26.940+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 2340秒 (ラグ相殺のため 2335秒後に自動実行)
+2026-04-24T04:53:13.058+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき①40.45] 配信枠を終了しました
+2026-04-24T04:53:13.073+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき④ 2220-2820] の配信準備を開始します
+2026-04-24T04:53:26.005+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき④ 2220-2820] ログイン完了、設定画面へ移行
+2026-04-24T04:53:44.188+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき④ 2220-2820] FFmpegによる映像送信を開始しました
+2026-04-24T04:53:47.190+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき④ 2220-2820] 映像のバッファリングのため15秒待機します...
+2026-04-24T04:54:02.226+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T04:54:05.297+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2220秒 (ラグ相殺のため 2215秒後に自動実行)
+2026-04-24T05:26:14.324+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき④ 2220-2820] 配信枠を終了しました
+2026-04-24T05:26:14.341+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき②45.57.] の配信準備を開始します
+2026-04-24T05:26:36.549+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき②45.57.] ログイン完了、設定画面へ移行
+2026-04-24T05:26:54.314+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき②45.57.] FFmpegによる映像送信を開始しました
+2026-04-24T05:26:58.319+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき②45.57.] 映像のバッファリングのため15秒待機します...
+2026-04-24T05:27:13.332+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T05:27:16.386+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2757秒 (ラグ相殺のため 2752秒後に自動実行)
+2026-04-24T05:27:22.689+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 💰 [にじにゃん/せいな① 2340-2400.] 時間が来ました。有料切替操作を開始します...
+2026-04-24T05:27:25.945+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [にじにゃん/せいな① 2340-2400.] 有料放送へ切り替え操作が完了しました
+2026-04-24T06:07:57.570+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [にじにゃん/せいな① 2340-2400.] 配信枠を終了しました
+2026-04-24T06:07:57.602+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [ゆうちゃん/さたん② 5967-001] の配信準備を開始します
+2026-04-24T06:08:09.872+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん② 5967-001] ログイン完了、設定画面へ移行
+2026-04-24T06:08:28.176+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [ゆうちゃん/さたん② 5967-001] FFmpegによる映像送信を開始しました
+2026-04-24T06:08:32.179+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [ゆうちゃん/さたん② 5967-001] 映像のバッファリングのため15秒待機します...
+2026-04-24T06:08:47.191+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T06:08:50.277+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 3244秒 (ラグ相殺のため 3239秒後に自動実行)
+2026-04-24T06:13:08.417+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 💰 [ゆりえ\みずき②45.57.] 時間が来ました。有料切替操作を開始します...
+2026-04-24T06:13:11.811+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき②45.57.] 有料放送へ切り替え操作が完了しました
+2026-04-24T06:54:45.241+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき②45.57.] 配信枠を終了しました
+2026-04-24T06:54:45.306+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき③64.14] の配信準備を開始します
+2026-04-24T06:54:57.911+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき③64.14] ログイン完了、設定画面へ移行
+2026-04-24T06:55:16.150+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき③64.14] FFmpegによる映像送信を開始しました
+2026-04-24T06:55:19.153+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき③64.14] 映像のバッファリングのため15秒待機します...
+2026-04-24T06:55:34.168+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T06:55:37.265+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 3854秒 (ラグ相殺のため 3849秒後に自動実行)
+2026-04-24T07:02:49.556+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 💰 [ゆうちゃん/さたん② 5967-001] 時間が来ました。有料切替操作を開始します...
+2026-04-24T07:02:52.829+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん② 5967-001] 有料放送へ切り替え操作が完了しました
+2026-04-24T07:47:59.647+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [ゆうちゃん/さたん② 5967-001] 配信枠を終了しました
+2026-04-24T07:47:59.664+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [にじにゃん/せいな② 2820-3300] の配信準備を開始します
+2026-04-24T07:48:11.899+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [にじにゃん/せいな② 2820-3300] ログイン完了、設定画面へ移行
+2026-04-24T07:48:29.642+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [にじにゃん/せいな② 2820-3300] FFmpegによる映像送信を開始しました
+2026-04-24T07:48:32.648+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [にじにゃん/せいな② 2820-3300] 映像のバッファリングのため15秒待機します...
+2026-04-24T07:48:47.660+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T07:48:50.750+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 2820秒 (ラグ相殺のため 2815秒後に自動実行)
+2026-04-24T07:48:51.236+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [にじにゃん/せいな② 2820-3300] 配信枠を終了しました
+2026-04-24T07:48:51.239+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [ゆうちゃん/さたん① 4986-002-54.04] の配信準備を開始します
+2026-04-24T07:49:03.018+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん① 4986-002-54.04] ログイン完了、設定画面へ移行
+2026-04-24T07:49:20.774+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [ゆうちゃん/さたん① 4986-002-54.04] FFmpegによる映像送信を開始しました
+2026-04-24T07:49:23.775+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [ゆうちゃん/さたん① 4986-002-54.04] 映像のバッファリングのため15秒待機します...
+2026-04-24T07:49:38.784+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T07:49:41.868+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 2747秒 (ラグ相殺のため 2742秒後に自動実行)
+2026-04-24T07:59:47.221+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 💰 [ゆりえ\みずき③64.14] 時間が来ました。有料切替操作を開始します...
+2026-04-24T07:59:50.530+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき③64.14] 有料放送へ切り替え操作が完了しました
+2026-04-24T08:33:41.708+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき③64.14] 配信枠を終了しました
+2026-04-24T08:33:41.752+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき①40.45] の配信準備を開始します
+2026-04-24T08:33:54.116+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき①40.45] ログイン完了、設定画面へ移行
+2026-04-24T08:34:12.054+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき①40.45] FFmpegによる映像送信を開始しました
+2026-04-24T08:34:15.059+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき①40.45] 映像のバッファリングのため15秒待機します...
+2026-04-24T08:34:30.078+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T08:34:33.144+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2445秒 (ラグ相殺のため 2440秒後に自動実行)
+2026-04-24T08:35:24.785+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 💰 [ゆうちゃん/さたん① 4986-002-54.04] 時間が来ました。有料切替操作を開始します...
+2026-04-24T08:35:28.074+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [ゆうちゃん/さたん① 4986-002-54.04] 有料放送へ切り替え操作が完了しました
+2026-04-24T09:12:31.064+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🏁 [ゆうちゃん/さたん① 4986-002-54.04] 配信枠を終了しました
+2026-04-24T09:12:31.278+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎬 [にじにゃん/せいな① 2340-2400.] の配信準備を開始します
+2026-04-24T09:12:43.940+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ✅ [にじにゃん/せいな① 2340-2400.] ログイン完了、設定画面へ移行
+2026-04-24T09:13:01.447+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] 🎥 [にじにゃん/せいな① 2340-2400.] FFmpegによる映像送信を開始しました
+2026-04-24T09:13:04.450+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ☕ [にじにゃん/せいな① 2340-2400.] 映像のバッファリングのため15秒待機します...
+2026-04-24T09:13:19.472+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T09:13:22.606+09:00  INFO 20396 --- [fc2-live-automation] [Thread-61] c.e.f.service.Fc2AutomationWorker        : [Preset さたん2・せいな2] ⏳ 有料切替タイマーセット: 2340秒 (ラグ相殺のため 2335秒後に自動実行)
+2026-04-24T09:15:01.076+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🏁 [ゆりえ\みずき①40.45] 配信枠を終了しました
+2026-04-24T09:15:01.085+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎬 [ゆりえ\みずき④ 2220-2820] の配信準備を開始します
+2026-04-24T09:15:13.481+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ✅ [ゆりえ\みずき④ 2220-2820] ログイン完了、設定画面へ移行
+2026-04-24T09:15:31.867+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] 🎥 [ゆりえ\みずき④ 2220-2820] FFmpegによる映像送信を開始しました
+2026-04-24T09:15:34.871+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ☕ [ゆりえ\みずき④ 2220-2820] 映像のバッファリングのため15秒待機します...
+2026-04-24T09:15:49.880+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 配信開始ボタンを待機します（最大 30秒 / 試行 1回目）...
+2026-04-24T09:15:52.962+09:00  INFO 20396 --- [fc2-live-automation] [Thread-133] c.e.f.service.Fc2AutomationWorker        : [Preset ゆりえ] ⏳ 有料切替タイマーセット: 2220秒 (ラグ相殺のため 2215秒後に自動実行)

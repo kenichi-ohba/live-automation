@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; } /* 横スクロール用の高さを追加 */
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
@@ -104,14 +104,14 @@
 
                             <div class="border rounded bg-indigo-50 p-2 flex flex-col h-full overflow-hidden">
                                 <h3 class="font-bold text-sm text-indigo-500 mb-2 text-center flex-shrink-0">再生する順番 (上から)</h3>
-                                <ul id="selectedList" class="space-y-2 overflow-y-auto custom-scrollbar flex-grow pr-1">
+                                <ul id="selectedList" class="space-y-2 overflow-y-auto overflow-x-auto pb-2 custom-scrollbar flex-grow pr-1">
                                     <th:block th:each="acc : ${playlist}">
-                                        <li class="bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center" 
+                                        <li class="bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center min-w-max" 
                                             th:data-id="${acc.id}" th:data-name="${acc.accountName}" th:data-preset="${acc.presetName != null ? acc.presetName : ''}">
                                             <div class="flex items-center w-full">
                                                 <span class="mr-2 text-gray-400 cursor-move">↕</span>
                                                 <div class="flex flex-col w-full pr-2">
-                                                    <div class="truncate text-sm font-bold text-indigo-900" th:text="${acc.accountName}"></div>
+                                                    <div class="whitespace-nowrap text-sm font-bold text-indigo-900" th:text="${acc.accountName}"></div>
                                                 </div>
                                                 <div class="flex space-x-1 ml-2 flex-shrink-0">
                                                     <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveUp(this.parentElement.parentElement.parentElement)">▲</button>
@@ -188,17 +188,17 @@
             const name = item.getAttribute('data-name');
             
             const li = document.createElement('li');
-            li.className = "bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center";
+            // 🌟修正箇所：min-w-max を追加
+            li.className = "bg-white p-2 rounded shadow-sm border border-indigo-200 flex justify-between items-center min-w-max";
             li.setAttribute('data-id', id); 
             li.setAttribute('data-name', name);
             li.setAttribute('data-preset', presetName);
             
-            // 🌟 修正: 追加時も selectedAccountIds としてフォームに登録されるように変更
             li.innerHTML = `
                 <div class="flex items-center w-full">
                     <span class="mr-2 text-gray-400 cursor-move">↕</span>
                     <div class="flex flex-col w-full pr-2">
-                        <div class="truncate text-sm font-bold text-indigo-900">${name}</div>
+                        <div class="whitespace-nowrap text-sm font-bold text-indigo-900">${name}</div>
                     </div>
                     <div class="flex space-x-1 ml-2 flex-shrink-0">
                         <button type="button" class="text-gray-500 hover:text-blue-500 px-1" onclick="moveUp(this.parentElement.parentElement.parentElement)">▲</button>
